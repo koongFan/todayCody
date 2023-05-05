@@ -16,9 +16,9 @@ public class LoginController {
     @GetMapping("hello")
     public List<String> user_id(){
 
-        String user_id = loginDAO.getUserId();
+        // String user_id = loginDAO.getUserId();
 
-        return Arrays.asList("안녕하세요",user_id);
+        return Arrays.asList("안녕하세요","ㅋㅋ");
     }
 
 }
