@@ -9,19 +9,20 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping(value = "/member")
 public class LoginController {
 
   @Autowired
   private LoginDAO loginDAO;
+
+  @Autowired
+  private  LoginService loginService;
 
   @GetMapping("hello")
   public List<String> user_id() {
@@ -31,11 +32,8 @@ public class LoginController {
     return Arrays.asList("안녕하세요", "ㅋㅋ");
   }
 
-  @PostMapping("member/login.do")
-  public Object userLogin(HttpServletRequest request, HttpServletResponse response,
-                          @RequestParam Map<String, String> params
-  ) throws JsonProcessingException {
-
+  @PostMapping("/signOn.do")
+  public Object userLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception {
 
     String jsonData = params.get("jsonData");
     Map<String, Object> resMap = new HashMap<>();
@@ -54,8 +52,11 @@ public class LoginController {
     System.out.println("aaaaaaaaaaaa id : " + jsonMap.get("id"));
     System.out.println("aaaaaaaaaaaa pwd : " + jsonMap.get("pwd"));
 
-    return null;
+    resMap = loginService.user_login(jsonMap,request,response);
+    resMap.put("retCode","000");
+    resMap.put("retMsg","응답 성공");
 
+    return resMap;
   }
 
 
