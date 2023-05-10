@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Ranking() {
-  return <div>ranking</div>;
+  return <div className="wrapper">ranking</div>;
 }
