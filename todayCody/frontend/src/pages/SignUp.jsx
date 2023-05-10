@@ -30,11 +30,11 @@ export default function SignUp() {
             onChange={handleChange}
           />
           <input
-            type="pwd"
-            name="pwd"
+            type="password"
+            name="password"
             value={user.password}
             required
-            placeholder="pwd"
+            placeholder="password"
             onChange={handleChange}
           />
           <input
