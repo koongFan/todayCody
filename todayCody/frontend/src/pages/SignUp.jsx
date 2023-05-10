@@ -3,8 +3,10 @@ import { useState } from "react";
 
 export default function SignUp() {
   const [user, setUser] = useState({
-    email: "",
+    id: "",
     password: "",
+    name: "",
+    nickname: ""
   });
 
   const handleChange = (e) => {
