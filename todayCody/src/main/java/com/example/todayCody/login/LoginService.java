@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface LoginService {
-  public Map<String, Object> user_login(HashMap<String, Object> jsonMap, HttpServletRequest request, HttpServletResponse response) throws Exception;
+  public Map<String, Object> getUserInfoById(HashMap<String, Object> jsonMap, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
