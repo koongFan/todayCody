@@ -22,9 +22,12 @@ public class LoginDAOImpl implements LoginDAO {
     }
 
   @Override
-  public Map<String, Object> user_login(HashMap<String, Object> jsonMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public Map<String, Object> getUserInfoById(HashMap<String, Object> vo) throws Exception {
       HashMap<String, Object> retMap = new HashMap<>();
       retMap.put("test", "성공");
+      retMap.put("id", "hwpark93");
+      retMap.put("pwd", "1234");
+      retMap.put("name", "박한우");
     return retMap;
   }
 
