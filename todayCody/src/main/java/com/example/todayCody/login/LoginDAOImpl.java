@@ -31,5 +31,18 @@ public class LoginDAOImpl implements LoginDAO {
     return retMap;
   }
 
-  ;
+  @Override
+  public int duplIdCnt(LoginDTO loginDTO) throws Exception{
+    int dupleCnt = this.sqlSession.selectOne("com.example.todayCody.LoginDAO.duplIdCnt", loginDTO);
+    return dupleCnt;
+  }
+
+  @Override
+  public int upUserInfoCnt(LoginDTO loginDTO) throws Exception{
+    int upCnt = this.sqlSession.insert("com.example.todayCody.LoginDAO.upUserInfoCnt",loginDTO);
+    return upCnt;
+  }
+
+
+  
 }

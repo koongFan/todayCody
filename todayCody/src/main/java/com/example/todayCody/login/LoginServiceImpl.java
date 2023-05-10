@@ -50,4 +50,25 @@ public class LoginServiceImpl implements LoginService {
 
     return map;
   }
+
+  @Override
+  public Map<String, Object> insertUpLogin(LoginDTO loginDTO) throws Exception{
+
+    HashMap<String, Object> map = new HashMap<>();
+
+    // 아이디 확인
+    int dupleIdCnt = loginDAO.duplIdCnt(loginDTO);
+    int upUserInfo = loginDAO.upUserInfoCnt(loginDTO);
+
+    if(dupleIdCnt>=1){
+      map.put("msg","이미 있는 아이디 입니다.");
+      map.put("failSucc",false);
+      return map;
+    }
+    else{
+      map.put("msg","회원가입이 완료되었습니다.");
+      map.put("faileSucc",true);
+      return map;
+    }
+  }
 }
