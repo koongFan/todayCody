@@ -4,7 +4,32 @@
 
 
 <mapper namespace="com.example.todayCody.LoginDAO">
+
+
 	<select id="getUserId" resultType="string">
 		select user_id from todaycody.user;
 	</select>
+
+	<select id="duplIdCnt" parameterType="com.example.todayCody.login.LoginDTO" resultType="int">
+		select count(*) from todaycody.user where id = #{id};
+	</select>
+
+	
+
+	<insert id="upUserInfoCnt" parameterType="com.example.todayCody.login.LoginDTO">		
+		insert into todaycody.user(
+			id
+			,pwd			
+			,name
+			,nickname			
+		)
+		values
+		(
+			#{id}
+			,#{pwd}			
+			,#{name}
+			,#{nickname}			
+		)
+	</insert>
+
 </mapper>
