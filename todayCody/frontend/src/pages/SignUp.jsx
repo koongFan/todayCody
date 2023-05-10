@@ -22,19 +22,35 @@ export default function SignUp() {
         <h3>오늘코디</h3>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            name="email"
-            value={user.email}
+            type="id"
+            name="id"
+            value={user.id}
             required
-            placeholder="email"
+            placeholder="id"
             onChange={handleChange}
           />
           <input
-            type="password"
-            name="password"
+            type="pwd"
+            name="pwd"
             value={user.password}
             required
-            placeholder="password"
+            placeholder="pwd"
+            onChange={handleChange}
+          />
+          <input
+            type="name"
+            name="name"
+            value={user.name}
+            required
+            placeholder="name"
+            onChange={handleChange}
+          />
+          <input
+            type="nickname"
+            name="nickname"
+            value={user.nickname}
+            required
+            placeholder="nickname"
             onChange={handleChange}
           />
           <input
