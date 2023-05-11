@@ -43,7 +43,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios({
-        url: "http://52.78.103.73/member/signIn.do", //주소 확실하지 않음 cors에러
+        url: "http://52.78.103.73:8081/member/signIn.do", //주소 확실하지 않음 cors에러
         method: "post",
         headers: {
           "Content-Type": "application/json",
