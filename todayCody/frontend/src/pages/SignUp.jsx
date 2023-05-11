@@ -1,21 +1,35 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default function SignUp() {
   const [user, setUser] = useState({
-    id: "",
-    password: "",
-    name: "",
-    nickname: ""
+    user_id: '',
+    pwd: '',
+    u_name: '',
+    u_nickname: ''
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const signupClick = (e) => {
+    e.preventDefault();
+    axios.post('http://52.78.103.73:8081/member/signUp.do', user)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.result === 'success') {
+          alert('회원가입이 완료되었습니다.');
+          window.location.replace('/member/signIn.do');
+        } else {
+          alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('회원가입에 실패했습니다. 다시 시도해주세요.')
+      })
+  }
   
   return(
     <>
@@ -24,41 +38,46 @@ export default function SignUp() {
         <h3>오늘코디</h3>
         <form onSubmit={handleSubmit}>
           <input
-            type="id"
+            type="text"
             name="id"
-            value={user.id}
+            value={user.user_id}
             required
             placeholder="id"
-            onChange={handleChange}
+            onChange={(e) => {
+              setUser({ ...user, user_id: e.target.value })
+            }}
           />
           <input
             type="password"
             name="password"
-            value={user.password}
+            value={user.pwd}
             required
             placeholder="password"
-            onChange={handleChange}
+            onChange={(e) => {
+              setUser({ ...user, pwd: e.target.value })
+            }}
           />
           <input
-            type="name"
+            type="text"
             name="name"
-            value={user.name}
+            value={user.u_name}
             required
             placeholder="name"
-            onChange={handleChange}
+            onChange={(e) => {
+              setUser({ ...user, u_name: e.target.value })
+            }}
           />
           <input
-            type="nickname"
+            type="text"
             name="nickname"
-            value={user.nickname}
+            value={user.u_nickname}
             required
             placeholder="nickname"
-            onChange={handleChange}
+            onChange={(e) => {
+              setUser({ ...user, u_nickname: e.target.value})
+            }}
           />
-          <input
-            type="submit"
-            value="회원가입"
-          />
+          <input type="submit" value="회원가입" onClick={signupClick} />
         </form>
       </div>
     </div>
