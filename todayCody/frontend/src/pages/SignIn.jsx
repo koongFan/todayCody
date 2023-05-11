@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
-    email: "",
+    id: "",
     password: "",
   });
 
   const [valid, setValid] = useState({
-    email: false,
     password: false,
   });
 
@@ -17,32 +17,48 @@ export default function Login() {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
+      //디바운싱
       console.log("유효성 검사중");
-      setFormIsValid(inputs.email.includes("@") && inputs.password.length >= 8);
-    }, 300);
+      setValid({ ...valid, password: inputs.password.length >= 8 });
+      setFormIsValid(inputs.id && inputs.password.length >= 8);
+    }, 200);
 
     return () => {
       console.log("클린업");
       clearTimeout(identifier);
     };
-  }, [inputs.email, inputs.password]);
+  }, [inputs.id, inputs.password]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
-  const validHandler = (e) => {
-    const { name } = e.target;
-    if (name === "email") {
-      setValid({ ...valid, [name]: inputs.email.includes("@") });
-    } else {
-      setValid({ ...valid, [name]: inputs.password.length >= 8 });
-    }
-  };
+  //const validHandler = (e) => {
+  //  const { name } = e.target;
+  //  setValid({ ...valid, [name]: inputs.password.length >= 8 });
+  //};
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const res = await axios({
+        url: "http://52.78.103.73/member/signIn.do", //주소 확실하지 않음 cors에러
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          id: inputs.id,
+          password: inputs.password,
+        }),
+      });
+      if (res.status === 200) {
+        alert("로그인되었습니다.");
+      }
+    } catch (error) {
+      alert("[ERROR] 로그인에 실패했습니다.");
+    }
   };
 
   return (
@@ -52,20 +68,18 @@ export default function Login() {
           <h3>오늘코디</h3>
           <p>오늘코디 계정으로 로그인</p>
           <input
-            type="email"
-            name="email"
-            value={inputs.email}
+            type="text"
+            name="id"
+            required
+            value={inputs.id}
             onChange={changeHandler}
-            onBlur={validHandler}
-            placeholder="이메일을 입력해주세요."
+            placeholder="아이디를 입력해주세요."
           />
-          {!valid.email && <p className="warn">이메일 형식을 맞춰주세요.</p>}
           <input
             type="password"
             name="password"
             value={inputs.password}
             onChange={changeHandler}
-            onBlur={validHandler}
             placeholder="비밀번호를 입력해주세요. (8자 이상)"
           />
           {!valid.password && <p className="warn">8자리 이상 입력해주세요.</p>}
