@@ -62,12 +62,12 @@ public class LoginServiceImpl implements LoginService {
 
     if(dupleIdCnt>=1){
       map.put("msg","이미 있는 아이디 입니다.");
-      map.put("failSucc",false);
+      map.put("failOrSucc",false);
       return map;
     }
     else{
       map.put("msg","회원가입이 완료되었습니다.");
-      map.put("faileSucc",true);
+      map.put("failOrSucc",true);
       return map;
     }
   }
