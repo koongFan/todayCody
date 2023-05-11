@@ -3,5 +3,8 @@
 @import "mixins.scss";
 
 @import "layout/header";
-// @import "components/*";
-// @import "pages/*";
+
+@import "components/instafeed";
+
+@import "pages/signin";
+@import "pages/feed";
