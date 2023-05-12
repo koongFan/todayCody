@@ -18,11 +18,11 @@ export default function SignUp() {
     axios.post('http://52.78.103.73:8081/member/signUp.do', user)
       .then((res) => {
         console.log(res.data);
-        if (res.data.result === 'success') {
+        if (res.data.failOrSucc) {
           alert('회원가입이 완료되었습니다.');
           window.location.replace('/member/signIn.do');
         } else {
-          alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+          alert('회원가입에 실패했습니다. 다시 시도해주세요.' + res.data.msg);
         }
       })
       .catch((err) => {
