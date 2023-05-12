@@ -4,19 +4,26 @@
   display: flex;
   flex-direction: column;
 
-  border: 1px solid black;
+  border-inline: 1px solid black;
+  border-bottom: 1px solid black;
+
+  &:nth-child(1) {
+    border-top: 1px solid black;
+  }
 
   .feedTop {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .profile {
       display: flex;
       align-items: center;
+      gap: 0.8rem;
 
       .imgContainer {
-        width: 50px;
-        height: 50px;
+        width: 2rem;
+        height: 2rem;
         border-radius: 50px;
         overflow: hidden;
 
@@ -27,11 +34,20 @@
         }
       }
     }
+
+    button {
+      height: 1.7rem;
+      padding-inline: 0.5rem;
+      border-radius: 0.2rem;
+      background-color: black;
+      color: white;
+    }
   }
 
   .feedContent {
     display: flex;
     flex-direction: column;
+    margin-top: 1.5rem;
 
     .imgContainer {
       width: 100%;
@@ -43,8 +59,15 @@
       }
     }
 
+    .likes {
+      font-size: 0.8rem;
+    }
+
     .feedText {
+      margin-top: 0.5rem;
       display: flex;
+      font-size: 0.8rem;
+      gap: 0.2rem;
     }
   }
 }
