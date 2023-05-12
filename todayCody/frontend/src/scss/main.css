@@ -228,4 +228,41 @@ header nav .menu a .menuItem:hover {
   width: 35%;
   margin-inline: auto;
   margin-top: 2rem;
+}
+
+.boardContainer {
+  width: 80%;
+  margin-inline: auto;
+  margin-top: 5rem;
+}
+.boardContainer .category {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+.boardContainer .category span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.boardContainer .boardTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.boardContainer .boardTable thead tr {
+  background-color: #fff;
+  height: 3rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+.boardContainer .boardTable thead tr th {
+  font-weight: 500;
+}
+.boardContainer .boardTable tbody .post {
+  height: 3rem;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fff;
+}
+.boardContainer .boardTable tbody .post td {
+  text-align: center;
 }/*# sourceMappingURL=main.css.map */

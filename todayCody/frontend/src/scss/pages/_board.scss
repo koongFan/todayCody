@@ -1,0 +1,48 @@
+.boardContainer {
+  width: 80%;
+  margin-inline: auto;
+  margin-top: 5rem;
+  //   background-color: yellow;
+
+  .category {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f1f1;
+
+    span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+  .boardTable {
+    width: 100%;
+    border-collapse: collapse; //이걸 넣어야만 tr에 border을 넣을 수 있음
+
+    thead {
+      tr {
+        background-color: #fff;
+        height: 3rem;
+        border-bottom: 1px solid #f1f1f1;
+
+        th {
+          font-weight: 500;
+        }
+      }
+    }
+
+    tbody {
+      .post {
+        height: 3rem;
+        border-bottom: 1px solid #f1f1f1;
+        background-color: #fff;
+
+        td {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
