@@ -1,5 +1,5 @@
 import React from "react";
-import BoardPost from "components/BoardPost";
+import BoardList from "components/board/BoardList";
 
 export default function Board() {
   const posts = [
@@ -44,7 +44,7 @@ export default function Board() {
           </thead>
           <tbody>
             {posts.map((post) => (
-              <BoardPost post={post} />
+              <BoardList post={post} />
             ))}
           </tbody>
         </table>

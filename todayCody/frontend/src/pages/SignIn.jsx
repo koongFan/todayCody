@@ -6,11 +6,11 @@ import axios from "axios";
 export default function Login() {
   const [inputs, setInputs] = useState({
     id: "",
-    password: "",
+    pwd: "",
   });
 
   const [valid, setValid] = useState({
-    password: false,
+    pwd: false,
   });
 
   const [formIsValid, setFormIsValid] = useState(false);
@@ -19,39 +19,35 @@ export default function Login() {
     const identifier = setTimeout(() => {
       //디바운싱
       console.log("유효성 검사중");
-      setValid({ ...valid, password: inputs.password.length >= 8 });
-      setFormIsValid(inputs.id && inputs.password.length >= 8);
+      setValid({ ...valid, pwd: inputs.pwd.length >= 8 });
+      setFormIsValid(inputs.id && inputs.pwd.length >= 8);
     }, 200);
 
     return () => {
       console.log("클린업");
       clearTimeout(identifier);
     };
-  }, [inputs.id, inputs.password]);
+  }, [inputs.id, inputs.pwd]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
-  //const validHandler = (e) => {
+  // const validHandler = (e) => {
   //  const { name } = e.target;
-  //  setValid({ ...valid, [name]: inputs.password.length >= 8 });
-  //};
+  //  setValid({ ...valid, [name]: inputs.name.length >= 8 });
+  // };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await axios({
-        url: "http://52.78.103.73:8081/member/signIn.do", //주소 확실하지 않음 cors에러
-        method: "post",
+        url: "http://52.78.103.73:8081/member/signIn.do",
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({
-          id: inputs.id,
-          password: inputs.password,
-        }),
+        data: JSON.stringify(inputs),
       });
       if (res.status === 200) {
         alert("로그인되었습니다.");
@@ -77,12 +73,12 @@ export default function Login() {
           />
           <input
             type="password"
-            name="password"
-            value={inputs.password}
+            name="pwd"
+            value={inputs.pwd}
             onChange={changeHandler}
             placeholder="비밀번호를 입력해주세요. (8자 이상)"
           />
-          {!valid.password && <p className="warn">8자리 이상 입력해주세요.</p>}
+          {!valid.pwd && <p className="warn">8자리 이상 입력해주세요.</p>}
           <button
             type="submit"
             disabled={!formIsValid}
@@ -92,7 +88,7 @@ export default function Login() {
           </button>
           <div className="aboutSign">
             <Link to="#">비밀번호 찾기</Link>
-            <Link to="/signup">회원가입</Link>
+            <Link to="/member/signUp.do">회원가입</Link>
           </div>
         </form>
       </div>

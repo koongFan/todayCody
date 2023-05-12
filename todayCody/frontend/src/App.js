@@ -1,17 +1,18 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Header from "components/Header";
+import Header from "components/layout/Header";
 import NotFound from "pages/NotFound";
 import Main from "pages/Main";
 import Ranking from "pages/Ranking";
 import LookInfo from "pages/LookInfo";
 import Board from "pages/Board";
+import BoardPost from "components/board/BoardPost";
 import Feed from "pages/Feed";
 import MyPage from "pages/MyPage";
 import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
-import Footer from "components/Footer";
+import Footer from "components/layout/Footer";
 
 import "./scss/main.scss";
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: "/ranking", element: <Ranking /> },
       { path: "/lookinfo", element: <LookInfo /> },
       { path: "/board", element: <Board /> },
+      { path: "/board/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage /> },
     ],

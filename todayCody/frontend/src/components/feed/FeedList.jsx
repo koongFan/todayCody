@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function InstaFeed({ data }) {
+export default function FeedList({ data }) {
   const { id, userName, profileImg, feedImg, likes, feedText, comments } = data;
   return (
     <div className="feedContainer">

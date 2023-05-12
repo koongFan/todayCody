@@ -1,5 +1,5 @@
 import React from "react";
-import InstaFeed from "components/InstaFeed";
+import FeedList from "components/feed/FeedList";
 
 export default function Feed() {
   const feedDatas = [
@@ -47,7 +47,7 @@ export default function Feed() {
     <div className="wrapper">
       <ul className="feedList">
         {feedDatas.map((item) => (
-          <InstaFeed key={item.id} data={item} />
+          <FeedList key={item.id} data={item} />
         ))}
       </ul>
     </div>

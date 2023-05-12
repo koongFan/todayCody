@@ -265,4 +265,7 @@ header nav .menu a .menuItem:hover {
 }
 .boardContainer .boardTable tbody .post td {
   text-align: center;
+}
+.boardContainer .boardTable tbody .post td a:hover {
+  color: #e87a72;
 }/*# sourceMappingURL=main.css.map */
