@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function LookInfo() {
-  return <div>lookinfo</div>;
+  return <div className="wrapper">lookinfo</div>;
 }

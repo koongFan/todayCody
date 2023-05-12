@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function MyPage() {
-  return <div>mypage</div>;
+  return <div className="wrapper">mypage</div>;
 }

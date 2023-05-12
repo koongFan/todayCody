@@ -84,7 +84,7 @@ public class LoginValidator implements Validator {
                 , "별칭을 입력해주세요"        
             );
 
-			if( Pattern.matches(  "^[가-힣]{2,10}$", dto.getName()  )==false ) {
+			if( Pattern.matches(  "^[가-힣]{2,10}$", dto.getNickname()  )==false ) {
 				errors.rejectValue("nickname", "별칭은 2자에서 10자 사이입니다. 다시 입력해주세요");
 			}           
             //===============================================================================================

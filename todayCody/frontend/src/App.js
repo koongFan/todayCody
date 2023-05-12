@@ -13,6 +13,8 @@ import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import Footer from "components/Footer";
 
+import "./scss/main.scss";
+
 const Layout = () => {
   return (
     <>
@@ -34,12 +36,12 @@ const router = createBrowserRouter([
       { path: "/lookinfo", element: <LookInfo /> },
       { path: "/board", element: <Board /> },
       { path: "/feed", element: <Feed /> },
-      { path: "/profile/:profileId", element: <MyPage /> },
+      { path: "/mypage", element: <MyPage /> },
     ],
   },
   
-  { path: "/member/signIn.do", element: <SignIn /> },
-  { path: "/member/signUp.do", element: <SignUp /> },
+  { path: "/signin", element: <SignIn /> },
+  { path: "/signup", element: <SignUp /> },
   { path: "/newpost", element: <NewPost /> },
   { path: "/editpost", element: <NewPost /> },
 ]);
