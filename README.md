@@ -10,7 +10,9 @@
  23/05/12 (금) FE
  pull requests => 로그인 화면 구현 -PE
  
- 이후 merge 하면
+ 
+ 써주시고
+ 이후 제가 merge 하면
  
  23/05/12 (금) FE
  로그인 화면 구현 -PE (merge) 
