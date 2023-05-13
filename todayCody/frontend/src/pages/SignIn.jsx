@@ -5,55 +5,43 @@ import axios from "axios";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
-    id: "",
+    user_id: "",
     pwd: "",
   });
-
-  const [valid, setValid] = useState({
-    pwd: false,
-  });
-
   const [formIsValid, setFormIsValid] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      //디바운싱
-      console.log("유효성 검사중");
-      setValid({ ...valid, pwd: inputs.pwd.length >= 8 });
-      setFormIsValid(inputs.id && inputs.pwd.length >= 8);
+      setFormIsValid(inputs.user_id && inputs.pwd.length >= 8);
     }, 200);
 
     return () => {
-      console.log("클린업");
       clearTimeout(identifier);
     };
-  }, [inputs.id, inputs.pwd]);
+  }, [inputs.user_id, inputs.pwd]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
-  // const validHandler = (e) => {
-  //  const { name } = e.target;
-  //  setValid({ ...valid, [name]: inputs.name.length >= 8 });
-  // };
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios({
-        url: "http://52.78.103.73:8081/member/signIn.do",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(inputs),
-      });
-      if (res.status === 200) {
-        alert("로그인되었습니다.");
+      const { data } = await axios.post(
+        "http://52.78.103.73:8081/member/signIn.do",
+        inputs
+      );
+      console.log(data);
+      if (data.retCode === "000") {
+        alert(data.retMsg);
+        window.location.replace("/");
+      } else {
+        setError("아이디 또는 비밀번호가 틀렸습니다.");
       }
     } catch (error) {
-      alert("[ERROR] 로그인에 실패했습니다.");
+      console.log(error);
     }
   };
 
@@ -65,9 +53,9 @@ export default function Login() {
           <p>오늘코디 계정으로 로그인</p>
           <input
             type="text"
-            name="id"
+            name="user_id"
             required
-            value={inputs.id}
+            value={inputs.user_id}
             onChange={changeHandler}
             placeholder="아이디를 입력해주세요."
           />
@@ -76,9 +64,8 @@ export default function Login() {
             name="pwd"
             value={inputs.pwd}
             onChange={changeHandler}
-            placeholder="비밀번호를 입력해주세요. (8자 이상)"
+            placeholder="비밀번호를 입력해주세요.(8자 이상)"
           />
-          {!valid.pwd && <p className="warn">8자리 이상 입력해주세요.</p>}
           <button
             type="submit"
             disabled={!formIsValid}
@@ -86,9 +73,10 @@ export default function Login() {
           >
             로그인
           </button>
+          {error && <p className="error">{error}</p>}
           <div className="aboutSign">
             <Link to="#">비밀번호 찾기</Link>
-            <Link to="/member/signUp.do">회원가입</Link>
+            <Link to="/signUp">회원가입</Link>
           </div>
         </form>
       </div>
