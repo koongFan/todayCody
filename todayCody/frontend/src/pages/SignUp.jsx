@@ -2,25 +2,33 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function SignUp() {
+
   const [user, setUser] = useState({
     user_id: '',
     pwd: '',
     u_name: '',
-    u_nickname: ''
+    u_nickname: '',
+    u_birth: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    for (let key in user) {
+      if (!user[key]) {
+        alert(`${key}를 입력해주세요`);
+        return;
+      }
+    }
+    signupClick();
   };
 
-  const signupClick = (e) => {
-    e.preventDefault();
+  const signupClick = () => {
     axios.post('http://52.78.103.73:8081/member/signUp.do', user)
       .then((res) => {
         console.log(res.data);
         if (res.data.failOrSucc) {
           alert('회원가입이 완료되었습니다.');
-          window.location.replace('/member/signIn.do');
+          window.location.replace('signIn')
         } else {
           alert('회원가입에 실패했습니다. 다시 시도해주세요.' + res.data.msg);
         }
@@ -77,7 +85,17 @@ export default function SignUp() {
               setUser({ ...user, u_nickname: e.target.value})
             }}
           />
-          <input type="submit" value="회원가입" onClick={signupClick} />
+          <input
+            type="text"
+            name="birth"
+            value={user.u_birth}
+            required
+            placeholder="YYYYMMDD 형식으로 입력해 주세요."
+            onChange={(e) => {
+              setUser({ ...user, u_birth: e.target.value})
+            }}
+          />
+          <button type="submit">회원가입</button>
         </form>
       </div>
     </div>
