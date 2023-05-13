@@ -10,6 +10,8 @@
  23/05/12 (금) FE
  pull requests => 로그인 화면 구현 -PE
  
+ 23/05/13 (토) FE
+ pull requests => 로그인 수정사항 반영 -PE
  
  써주시고
  이후 제가 merge 하면
