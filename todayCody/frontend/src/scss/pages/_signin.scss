@@ -22,12 +22,6 @@
       margin-top: 2rem;
     }
 
-    .warn {
-      margin-top: 0.5rem;
-      color: #de3730ff;
-      font-size: 0.8rem;
-    }
-
     input {
       width: 250px;
       background-color: #eee;
@@ -50,12 +44,18 @@
       transition: transform 0.1s ease-in;
 
       &.disabled {
-        background-color: #de3730ff;
+        background-color: #848484;
       }
 
       &:hover {
         transform: scale(0.95);
       }
+    }
+
+    .error {
+      margin-top: 0.5rem;
+      color: #de3730ff;
+      font-size: 0.8rem;
     }
   }
 
