@@ -32,12 +32,12 @@ public class LoginValidator implements Validator {
             //===============================================================================================
 			ValidationUtils.rejectIfEmptyOrWhitespace(
 					errors                    
-					, "id"                  
+					, "user_id"
 					, "id를 입력해주세요"   
 			);
 
-			if( Pattern.matches(  "[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$", dto.getId()  )==false ) {
-				errors.rejectValue("id", "id는 '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하 입니다. 다시 입력해주세요");
+			if(!Pattern.matches("[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$", dto.getUser_id())) {
+				errors.rejectValue("user_id", "id는 '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하 입니다. 다시 입력해주세요");
 			}
             //===============================================================================================
             //===============================================================================================
@@ -51,7 +51,7 @@ public class LoginValidator implements Validator {
                 , "암호를 입력해주세요"        
             );
 
-			if( Pattern.matches(  "^[A-Za-z0-9]{6,12}$", dto.getPwd()  )==false ) {
+			if(!Pattern.matches("^[A-Za-z0-9]{6,12}$", dto.getPwd())) {
 				errors.rejectValue("pwd", "비밀번호는 숫자, 문자 포함의 6~12자리 이내 입니다. 다시 입력해주세요");
 			}
             //===============================================================================================
@@ -63,12 +63,12 @@ public class LoginValidator implements Validator {
             //===============================================================================================
 			ValidationUtils.rejectIfEmptyOrWhitespace(
                 errors                       
-                , "name"                   
+                , "u_name"
                 , "이름을 입력해주세요"        
             );
 
-			if( Pattern.matches(  "^[가-힣]{2,10}$", dto.getName()  )==false ) {
-				errors.rejectValue("name", "이름은 2자에서 10자 사이입니다. 다시 입력해주세요");
+			if(!Pattern.matches("^[가-힣]{2,10}$", dto.getU_name())) {
+				errors.rejectValue("u_name", "이름은 2자에서 10자 사이입니다. 다시 입력해주세요");
 			}           
             //===============================================================================================
             //===============================================================================================
@@ -80,12 +80,12 @@ public class LoginValidator implements Validator {
             //===============================================================================================
 			ValidationUtils.rejectIfEmptyOrWhitespace(
                 errors                       
-                , "nickname"                   
+                , "u_nickname"
                 , "별칭을 입력해주세요"        
             );
 
-			if( Pattern.matches(  "^[가-힣]{2,10}$", dto.getNickname()  )==false ) {
-				errors.rejectValue("nickname", "별칭은 2자에서 10자 사이입니다. 다시 입력해주세요");
+			if(!Pattern.matches("^[가-힣]{2,10}$", dto.getU_nickname())) {
+				errors.rejectValue("u_nickname", "별칭은 2자에서 10자 사이입니다. 다시 입력해주세요");
 			}           
             //===============================================================================================
             //===============================================================================================

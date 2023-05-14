@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 public class LoginDTO {
-    private String id;
+    private String user_id;
     private String pwd;
-    private String name;
-    private String nickname;
-
+    private String u_name;
+    private String u_nickname;
+    private String email;
+    private String u_birth;
 
 }

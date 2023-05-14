@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service("LoginService")
+@Service("loginService")
 public class LoginServiceImpl implements LoginService {
 
   @Autowired
@@ -42,8 +42,8 @@ public class LoginServiceImpl implements LoginService {
       request.getSession().setAttribute("user_id", String.valueOf(map.get("id")));
       request.getSession().setAttribute("user_name", String.valueOf(map.get("name")));
 
-      jsonMap.put("id",map.get("id"));
-      jsonMap.put("name",map.get("name"));
+      jsonMap.put("id", map.get("id"));
+      jsonMap.put("name", map.get("name"));
 
     }
     map = jsonMap;
@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
   }
 
   @Override
-  public Map<String, Object> insertUpLogin(LoginDTO loginDTO) throws Exception{
+  public Map<String, Object> insertUpLogin(LoginDTO loginDTO) throws Exception {
 
     HashMap<String, Object> map = new HashMap<>();
 
@@ -60,14 +60,13 @@ public class LoginServiceImpl implements LoginService {
     int dupleIdCnt = loginDAO.duplIdCnt(loginDTO);
     int upUserInfo = loginDAO.upUserInfoCnt(loginDTO);
 
-    if(dupleIdCnt>=1){
-      map.put("msg","이미 있는 아이디 입니다.");
-      map.put("failOrSucc",false);
+    if (dupleIdCnt >= 1) {
+      map.put("msg", "이미 있는 아이디 입니다.");
+      map.put("failOrSucc", false);
       return map;
-    }
-    else{
-      map.put("msg","회원가입이 완료되었습니다.");
-      map.put("failOrSucc",true);
+    } else {
+      map.put("msg", "회원가입이 완료되었습니다.");
+      map.put("failOrSucc", true);
       return map;
     }
   }
