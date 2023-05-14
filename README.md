@@ -28,5 +28,5 @@
 
 
 
- 23/05/14 (일) BE
- pull requests => MyBatis DB연동,log4j2 추가,DTO 수정 -PE
+ 23/05/14 (일) BE  
+ MyBatis DB연동,log4j2 추가,DTO 수정 -hw (merge)
