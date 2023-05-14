@@ -3,7 +3,7 @@
 
 
 
-<mapper namespace="com.example.todayCody.LoginDAO">
+<mapper namespace="com.example.todayCody.login.LoginDAO">
 
 
 	<select id="getUserId" resultType="string">
@@ -22,7 +22,6 @@
 			,pwd			
 			,u_name
 			,u_nickname
-			,email
 			,u_birth
 		)
 		values
@@ -31,7 +30,6 @@
 			,#{pwd}			
 			,#{u_name}
 			,#{u_nickname}
-			,#{email}
 			,#{u_birth}
 		)
 	</insert>
