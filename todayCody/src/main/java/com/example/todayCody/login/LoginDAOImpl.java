@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-@Repository
+@Repository("loginDAO")
 public class LoginDAOImpl implements LoginDAO {
 
     @Autowired
-    private SqlSessionTemplate sqlSession;
+    SqlSessionTemplate sqlSession;
 
     public String getUserId(){
         String userId = this.sqlSession.selectOne("com.example.todayCody.LoginDAO.getUserId");

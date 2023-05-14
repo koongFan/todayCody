@@ -1,10 +1,12 @@
 # 오늘코디
-<br>  
+
+<br>
 
 ## 🤙 commit -> Pull requests -> conflict 아닌 거 확인 되면 수정 사항 적어두기
+
 <hr/>
 
-### 예시  
+### 예시
 
 <pre>
  23/05/12 (금) FE
@@ -20,4 +22,8 @@
  로그인 화면 구현 -PE (merge) 
  
  로 제가 수정 하겠습니다!
+
+
+ 23/05/14 (일) BE
+ pull requests => MyBatis DB연동,log4j2 추가,DTO 수정 -PE
 </pre>
