@@ -1,0 +1,20 @@
+2023-05-14 11:19:29  INFO [com.example.todayCody.TodayCodyApplication] Starting TodayCodyApplication using Java 17.0.6 on baghan-uui-MacBookPro.local with PID 15465 (/Users/han-u/Documents/todayCody/todayCody/build/classes/java/main started by han-u in /Users/han-u/Documents/todayCody/todayCody)
+2023-05-14 11:19:29  INFO [com.example.todayCody.TodayCodyApplication] No active profile set, falling back to 1 default profile: "default"
+2023-05-14 11:19:30  WARN [org.mybatis.spring.mapper.ClassPathMapperScanner] No MyBatis mapper was found in '[com.example.todayCody]' package. Please check your configuration.
+2023-05-14 11:19:30  INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat initialized with port(s): 8081 (http)
+2023-05-14 11:19:30  INFO [org.apache.coyote.http11.Http11NioProtocol] Initializing ProtocolHandler ["http-nio-8081"]
+2023-05-14 11:19:30  INFO [org.apache.catalina.core.StandardService] Starting service [Tomcat]
+2023-05-14 11:19:30  INFO [org.apache.catalina.core.StandardEngine] Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-05-14 11:19:30  INFO [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring embedded WebApplicationContext
+2023-05-14 11:19:30  INFO [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] Root WebApplicationContext: initialization completed in 331 ms
+2023-05-14 11:19:30  INFO [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping] Adding welcome page: class path resource [static/index.html]
+2023-05-14 11:19:30  INFO [org.apache.coyote.http11.Http11NioProtocol] Starting ProtocolHandler ["http-nio-8081"]
+2023-05-14 11:19:30  INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] Tomcat started on port(s): 8081 (http) with context path ''
+2023-05-14 11:19:30  INFO [com.example.todayCody.TodayCodyApplication] Started TodayCodyApplication in 0.645 seconds (JVM running for 0.917)
+2023-05-14 11:19:56  INFO [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-14 11:19:56  INFO [org.springframework.web.servlet.DispatcherServlet] Initializing Servlet 'dispatcherServlet'
+2023-05-14 11:19:56  INFO [org.springframework.web.servlet.DispatcherServlet] Completed initialization in 2 ms
+2023-05-14 11:19:56  WARN [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver] Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+2023-05-14 11:20:16  INFO [com.example.todayCody.login.LoginController] test!!!!!
+2023-05-14 11:20:16  INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+2023-05-14 11:20:16  INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Log4j2
 @RestController
 @RequestMapping(value = "/member")
 @CrossOrigin
@@ -30,7 +32,7 @@ public class LoginController {
 
   @GetMapping("hello")
   public List<String> user_id() {
-
+    log.info("test!!!!!");
     String user_id = loginDAO.getUserId();
 //    System.out.println(user_id);
 
