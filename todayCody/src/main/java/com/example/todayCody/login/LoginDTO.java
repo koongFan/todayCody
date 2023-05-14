@@ -10,5 +10,4 @@ public class LoginDTO {
     private String u_nickname;
     private String email;
     private String u_birth;
-
 }
