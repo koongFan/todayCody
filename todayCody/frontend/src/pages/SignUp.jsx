@@ -28,7 +28,7 @@ export default function SignUp() {
         console.log(res.data);
         if (res.data.failOrSucc) {
           alert('회원가입이 완료되었습니다.');
-          window.location.replace('signin')
+          window.location.replace('/signIn')
         } else {
           alert('회원가입에 실패했습니다. 다시 시도해주세요.' + res.data.msg);
         }
