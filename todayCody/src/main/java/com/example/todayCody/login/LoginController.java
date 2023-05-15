@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.todayCody.common.config.TodayCodyConstUrl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
 @RestController
-@RequestMapping(value = "/member")
 @CrossOrigin
 public class LoginController {
 
@@ -30,21 +30,10 @@ public class LoginController {
 
   String inputCheckRet = null; //[230510:한우]데이터 유효성 검사 변수
 
-  @GetMapping("hello")
-  public List<String> user_id() {
-    log.info("test!!!!!");
-    log.debug("DEBUG");
-    log.fatal("FATAL");
-    String user_id = loginDAO.getUserId();
-//    System.out.println(user_id);
-
-    return Arrays.asList("안녕하세요", user_id);
-  }
-
   //==========================================================================================================================================================
   // 주석
   //==========================================================================================================================================================
-  @PostMapping("/signIn.do")
+  @PostMapping(TodayCodyConstUrl.signIn)
   public Object userLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception {
 
     String jsonData = params.get("jsonData");
@@ -106,7 +95,7 @@ public class LoginController {
   //==========================================================================================================================================================
   // 회원가입 
   //==========================================================================================================================================================
-  @PostMapping("/signUp.do")
+  @PostMapping(TodayCodyConstUrl.signUp)
   public Object userSignUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginDTO loginDTO, BindingResult bindingResult) throws Exception {
 
     Map<String, Object> resMap = new HashMap<>();

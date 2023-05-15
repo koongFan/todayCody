@@ -15,12 +15,6 @@ public class LoginDAOImpl implements LoginDAO {
     @Autowired
     SqlSessionTemplate sqlSession;
 
-    public String getUserId(){
-        String userId = this.sqlSession.selectOne("com.example.todayCody.login.LoginDAO.getUserId");
-
-        return userId;
-    }
-
   @Override
   public Map<String, Object> getUserInfoById(HashMap<String, Object> vo) throws Exception {
       HashMap<String, Object> retMap = new HashMap<>();
@@ -31,12 +25,14 @@ public class LoginDAOImpl implements LoginDAO {
     return retMap;
   }
 
+  // [회원가입] 중복 아이디 확인
   @Override
   public int duplIdCnt(LoginDTO loginDTO) throws Exception{
     int dupleCnt = this.sqlSession.selectOne("com.example.todayCody.login.LoginDAO.duplIdCnt", loginDTO);
     return dupleCnt;
   }
-
+  
+  // [회원가입] 아이디 정보 DB 입력
   @Override
   public int upUserInfoCnt(LoginDTO loginDTO) throws Exception{
     int upCnt = this.sqlSession.insert("com.example.todayCody.login.LoginDAO.upUserInfoCnt",loginDTO);

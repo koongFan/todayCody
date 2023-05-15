@@ -50,7 +50,8 @@ public class LoginServiceImpl implements LoginService {
 
     return map;
   }
-
+  
+  // [회원가입] 비즈니스 로직
   @Override
   public Map<String, Object> insertUpLogin(LoginDTO loginDTO) throws Exception {
 
