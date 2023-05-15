@@ -33,6 +33,8 @@ public class LoginController {
   @GetMapping("hello")
   public List<String> user_id() {
     log.info("test!!!!!");
+    log.debug("DEBUG");
+    log.fatal("FATAL");
     String user_id = loginDAO.getUserId();
 //    System.out.println(user_id);
 
