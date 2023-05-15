@@ -1,49 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration status="INFO">
 
     <!-- 해당 설정파일에서 사용하는 프로퍼티-->
     <Properties>
-        <property name="LOGS_PATH">C:\test_logs</property>
+        <!--        <property name="LOGS_PATH">C:\test_logs</property>-->
+        <Property name="logNm">Spring Log4j2</Property>
+        <Property name="layoutPattern">%style{%d{yyyy/MM/dd HH:mm:ss,SSS}}{cyan} %highlight{[%-5p]}{FATAL=bg_red,
+            ERROR=red,
+            INFO=green, DEBUG=blue} [%C] %style{[%t]}{yellow}- %m%n -
+        </Property>
     </Properties>
 
     <Appenders>
         <!-- 콘솔 -->
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level %logger{35} - %msg%n" />
+        <Console name="Console_Appender" target="SYSTEM_OUT">
+            <!--            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level %logger{35} - %msg%n" />-->
+            <PatternLayout pattern="${layoutPattern}"/>
         </Console>
 
         <!-- 파일 -->
-        <RollingFile name ="RollingFile">
-            <FileName>${LOGS_PATH}/log4j2.log</FileName>
-            <FilePattern>${LOGS_PATH}/log4j2.%d{yyyy-MM-dd}.%i.log.gz</FilePattern>
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %5p [%c] %m%n</Pattern>
-            </PatternLayout>
+        <RollingFile name="File_Appender" fileName="logs/${logNm}.log"
+                     filePattern="logs/${logNm}_%d{yyyy-MM-dd}_%i.log.gz">
+            <PatternLayout pattern="${layoutPattern}"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="100MB"/>
-                <TimeBasedTriggeringPolicy interval = "1" modulate = "true"/>
+                <SizeBasedTriggeringPolicy size="200KB"/>
+                <TimeBasedTriggeringPolicy interval="1"/>
             </Policies>
+            <DefaultRolloverStrategy max="10" fileIndex="min"/>
         </RollingFile>
     </Appenders>
 
     <Loggers>
-        <!-- Application Loggers -->
-        <!-- Root 보다 우선 순위가 높습니다. -->
-        <logger name="com.test.api.controller" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-            <AppenderRef ref="RollingFile" />
-        </logger>
-
-        <logger name="com.test.api.service" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-            <AppenderRef ref="RollingFile" />
-        </logger>
-
-        <!-- FATAL, ERROR, WARN, INFO, DEBUG, TRACE -->
-        <Root level="INFO">
-            <AppenderRef ref="console" />
-            <AppenderRef ref="RollingFile" />
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="Console_Appender"/>
+            <AppenderRef ref="File_Appender"/>
         </Root>
+        <logger name="org.mybatis" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console_Appender"/>
+        </logger>
+
     </Loggers>
 
 </Configuration>

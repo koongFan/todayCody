@@ -16,7 +16,7 @@ public class LoginDAOImpl implements LoginDAO {
     SqlSessionTemplate sqlSession;
 
     public String getUserId(){
-        String userId = this.sqlSession.selectOne("com.example.todayCody.LoginDAO.getUserId");
+        String userId = this.sqlSession.selectOne("com.example.todayCody.login.LoginDAO.getUserId");
 
         return userId;
     }

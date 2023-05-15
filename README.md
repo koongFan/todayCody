@@ -25,8 +25,8 @@
 
 </pre>
 
-
-
-
- 23/05/14 (일) BE  
+23/05/14 (일) BE  
  MyBatis DB연동,log4j2 추가,DTO 수정 -hw (merge)
+
+23/05/15 (월) BE
+log4j2 파일 저장 경로 수정, sql 쿼리 로그 추가, log파일 gitignore 추가
