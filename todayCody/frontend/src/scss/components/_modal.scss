@@ -1,0 +1,159 @@
+.modalContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+
+  .feedModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    width: 800px;
+    height: 600px;
+
+    background-color: #fff;
+
+    .left,
+    .right {
+      width: 50%;
+      height: width;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left {
+      .imgContainer {
+        width: 100%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
+      }
+
+      .content {
+        padding: 1rem;
+
+        .profile {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+
+          .profileImg {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50px;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        .text {
+          margin-top: 0.5rem;
+        }
+      }
+    }
+
+    .right {
+      padding-left: 2rem;
+
+      .comments {
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+
+        overflow-y: scroll;
+
+        h3 {
+          padding: 1rem 0.5rem;
+        }
+
+        .comment {
+          margin-top: 1.2rem;
+          display: flex;
+          align-items: flex-start;
+
+          .profileImg {
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            overflow: hidden;
+            margin-right: 1rem;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+
+          .text {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            span {
+              font-size: 0.8rem;
+              font-weight: 500;
+              line-height: 0.8rem;
+            }
+
+            p {
+              font-size: 0.9rem;
+              color: rgb(15, 15, 15);
+            }
+          }
+        }
+      }
+
+      .addCommnet {
+        position: absolute;
+        bottom: 2rem;
+
+        margin-top: 1.2rem;
+        display: flex;
+        align-items: flex-start;
+
+        .profileImg {
+          width: 40px;
+          height: 40px;
+          border-radius: 50px;
+          overflow: hidden;
+          margin-right: 1rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        form {
+          input {
+            padding: 0.5rem 0.3rem;
+            color: #606060;
+            font-size: 1rem;
+
+            &:focus {
+              border-bottom: 1px solid #606060;
+            }
+          }
+        }
+      }
+    }
+  }
+}
