@@ -34,5 +34,5 @@
  log4j2 파일 저장 경로 수정, sql 쿼리 로그 추가, log파일 gitignore 추가 -hw (merge)
 
  23/05/17 (수) FE<br>
- pull requests => 피드 모달창 작업 -PE
+피드 모달창 작업 -PE (merge)
 
