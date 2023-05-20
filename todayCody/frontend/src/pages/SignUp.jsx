@@ -6,6 +6,7 @@ export default function SignUp() {
   const [user, setUser] = useState({
     user_id: '',
     pwd: '',
+    email: '',
     u_name: '',
     u_nickname: '',
     u_birth: ''
@@ -63,6 +64,16 @@ export default function SignUp() {
             placeholder="password"
             onChange={(e) => {
               setUser({ ...user, pwd: e.target.value })
+            }}
+          />
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            required
+            placeholder="email"
+            onChange={(e) => {
+              setUser({ ...user, email: e.target.value })
             }}
           />
           <input
