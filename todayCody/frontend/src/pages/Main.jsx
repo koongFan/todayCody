@@ -1,5 +1,6 @@
 import Banner from "components/main/Banner";
 import Coder from "components/main/Coder";
+import Marquee from "components/main/Marquee";
 
 export default function Main() {
   const codyRanker = [
@@ -32,6 +33,7 @@ export default function Main() {
     <div className="main-wrapper">
       <Banner />
       <Coder codyRanker={codyRanker} />
+      <Marquee />
     </div>
   );
 }

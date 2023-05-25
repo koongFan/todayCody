@@ -121,4 +121,45 @@
       }
     }
   }
+
+  .marquee {
+    width: 100vw;
+    height: 2.5rem;
+
+    position: relative;
+    overflow: hidden;
+
+    .track {
+      width: 200%;
+      height: 2.5rem;
+
+      display: flex;
+
+      position: absolute;
+      overflow: hidden;
+
+      animation: marquee 20s linear infinite;
+
+      .content {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: #111;
+        color: #ff4c13;
+        font-weight: 700;
+      }
+
+      @keyframes marquee {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: -100%;
+        }
+      }
+    }
+  }
 }
