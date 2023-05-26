@@ -162,4 +162,63 @@
       }
     }
   }
+
+  .trend-container {
+    width: 925px;
+    height: 400px;
+
+    margin: 3rem auto 6rem auto;
+
+    .trend-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .trend-look {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 2rem;
+
+      .look-content {
+        width: 220px;
+        height: 330px;
+
+        .img-container {
+          width: 100%;
+
+          img {
+            width: 100%;
+            border: 1px solid #222;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+          }
+        }
+
+        .tags {
+          display: flex;
+          gap: 0.5rem;
+
+          margin-top: 0.5rem;
+
+          li {
+            height: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 0.25rem 0.5rem;
+
+            background-color: #fff;
+            border: 0.7px solid #111111;
+            border-radius: 1.5rem;
+
+            font-size: 0.5rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
 }
