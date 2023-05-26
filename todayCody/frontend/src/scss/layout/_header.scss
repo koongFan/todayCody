@@ -29,6 +29,8 @@ header {
     display: flex;
     flex-direction: column;
 
+    font-weight: 600;
+
     .top {
       height: 110px;
       display: flex;
@@ -44,7 +46,6 @@ header {
         border-right: 1px solid #222222;
 
         font-size: 1rem;
-        font-weight: 500;
       }
 
       .top-right {
