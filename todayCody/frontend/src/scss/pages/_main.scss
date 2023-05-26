@@ -221,4 +221,64 @@
       }
     }
   }
+
+  .board-container {
+    width: 1100px;
+
+    margin: 4rem auto 6rem auto;
+
+    display: flex;
+    justify-content: space-between;
+
+    .board {
+      display: flex;
+      flex-direction: column;
+
+      font-size: 0.8rem;
+
+      .board-title {
+        align-self: center;
+
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .board-table {
+        width: 500px;
+
+        margin-top: 2rem;
+        border-collapse: collapse;
+
+        thead {
+          tr {
+            height: 2rem;
+
+            background-color: #fff;
+            border-block: 1px solid #111111;
+
+            th {
+              font-weight: 600;
+            }
+          }
+        }
+
+        tbody {
+          .board-row {
+            height: 2rem;
+
+            background-color: #fff;
+
+            td {
+              a {
+                &:hover {
+                  color: #ff4c13;
+                }
+              }
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
 }
