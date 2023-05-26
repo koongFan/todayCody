@@ -98,7 +98,7 @@ export default function Main() {
         <Board title="자유게시판" posts={posts} />
         <Board title="Q&A" posts={posts} />
       </div>
-      <Marquee />
+      <Marquee reverse="true" />
     </div>
   );
 }

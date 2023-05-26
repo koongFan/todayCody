@@ -149,7 +149,14 @@
 
         background-color: #111;
         color: #ff4c13;
+
+        font-size: 1.2rem;
         font-weight: 700;
+
+        &.reverse {
+          background-color: #ff4c13;
+          color: #111;
+        }
       }
 
       @keyframes marquee {
