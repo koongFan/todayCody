@@ -1,0 +1,23 @@
+.footer {
+  height: 180px;
+
+  display: flex;
+  align-items: center;
+
+  padding-inline: 4rem;
+
+  background-color: #111111;
+  color: #fff;
+
+  .logo {
+    font-size: 7rem;
+    font-weight: 700;
+    opacity: 0.4;
+  }
+
+  p {
+    margin-left: 2rem;
+    font-size: 1.2rem;
+    opacity: 0.4;
+  }
+}
