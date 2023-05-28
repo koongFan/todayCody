@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import '../scss/pages/_signup.scss';
 
 export default function SignUp() {
 
@@ -7,6 +8,7 @@ export default function SignUp() {
     user_id: '',
     pwd: '',
     email: '',
+    mailAccessCode: '',
     u_name: '',
     u_nickname: '',
     u_birth: ''
@@ -23,22 +25,35 @@ export default function SignUp() {
     signupClick();
   };
 
-  const signupClick = () => {
-    axios.post('http://52.78.103.73:8081/member/signUp.do', user)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.failOrSucc) {
-          alert('회원가입이 완료되었습니다.');
-          window.location.replace('/signin')
-        } else {
-          alert('회원가입에 실패했습니다. 다시 시도해주세요.' + res.data.msg);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert('회원가입에 실패했습니다. 다시 시도해주세요.')
-      })
+  const handleEmailCertification = async () => {
+    try {
+      const res = await axios.post('http://52.78.103.73:8081/signup/mailConfirm', {email: user.email});
+      if (res.data.success) {
+        alert('이메일로 인증코드가 전송되었습니다.')
+      } else {
+        alert('인증 코드 전송에 실패했습니다.');
+      }
+    } catch (err) {
+      console.log(err);
+      alert('인증 코드 전송에 실패했습니다.');
+    }
   }
+
+  const signupClick = async () => {
+    try {
+      const res = await axios.post("http://52.78.103.73:8081/member/signUp.do", user);
+      console.log(res.data);
+      if (res.data.failOrSucc) {
+        alert("회원가입이 완료되었습니다.");
+        window.location.replace("/signin");
+      } else {
+        alert("회원가입에 실패했습니다. 다시 시도해주세요." + res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
   
   return(
     <>
@@ -66,6 +81,8 @@ export default function SignUp() {
               setUser({ ...user, pwd: e.target.value })
             }}
           />
+
+          {/* 이메일 */}
           <input
             type="email"
             name="email"
@@ -76,16 +93,20 @@ export default function SignUp() {
               setUser({ ...user, email: e.target.value })
             }}
           />
+          <button onChange={handleEmailCertification}>이메일 인증</button>
+          
+          {/* 이메일 인증 코드 */}
           <input
             type="text"
-            name="name"
-            value={user.u_name}
+            name="mailAccessCods"
+            value={user.mailAccessCode}
             required
-            placeholder="name"
+            placeholder="이메일 인증 코드"
             onChange={(e) => {
-              setUser({ ...user, u_name: e.target.value })
+              setUser({ ...user, mailAccessCode: e.target.value });
             }}
           />
+          
           <input
             type="text"
             name="nickname"
