@@ -15,12 +15,15 @@
   }
 
   .coder-container {
-    height: 450px;
+    width: 1300px;
+    height: 420px;
+
+    margin-inline: auto;
 
     display: flex;
 
     .left {
-      width: 450px;
+      width: 350px;
 
       display: flex;
       flex-direction: column;
@@ -41,20 +44,21 @@
 
       p {
         margin-top: 1rem;
+        color: #858585;
       }
     }
     .right {
-      width: calc(100vw - 450px);
+      width: 950px;
 
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 6rem;
+      gap: 2rem;
 
+      padding-left: 2rem;
       padding-block: 2.3rem;
 
       .coder {
-        width: 220px;
+        width: 210px;
         height: 100%;
 
         .coder-content {
@@ -62,11 +66,12 @@
 
           .img-container {
             width: 100%;
-            height: 80%;
+            height: 280px;
+            border-bottom: 1px solid #222;
 
             img {
               width: 100%;
-              border-bottom: 1px solid #222;
+              height: 100%;
               aspect-ratio: 3/4;
               object-fit: cover;
             }
@@ -102,10 +107,13 @@
         }
         .more {
           margin-top: 0.5rem;
+          font-size: 0.8rem;
 
           .heart {
             display: flex;
             align-items: center;
+
+            font-size: 1rem;
 
             .heart-icon {
               margin-right: 0.2rem;
@@ -116,6 +124,173 @@
 
           .name {
             font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .marquee {
+    width: 100vw;
+    height: 2.5rem;
+
+    position: relative;
+    overflow: hidden;
+
+    .track {
+      width: 200%;
+      height: 2.5rem;
+
+      display: flex;
+
+      position: absolute;
+      overflow: hidden;
+
+      animation: marquee 20s linear infinite;
+
+      .content {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        background-color: #111;
+        color: #ff4c13;
+
+        font-size: 1.2rem;
+        font-weight: 700;
+
+        &.reverse {
+          background-color: #ff4c13;
+          color: #111;
+        }
+      }
+
+      @keyframes marquee {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: -100%;
+        }
+      }
+    }
+  }
+
+  .trend-container {
+    width: 925px;
+    height: 400px;
+
+    margin: 3rem auto 6rem auto;
+
+    .trend-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .trend-look {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 2rem;
+
+      .look-content {
+        width: 220px;
+        height: 330px;
+
+        .img-container {
+          width: 100%;
+
+          img {
+            width: 100%;
+            border: 1px solid #222;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+          }
+        }
+
+        .tags {
+          display: flex;
+          gap: 0.5rem;
+
+          margin-top: 0.5rem;
+
+          li {
+            height: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 0.25rem 0.5rem;
+
+            background-color: #fff;
+            border: 0.7px solid #111111;
+            border-radius: 1.5rem;
+
+            font-size: 0.5rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .board-container {
+    width: 1100px;
+
+    margin: 4rem auto 6rem auto;
+
+    display: flex;
+    justify-content: space-between;
+
+    .board {
+      display: flex;
+      flex-direction: column;
+
+      font-size: 0.8rem;
+
+      .board-title {
+        align-self: center;
+
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .board-table {
+        width: 500px;
+
+        margin-top: 2rem;
+        border-collapse: collapse;
+
+        thead {
+          tr {
+            height: 2rem;
+
+            background-color: #fff;
+            border-block: 1px solid #111111;
+
+            th {
+              font-weight: 600;
+            }
+          }
+        }
+
+        tbody {
+          .board-row {
+            height: 2rem;
+
+            background-color: #fff;
+
+            td {
+              a {
+                &:hover {
+                  color: #ff4c13;
+                }
+              }
+              text-align: center;
+            }
           }
         }
       }
