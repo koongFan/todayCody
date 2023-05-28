@@ -101,7 +101,7 @@ export default function SignUp() {
             name="mailAccessCods"
             value={user.mailAccessCode}
             required
-            placeholder="이메일 인증 코드"
+            placeholder="이메일 인증 코드를 입력해주세요."
             onChange={(e) => {
               setUser({ ...user, mailAccessCode: e.target.value });
             }}
