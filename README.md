@@ -34,14 +34,13 @@
  log4j2 파일 저장 경로 수정, sql 쿼리 로그 추가, log파일 gitignore 추가 -hw (merge)
 
  23/05/17 (수) FE<br>
-피드 모달창 작업 -PE (merge)
+ 피드 모달창 작업 -PE (merge)
 
  23/05/29 (월) FE<br>
  회원가입 이메일인증기능 추가 -RD (merge)
  
  23/05/29 (월) BE<br>
- 피드 글쓰기 로직 작업 중 - HW 
-
+ 피드 글쓰기 로직 작업 중 - HW (merge) 
 
  23/05/29 (월) BE<br>
- 피드 글쓰기 로직 완료 - HW  
+ 피드 글쓰기 로직 완료 - HW (merge)  
