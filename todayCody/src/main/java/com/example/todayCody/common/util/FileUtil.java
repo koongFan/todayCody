@@ -27,17 +27,16 @@ public class FileUtil {
   public static String uploadFile(String path, MultipartFile file)
           throws Exception {
 
-    UUID randomeUUID = UUID.randomUUID();
-
     String savedFileName = null;
+
     if (file != null) {
-
-      log.debug("uploadFile> 파라미터명:" + file.getName());
-      log.debug("uploadFile> 파일크기:" + file.getSize());
-      log.debug("uploadFile> 파일 존재:" + file.isEmpty());
-      log.debug("uploadFile> 오리지날파일이름:" + file.getOriginalFilename());
-      log.debug("uploadFile> 업로드 파일 경로:" + path);
-
+      log.info("===========================================================");
+      log.info("[uploadFile] 파라미터명:" + file.getName());
+      log.info("[uploadFile] 파일크기:" + file.getSize());
+      log.info("[uploadFile] 파일 존재:" + file.isEmpty());
+      log.info("[uploadFile] 오리지날파일이름:" + file.getOriginalFilename());
+      log.info("[uploadFile] 업로드 파일 경로:" + path);
+      log.info("===========================================================");
 
       InputStream inputStream = null;
       OutputStream outputStream = null;
@@ -52,19 +51,11 @@ public class FileUtil {
           if (!realUploadDir.exists()) {
             realUploadDir.mkdirs();
           }
+          savedFileName = file.getOriginalFilename();
 
-          if (file.getOriginalFilename().lastIndexOf(".") > 0) {
-            savedFileName = randomeUUID.toString().replaceAll("-", "") +
-                    file.getOriginalFilename()
-                            .substring(file.getOriginalFilename().lastIndexOf("."));
-          } else {
-            savedFileName = randomeUUID.toString().replaceAll("-", "") + "_"
-                    + file.getOriginalFilename();
-          }
+          organizedFilePath = path + "/" + savedFileName;
 
-          organizedFilePath = path + savedFileName;
-
-          log.debug("uploadFile> saved_file_name:" + organizedFilePath);// 파일이 저장된경로 + 파일명
+          log.info("[uploadFile] saved_file_name:" + organizedFilePath);// 파일이 저장된경로 + 파일명
 
           outputStream = new FileOutputStream(organizedFilePath);
 

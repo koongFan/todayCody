@@ -1,6 +1,11 @@
 package com.example.todayCody.feed;
 
 
-public class FeedDAO {
-    
+import java.util.HashMap;
+
+public interface FeedDAO {
+
+  public int insertFeedInfo(HashMap<String, Object> jsonMap);
+  public int insertFileInfo(HashMap<String, Object> jsonMap);
+
 }

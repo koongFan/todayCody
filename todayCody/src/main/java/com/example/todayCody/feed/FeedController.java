@@ -24,18 +24,13 @@ import java.util.Map;
 public class FeedController {
   @Autowired
   FeedService feedService;
+
   @PostMapping(TodayCodyConstUrl.feedWrite)
-  public Object feedWrite( HttpServletRequest request,
-                           HttpServletResponse response,
-                           @RequestParam Map<String, String> params) throws Exception {
+  public Object feedWrite(HttpServletRequest request,
+                          HttpServletResponse response,
+                          @RequestParam Map<String, String> params) throws Exception {
 
     String jsonData = params.get("jsonData");
-
-    boolean logWrite = true;
-
-    log.info("=========================================================");
-    log.info("/Ajax3DBankMultipartController.do 데이타수신 ");
-    log.info("=========================================================");
 
     Map<String, Object> resMap = new HashMap<>();
 
@@ -48,9 +43,7 @@ public class FeedController {
       return resMap;
     }
 
-    if (logWrite) {
-      log.info("[URLDecoder.decode후..]\n>jsondata=");
-    }
+    log.info("[URLDecoder.decode 후..] >jsondata=\n" + jsonData);
 
     List<MultipartFile> aMultipartFile = null;
     if (request instanceof MultipartHttpServletRequest) {
@@ -72,14 +65,8 @@ public class FeedController {
 
     resMap = feedService.feedWrite(jsonMap, aMultipartFile);
 
-    return null;
+    return resMap;
   }
-
-
-    
-    
-
-
 
 
 }
