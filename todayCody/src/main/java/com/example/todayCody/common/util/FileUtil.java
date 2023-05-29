@@ -1,0 +1,86 @@
+package com.example.todayCody.common.util;
+
+import lombok.extern.log4j.Log4j2;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.UUID;
+
+@Log4j2
+public class FileUtil {
+
+  /**
+   * 디렉토리를 생성한다.
+   *
+   * @param sPath 절대패스
+   * @since 1.0
+   */
+  public static void makeDir(String sPath) {
+    File desDirFile = new File(sPath);
+    if (!desDirFile.exists())
+      desDirFile.mkdir();
+  }
+
+  public static String uploadFile(String path, MultipartFile file)
+          throws Exception {
+
+    UUID randomeUUID = UUID.randomUUID();
+
+    String savedFileName = null;
+    if (file != null) {
+
+      log.debug("uploadFile> 파라미터명:" + file.getName());
+      log.debug("uploadFile> 파일크기:" + file.getSize());
+      log.debug("uploadFile> 파일 존재:" + file.isEmpty());
+      log.debug("uploadFile> 오리지날파일이름:" + file.getOriginalFilename());
+      log.debug("uploadFile> 업로드 파일 경로:" + path);
+
+
+      InputStream inputStream = null;
+      OutputStream outputStream = null;
+
+      String organizedFilePath = "";
+
+      try {
+        if (file.getSize() > 0) {
+          inputStream = file.getInputStream();
+          File realUploadDir = new File(path);
+
+          if (!realUploadDir.exists()) {
+            realUploadDir.mkdirs();
+          }
+
+          if (file.getOriginalFilename().lastIndexOf(".") > 0) {
+            savedFileName = randomeUUID.toString().replaceAll("-", "") +
+                    file.getOriginalFilename()
+                            .substring(file.getOriginalFilename().lastIndexOf("."));
+          } else {
+            savedFileName = randomeUUID.toString().replaceAll("-", "") + "_"
+                    + file.getOriginalFilename();
+          }
+
+          organizedFilePath = path + savedFileName;
+
+          log.debug("uploadFile> saved_file_name:" + organizedFilePath);// 파일이 저장된경로 + 파일명
+
+          outputStream = new FileOutputStream(organizedFilePath);
+
+          int readByte = 0;
+          byte[] buffer = new byte[8192];
+
+          while ((readByte = inputStream.read(buffer, 0, 8120)) != -1) {
+            outputStream.write(buffer, 0, readByte); // 파일 생성 !
+          }
+        }
+      } finally {
+        outputStream.close();
+        inputStream.close();
+      }
+    }
+
+    return savedFileName;
+  }
+}
