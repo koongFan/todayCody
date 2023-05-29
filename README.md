@@ -37,4 +37,4 @@
 피드 모달창 작업 -PE (merge)
 
  23/05/29 (월) FE<br>
- pull requests => 회원가입 이메일인증기능 추가 -RD
+ 회원가입 이메일인증기능 추가 -RD (merge)
