@@ -7,9 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.todayCody.common.config.TodayCodyConstUrl;
+import com.example.todayCody.login.dto.SignRequest;
+import com.example.todayCody.login.dto.SignResponse;
+import com.example.todayCody.login.repository.MemberRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,105 +24,95 @@ import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
 @RestController
+@RequiredArgsConstructor
 @CrossOrigin
 public class LoginController {
 
   @Autowired
   private LoginService loginService;
+  private final MemberRepository memberRepository;
 
   @Autowired
   LoginDAO loginDAO;
 
-
   String inputCheckRet = null; //[230510:한우]데이터 유효성 검사 변수
 
+
   //==========================================================================================================================================================
-  // 주석
+  // 로그인
   //==========================================================================================================================================================
   @PostMapping(TodayCodyConstUrl.signIn)
-  public Object userLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception {
-
-    String jsonData = params.get("jsonData");
-    Map<String, Object> resMap = new HashMap<>();
-
-    try {
-      jsonData = URLDecoder.decode(jsonData, "UTF-8");
-    } catch (Exception e2) {
-      resMap.put("retCode", "999");
-      resMap.put("retMsg", "수신데이타 파싱에러:" + e2);
-      return resMap;
-    }
+  public ResponseEntity<SignResponse> signin(@RequestBody SignRequest request) throws Exception {
+    return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
+  }
+  //==========================================================================================================================================================
+  //==========================================================================================================================================================
 
 
-    ObjectMapper mapper = new ObjectMapper();
-    HashMap<String, Object> jsonMap = mapper.readValue(jsonData, HashMap.class);
 
-    if ((inputCheckRet = checkIntpufield(jsonMap, (new String[]{"id", "pwd"}))) != null) {
-      resMap.put("restMsg", "id 혹은 pwd가 없습니다");
-      return resMap;
-    }
 
-    System.out.println("aaaaaaaaaaaa id : " + jsonMap.get("id"));
-    System.out.println("aaaaaaaaaaaa pwd : " + jsonMap.get("pwd"));
+  //==========================================================================================================================================================
+  // 회원정보 조회
+  //==========================================================================================================================================================
 
-    resMap = loginService.getUserInfoById(jsonMap, request, response);
+  @GetMapping("/user/get")
+  public ResponseEntity<SignResponse> getUser(@RequestParam String account) throws Exception {
+    return new ResponseEntity<>(loginService.getMember(account), HttpStatus.OK);
+  }
 
-    return resMap;
+  @GetMapping("/admin/get")
+  public ResponseEntity<SignResponse> getUserForAdmin(@RequestParam String account) throws Exception {
+    return new ResponseEntity<>(loginService.getMember(account), HttpStatus.OK);
   }
   //==========================================================================================================================================================
   //==========================================================================================================================================================
 
 
   //==========================================================================================================================================================
-  // 주석
+  // 회원가입
   //==========================================================================================================================================================
-  //[230510:한우]jsonData유효성 검사 함수 : 이게 여기 들어가도 되는지는 잘 모르겠음
-  private String checkIntpufield(Map<String, Object> jsonMap, String[] field) {
+//  @PostMapping(TodayCodyConstUrl.signUp)
+//  public Object userSignUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginDTO loginDTO, BindingResult bindingResult) throws Exception {
+//
+//    Map<String, Object> resMap = new HashMap<>();
+//    String msg = "";
+//
+//    try {
+//      msg = check_loginDTO(loginDTO, bindingResult, "up");
+//    } catch (Exception e) {
+//      resMap.put("msg", "DTO 값 불량");
+//      resMap.put("failOrSucc", false);
+//    }
+//
+//    if (msg != null && msg.equals("")) {
+//      resMap = loginService.insertUpLogin(loginDTO);
+//    } else {
+//      resMap.put("msg", msg);
+//      resMap.put("failOrSucc", false);
+//    }
+//    return resMap;
+//  }
 
-    String retmsg = null;
-    for (String s : field) {
-      try {
-        if (jsonMap.get(s) == null || String.valueOf(jsonMap.get(s)).trim().length() == 0) {
-          retmsg = "입력필드를 확인하세요. 필드[" + s + "]가 없거나 데이타가 셋팅이 안되어있음.";
-          System.out.println(retmsg);
-          break;
-        }
-      } catch (Exception ee) {
-        ee.printStackTrace();
-      }
-
-    }
-    return retmsg;
-  }
-  //==========================================================================================================================================================
-  //==========================================================================================================================================================
-
-
-  //==========================================================================================================================================================
-  // 회원가입 
-  //==========================================================================================================================================================
+  //위 코드와 병합 요망(추후 작업 예정)
   @PostMapping(TodayCodyConstUrl.signUp)
-  public Object userSignUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginDTO loginDTO, BindingResult bindingResult) throws Exception {
-
-    Map<String, Object> resMap = new HashMap<>();
-    String msg = "";
-
-    try {
-      msg = check_loginDTO(loginDTO, bindingResult, "up");
-    } catch (Exception e) {
-      resMap.put("msg", "DTO 값 불량");
-      resMap.put("failOrSucc", false);
-    }
-
-    if (msg != null && msg.equals("")) {
-      resMap = loginService.insertUpLogin(loginDTO);
-    } else {
-      resMap.put("msg", msg);
-      resMap.put("failOrSucc", false);
-    }
-
-
-    return resMap;
+  public ResponseEntity<Boolean> signup(@RequestBody SignRequest request) throws Exception {
+//    Map<String, Object> resMap = new HashMap<>();
+//    String msg = "";
+//
+//    try {
+//      msg = check_loginDTO(loginDTO, bindingResult, "up");
+//    } catch (Exception e) {
+//      resMap.put("msg", "DTO 값 불량");
+//      resMap.put("failOrSucc", false);
+//    }
+//
+//    if (msg != null && msg.equals("")) {
+//      resMap = loginService.insertUpLogin(loginDTO);
+//    } else {
+//      resMap.put("msg", msg);
+//      resMap.put("failOrSucc", false);
+//    }
+    return new ResponseEntity<>(loginService.register(request), HttpStatus.OK);
   }
   //==========================================================================================================================================================
   //==========================================================================================================================================================

@@ -11,6 +11,9 @@ public class TodayCodyConstUrl {
     // 피드 업로드
     public static final String feedWrite = "/feed/write.do";
 
+    // 피드 삭제
+    public static final String feedDelete = "/feed/delete.do";
+
     // 피드 상세보기
     public static final String feedDetail = "/feed/detail.do";
 
