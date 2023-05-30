@@ -93,7 +93,7 @@ export default function SignUp() {
               setUser({ ...user, email: e.target.value })
             }}
           />
-          <button onChange={handleEmailCertification}>이메일 인증</button>
+          <button onClick={handleEmailCertification}>이메일 인증</button>
           
           {/* 이메일 인증 코드 */}
           <input
@@ -107,6 +107,16 @@ export default function SignUp() {
             }}
           />
           
+          <input
+            type="text"
+            name="u_name"
+            value={user.u_name}
+            required
+            placeholder="u_name"
+            onChange={(e) => {
+              setUser({ ...user, u_name: e.target.value})
+            }}
+          />
           <input
             type="text"
             name="nickname"
