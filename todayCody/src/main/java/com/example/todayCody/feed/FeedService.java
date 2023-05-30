@@ -9,5 +9,6 @@ import java.util.Map;
 public interface FeedService {
   public Map<String,Object> feedWrite(Map<String, Object> jsonMap,
                                           List<MultipartFile> aMultipartFile) throws Exception;
-    
+   
+  public List<Map<String,Object>> getFeedList() throws Exception;
 }

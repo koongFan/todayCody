@@ -69,4 +69,9 @@ public class FeedServiceImpl implements FeedService {
 
     return jsonMap;
   }
+
+
+  public List<Map<String,Object>> getFeedList() throws Exception{
+    return null;
+  };
 }
