@@ -5,8 +5,8 @@ import '../scss/pages/_signup.scss';
 export default function SignUp() {
 
   const [user, setUser] = useState({
-    user_id: '',
-    pwd: '',
+    account: '',
+    password: '',
     email: '',
     mailAccessCode: '',
     u_name: '',
@@ -64,21 +64,21 @@ export default function SignUp() {
           <input
             type="text"
             name="id"
-            value={user.user_id}
+            value={user.account}
             required
             placeholder="id"
             onChange={(e) => {
-              setUser({ ...user, user_id: e.target.value })
+              setUser({ ...user, account: e.target.value })
             }}
           />
           <input
             type="password"
             name="password"
-            value={user.pwd}
+            value={user.password}
             required
             placeholder="password"
             onChange={(e) => {
-              setUser({ ...user, pwd: e.target.value })
+              setUser({ ...user, password: e.target.value })
             }}
           />
 
