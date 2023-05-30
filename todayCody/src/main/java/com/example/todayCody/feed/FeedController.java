@@ -25,6 +25,9 @@ public class FeedController {
   @Autowired
   FeedService feedService;
 
+  //==========================================================================================================================================================
+  // 피드 글쓰기
+  //==========================================================================================================================================================
   @PostMapping(TodayCodyConstUrl.feedWrite)
   public Object feedWrite(HttpServletRequest request,
                           HttpServletResponse response,
@@ -46,6 +49,7 @@ public class FeedController {
     log.info("[URLDecoder.decode 후..] >jsondata=\n" + jsonData);
 
     List<MultipartFile> aMultipartFile = null;
+
     if (request instanceof MultipartHttpServletRequest) {
       MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
       aMultipartFile = new ArrayList<>(multipartRequest.getFiles("file[]"));
@@ -60,6 +64,7 @@ public class FeedController {
         log.info("[" + i + "] >> getOriginalFilename()[" + aMultipartFile.get(i).getName() + "]:" + aMultipartFile.get(i).getOriginalFilename());
       }
     }
+
     ObjectMapper mapper = new ObjectMapper();
     HashMap<String, Object> jsonMap = mapper.readValue(jsonData, HashMap.class);
 
@@ -67,6 +72,22 @@ public class FeedController {
 
     return resMap;
   }
+
+  //==========================================================================================================================================================
+  //
+  //==========================================================================================================================================================
+
+  //==========================================================================================================================================================
+  // 피드 글 삭제
+  //==========================================================================================================================================================
+  @PostMapping(TodayCodyConstUrl.feedDelete)
+  public Object feedDelete(FeedDTO feedDTO){
+
+    return null;
+  }
+  //==========================================================================================================================================================
+  //
+  //==========================================================================================================================================================
 
 
 }
