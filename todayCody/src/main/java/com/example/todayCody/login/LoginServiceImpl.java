@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     return SignResponse.builder()
-            .id(member.getId())
+            .user_seq(member.getUser_seq())
             .account(member.getAccount())
             .u_name(member.getU_name())
             .email(member.getEmail())

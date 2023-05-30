@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SignResponse {
 
-  private int id;
+  private int user_seq;
 
   private String account;
 
@@ -29,7 +29,7 @@ public class SignResponse {
   private String token;
 
   public SignResponse(Member member) {
-    this.id = member.getId();
+    this.user_seq = member.getUser_seq();
     this.account = member.getAccount();
     this.u_nickname = member.getU_nickname();
     this.u_name = member.getU_name();

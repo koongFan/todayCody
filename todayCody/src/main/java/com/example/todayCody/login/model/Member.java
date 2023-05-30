@@ -18,7 +18,7 @@ public class Member {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private int user_seq;
 
   @Column(unique = true)
   private String account;
