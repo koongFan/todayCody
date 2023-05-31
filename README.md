@@ -49,4 +49,4 @@
  로그인 기능 - HW (merge) 
  
  23/05/30 (화) FE<br>
- pull requests => 이메일 인증 수정 - RD
+ 이메일 인증 수정 - RD (merge) 
