@@ -5,8 +5,8 @@ import '../scss/pages/_signup.scss';
 export default function SignUp() {
 
   const [user, setUser] = useState({
-    user_id: '',
-    pwd: '',
+    account: '',
+    password: '',
     email: '',
     mailAccessCode: '',
     u_name: '',
@@ -64,21 +64,21 @@ export default function SignUp() {
           <input
             type="text"
             name="id"
-            value={user.user_id}
+            value={user.account}
             required
             placeholder="id"
             onChange={(e) => {
-              setUser({ ...user, user_id: e.target.value })
+              setUser({ ...user, account: e.target.value })
             }}
           />
           <input
             type="password"
             name="password"
-            value={user.pwd}
+            value={user.password}
             required
             placeholder="password"
             onChange={(e) => {
-              setUser({ ...user, pwd: e.target.value })
+              setUser({ ...user, password: e.target.value })
             }}
           />
 
@@ -93,7 +93,7 @@ export default function SignUp() {
               setUser({ ...user, email: e.target.value })
             }}
           />
-          <button onChange={handleEmailCertification}>이메일 인증</button>
+          <button onClick={handleEmailCertification}>이메일 인증</button>
           
           {/* 이메일 인증 코드 */}
           <input
@@ -107,6 +107,16 @@ export default function SignUp() {
             }}
           />
           
+          <input
+            type="text"
+            name="u_name"
+            value={user.u_name}
+            required
+            placeholder="u_name"
+            onChange={(e) => {
+              setUser({ ...user, u_name: e.target.value})
+            }}
+          />
           <input
             type="text"
             name="nickname"
