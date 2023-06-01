@@ -5,21 +5,21 @@ import axios from "axios";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
-    user_id: "",
-    pwd: "",
+    account: "",
+    password: "",
   });
   const [formIsValid, setFormIsValid] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      setFormIsValid(inputs.user_id && inputs.pwd.length >= 8);
+      setFormIsValid(inputs.account && inputs.password);
     }, 200);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [inputs.user_id, inputs.pwd]);
+  }, [inputs.account, inputs.password]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -29,13 +29,18 @@ export default function Login() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      const res = await axios.post(
         "http://52.78.103.73:8081/member/signIn.do",
-        inputs
+        inputs,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-      console.log(data);
-      if (data.retCode === "000") {
-        alert(data.retMsg);
+      console.log(res);
+      if (res.status === 200) {
+        alert("로그인 되셨습니다");
         window.location.replace("/");
       } else {
         setError("아이디 또는 비밀번호가 틀렸습니다.");
@@ -53,16 +58,16 @@ export default function Login() {
           <p>오늘코디 계정으로 로그인</p>
           <input
             type="text"
-            name="user_id"
+            name="account"
             required
-            value={inputs.user_id}
+            value={inputs.account}
             onChange={changeHandler}
             placeholder="아이디를 입력해주세요."
           />
           <input
             type="password"
-            name="pwd"
-            value={inputs.pwd}
+            name="password"
+            value={inputs.password}
             onChange={changeHandler}
             placeholder="비밀번호를 입력해주세요.(8자 이상)"
           />
