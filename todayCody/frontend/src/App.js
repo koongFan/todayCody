@@ -1,6 +1,6 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Header from "components/layout/Header";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "pages/RootLayout";
 import NotFound from "pages/NotFound";
 import Main from "pages/Main";
 import Ranking from "pages/Ranking";
@@ -12,25 +12,18 @@ import MyPage from "pages/MyPage";
 import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
-import Footer from "components/layout/Footer";
+import { tokenLoader } from "util/auth";
+import { action as logoutAction } from "./pages/Logout";
 
 import "./scss/main.scss";
-
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <RootLayout />,
     errorElement: <NotFound />,
+    id: "root",
+    loader: tokenLoader,
     children: [
       { index: true, element: <Main /> },
       { path: "/ranking", element: <Ranking /> },
@@ -41,9 +34,10 @@ const router = createBrowserRouter([
       { path: "/mypage", element: <MyPage /> },
     ],
   },
-  
+
   { path: "/signin", element: <SignIn /> },
   { path: "/signup", element: <SignUp /> },
+  { path: "/logout", action: logoutAction },
   { path: "/newpost", element: <NewPost /> },
   { path: "/editpost", element: <NewPost /> },
 ]);

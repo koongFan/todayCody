@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { redirect, Link, useRouteLoaderData } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 
 export default function Header() {
+  const token = useRouteLoaderData("root");
+
   const menus = [
     { id: 1, item: "코디랭킹", to: "/ranking" },
     { id: 2, item: "룩별정보", to: "/lookinfo" },
@@ -18,16 +20,31 @@ export default function Header() {
         <nav className="top">
           <ul className="top-left">
             {menus.map((menu) => (
-              <Link to={menu.to}>
-                <li key={menu.id} className="menuItem">
-                  {menu.item}
-                </li>
-              </Link>
+              <li key={menu.id} className="menuItem">
+                <Link to={menu.to}>{menu.item}</Link>
+              </li>
             ))}
           </ul>
           <div className="top-right">
             <div>고승신님</div>
-            <button>LOGIN</button>
+            {!token && (
+              <li>
+                <Link to="/signin">LOGIN</Link>
+              </li>
+            )}
+            {token && (
+              <li>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("expiration");
+                    return redirect("/");
+                  }}
+                >
+                  LOGOUT
+                </button>
+              </li>
+            )}
             <Link to="/mypage">MYPAGE</Link>
           </div>
         </nav>

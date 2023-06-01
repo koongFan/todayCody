@@ -9,7 +9,6 @@ export default function Login() {
     password: "",
   });
   const [formIsValid, setFormIsValid] = useState(false);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -28,22 +27,26 @@ export default function Login() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const baseUrl = "http://52.78.103.73:8081";
     try {
-      const res = await axios.post(
-        "http://52.78.103.73:8081/member/signIn.do",
-        inputs,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(res);
-      if (res.status === 200) {
+      const { data } = await axios.post(`${baseUrl}/member/signIn.do`, inputs, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (data.token) {
+        const token = data.token;
+
+        localStorage.setItem("token", token);
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 1);
+        localStorage.setItem("expiration", expiration.toISOString());
+
         alert("로그인 되셨습니다");
         window.location.replace("/");
       } else {
-        setError("아이디 또는 비밀번호가 틀렸습니다.");
+        alert("아이디 또는 비밀번호가 틀렸습니다.");
       }
     } catch (error) {
       console.log(error);
@@ -62,14 +65,14 @@ export default function Login() {
             required
             value={inputs.account}
             onChange={changeHandler}
-            placeholder="아이디를 입력해주세요."
+            placeholder="아이디"
           />
           <input
             type="password"
             name="password"
             value={inputs.password}
             onChange={changeHandler}
-            placeholder="비밀번호를 입력해주세요.(8자 이상)"
+            placeholder="비밀번호"
           />
           <button
             type="submit"
@@ -78,7 +81,6 @@ export default function Login() {
           >
             로그인
           </button>
-          {error && <p className="error">{error}</p>}
           <div className="aboutSign">
             <Link to="#">비밀번호 찾기</Link>
             <Link to="/signUp">회원가입</Link>
