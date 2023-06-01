@@ -3,6 +3,8 @@ package com.example.todayCody.common.config;
 import com.example.todayCody.login.jwt.JwtAuthenticationFilter;
 import com.example.todayCody.login.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.CorsFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
@@ -19,6 +21,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +35,9 @@ import java.util.List;
 public class SecurityConfig {
 
   private final JwtProvider jwtProvider;
+//  @Autowired
+//  CorsConfig corsConfig;
+
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,13 +46,19 @@ public class SecurityConfig {
             .httpBasic().disable()
             // 쿠키 기반이 아닌 JWT 기반이므로 사용하지 않음
             .csrf().disable()
-            // CORS 설정
+//            // CORS 설정
             .cors(c -> {
                       CorsConfigurationSource source = request -> {
+                        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
                         // Cors 허용 패턴
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(List.of("*"));
-                        config.setAllowedMethods(List.of("*"));
+//                        config.setAllowedOrigins(List.of("*"));
+//                        config.setAllowedMethods(List.of("*"));
+//                        config.setAllowCredentials(true);
+                        config.addAllowedOrigin("*"); // e.g. http://domain1.com
+                        config.addAllowedHeader("*");
+                        config.addAllowedMethod("*");
+                        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", config);
                         return config;
                       };
                       c.configurationSource(source);
@@ -55,6 +67,7 @@ public class SecurityConfig {
             // Spring Security 세션 정책 : 세션을 생성 및 사용하지 않음
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
+//            .addFilter(corsConfig.corsFilter())
             // 조건별로 요청 허용/제한 설정
             .authorizeRequests()
             // 회원가입과 로그인은 모두 승인
