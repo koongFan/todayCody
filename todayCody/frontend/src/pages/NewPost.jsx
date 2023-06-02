@@ -1,23 +1,36 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import '../scss/pages/_newpost.scss';
 
 export default function NewPost() {
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [filePreviews, setFilePreviews] = useState([]); // 파일 미리보기 이미지 URL 배열
   const [feedContent, setFeedContent] = useState(""); // 피드 내용 상태 변수
-  const [uploadedImages, setUploadedImages] = useState([]); // 업로드된 이미지 목록 상태 변수
+  const [uploading, setUploading] = useState(false); // 파일 업로드 상태
 
   const handleFileSelect = (event) => {
-    const selectedFiles = event.target.files; // 선택한 파일들
-    const files = []; // 파일 배열
+    const newFiles = event.target.files; // 선택한 파일들
 
     // 선택한 파일들을 배열에 추가
-    for (let i = 0; i < selectedFiles.length; i++) {
-      const file = selectedFiles[i];
-      const filename = `filename${i + 1}`; // 파일명 동적 생성
-      files.push({ file, filename }); // 파일과 파일명을 객체로 추가
+    const updatedFiles = [...selectedFiles];
+    for (let i = 0; i < newFiles.length; i++) {
+      updatedFiles.push(newFiles[i]);
     }
+    setSelectedFiles(updatedFiles); // 선택한 파일들을 상태 변수에 저장
 
-    setSelectedFiles(files); // 선택한 파일들을 상태 변수에 저장
+    // 파일 미리보기 이미지 URL 생성
+    const previews = [];
+    for (let i = 0; i < updatedFiles.length; i++) {
+      const file = updatedFiles[i];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previews.push(e.target.result);
+        if (previews.length === updatedFiles.length) {
+          setFilePreviews(previews);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleContentChange = (event) => {
@@ -29,7 +42,7 @@ export default function NewPost() {
       const formData = new FormData();
 
       selectedFiles.forEach((fileData, index) => {
-        formData.append('file[]', fileData.file, fileData.filename); // 파일과 파일명 추가
+        formData.append('file[]', fileData, fileData.name); // 파일 추가
         formData.append('order_num', index + 1); // 파일 순서 추가
       });
 
@@ -40,40 +53,67 @@ export default function NewPost() {
       formData.append('jsonData', JSON.stringify(feedData));
 
       try {
+        setUploading(true); // 파일 업로드 시작 시 상태 업데이트
+
         const response = await axios.post('/feed/write.do', formData);
         console.log(response.data);
         // 요청 성공 시 동작
 
-        // 업로드된 이미지 목록 업데이트
-        setUploadedImages(response.data.images);
+        setUploading(false); // 파일 업로드 완료 시 상태 업데이트
       } catch (error) {
         console.log(error);
         // 요청 실패 시 동작
+        setUploading(false); // 파일 업로드 실패 시 상태 업데이트
       }
     }
+  };
+
+  const handlePreviewRemove = (index) => {
+    const updatedFiles = [...selectedFiles];
+    const updatedPreviews = [...filePreviews];
+    updatedFiles.splice(index, 1);
+    updatedPreviews.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+    setFilePreviews(updatedPreviews);
   };
 
   return (
     <>
       <div className="wrapper">
         <h1>New Post</h1>
-        <input type="file" multiple onChange={handleFileSelect} />
-        <textarea
-          placeholder="피드 내용을 입력해주세요"
-          value={feedContent}
-          onChange={handleContentChange}
-        ></textarea>
-        <button onClick={handleUpload}>피드 업로드</button>
-
-        {/* 업로드된 이미지 목록 표시 */}
-        <div className="uploaded-images">
-          {uploadedImages.map((image, index) => (
-            <img
+        <div className="file-upload">
+          {[...Array(5)].map((_, index) => (
+            <input
               key={index}
-              src={image.url}
-              alt={`Uploaded ${index + 1}`}
+              type="file"
+              onChange={handleFileSelect}
+              accept="image/*"
             />
           ))}
+          {filePreviews.length > 0 && (
+            <div className="image-preview">
+              {filePreviews.map((preview, index) => (
+                <div key={index} className="preview-item">
+                  <img src={preview} alt={`미리보기 ${index + 1}`} />
+                  <button onClick={() => handlePreviewRemove(index)}>
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="text-upload">
+          <textarea
+            placeholder="피드 내용을 입력해주세요"
+            value={feedContent}
+            onChange={handleContentChange}
+          ></textarea>
+          {!uploading ? (
+            <button onClick={handleUpload}>피드 업로드</button>
+          ) : (
+            <button disabled>Uploading...</button>
+          )}
         </div>
       </div>
     </>

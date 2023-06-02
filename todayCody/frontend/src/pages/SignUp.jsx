@@ -39,10 +39,11 @@ export default function SignUp() {
       alert('인증 코드 전송에 실패했습니다.');
     }
   }
+  
 
   const signupClick = async () => {
     try {
-      const res = await axios.post("http://52.78.103.73:8081/member/signUp.do", user);
+      const res = await axios.post('http://52.78.103.73:8081/member/signUp.do', user);
       console.log(res.data);
       if (res.data.failOrSucc) {
         alert("회원가입이 완료되었습니다.");
