@@ -50,3 +50,6 @@
  
  23/05/30 (화) FE<br>
  pull requests => 이메일 인증 수정 - RD
+ 
+ 23/06/02 (금) FE<br>
+ pull requests => 피드 파일 업로드 (5개) - RD
