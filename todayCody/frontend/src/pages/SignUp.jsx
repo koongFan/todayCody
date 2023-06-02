@@ -27,7 +27,7 @@ export default function SignUp() {
 
   const handleEmailCertification = async () => {
     try {
-      const res = await axios.post('http://52.78.103.73:8081/signup/mailConfirm.do', {email: user.email});
+      const res = await axios.post("http://52.78.103.73:8081/signup/mailConfirm.do", {email: user.email});
       if (res.data.success) {
         console.log('전송 성공')
         alert('이메일로 인증코드가 전송되었습니다.')

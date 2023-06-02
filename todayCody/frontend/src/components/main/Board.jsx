@@ -15,7 +15,7 @@ export default function Board({ title, posts }) {
         </thead>
         <tbody>
           {posts.map((post) => (
-            <tr className="board-row">
+            <tr key={post.postId} className="board-row">
               <td>{post.postId}</td>
               <td>
                 <Link to={`/board/${post.postId}`}>{post.title}</Link>
