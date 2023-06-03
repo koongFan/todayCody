@@ -10,7 +10,7 @@ public class TodayCodyConstUrl {
 
     // 이메일인증URL
     public static final String emailConfirm = "/signup/mailConfirm.do";
-
+    
     // 피드 업로드
     public static final String feedWrite = "/feed/write.do";
 
