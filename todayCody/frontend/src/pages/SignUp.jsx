@@ -8,7 +8,7 @@ export default function SignUp() {
     account: '',
     password: '',
     email: '',
-    mailAccessCode: '',
+    // mailAccessCode: '',
     u_name: '',
     u_nickname: '',
     u_birth: ''
@@ -25,20 +25,20 @@ export default function SignUp() {
     signupClick();
   };
 
-  const handleEmailCertification = async () => {
-    try {
-      const res = await axios.post('http://52.78.103.73:8081/signup/mailConfirm.do', {email: user.email});
-      if (res.data.success) {
-        console.log('전송 성공')
-        alert('이메일로 인증코드가 전송되었습니다.')
-      } else {
-        alert('인증 코드 전송에 실패했습니다.');
-      }
-    } catch (err) {
-      console.log(err);
-      alert('인증 코드 전송에 실패했습니다.');
-    }
-  }
+  // const handleEmailCertification = async () => {
+  //   try {
+  //     const res = await axios.post('http://52.78.103.73:8081/signup/mailConfirm.do', {email: user.email});
+  //     if (res.data.success) {
+  //       console.log('전송 성공')
+  //       alert('이메일로 인증코드가 전송되었습니다.')
+  //     } else {
+  //       alert('인증 코드 전송에 실패했습니다.');
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     alert('인증 코드 전송에 실패했습니다.');
+  //   }
+  // }
   
 
   const signupClick = async () => {
@@ -95,9 +95,9 @@ export default function SignUp() {
               setUser({ ...user, email: e.target.value })
             }}
           />
-          <button onClick={handleEmailCertification}>이메일 인증</button>
+          {/* <button onClick={handleEmailCertification}>이메일 인증</button> */}
           
-          {/* 이메일 인증 코드 */}
+          {/* 이메일 인증 코드
           <input
             type="text"
             name="mailAccessCods"
@@ -107,7 +107,7 @@ export default function SignUp() {
             onChange={(e) => {
               setUser({ ...user, mailAccessCode: e.target.value });
             }}
-          />
+          /> */}
           
           <input
             type="text"
