@@ -45,6 +45,9 @@ export default function Login() {
         expiration.setHours(expiration.getHours() + 0.5); //만료시간 30분
         localStorage.setItem("expiration", expiration.toISOString());
 
+        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
         alert("로그인 되셨습니다");
         navigate("/");
       } else if (res.status === 404) {

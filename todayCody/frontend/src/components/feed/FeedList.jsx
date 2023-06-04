@@ -10,7 +10,7 @@ export default function FeedList({ data }) {
 
   return (
     <>
-      <div className="feedContainer" onClick={() => setModalOpen(true)}>
+      <div className="feedContainer">
         <div className="feedTop">
           <div className="profile">
             <div className="imgContainer">
@@ -39,7 +39,9 @@ export default function FeedList({ data }) {
             {feedText}
           </p>
           <div className="comments">
-            <p className="more">View all 33 comments</p>
+            <p className="more" onClick={() => setModalOpen(true)}>
+              View all 33 comments
+            </p>
             {comments.slice(0, 2).map((item) => (
               <p className="comment" key={item.userId}>
                 <span>{item.nickname}</span>
