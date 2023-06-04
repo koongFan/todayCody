@@ -71,48 +71,26 @@ public class LoginController {
   //==========================================================================================================================================================
   // 회원가입
   //==========================================================================================================================================================
-//  @PostMapping(TodayCodyConstUrl.signUp)
-//  public Object userSignUp(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginDTO loginDTO, BindingResult bindingResult) throws Exception {
-//
-//    Map<String, Object> resMap = new HashMap<>();
-//    String msg = "";
-//
-//    try {
-//      msg = check_loginDTO(loginDTO, bindingResult, "up");
-//    } catch (Exception e) {
-//      resMap.put("msg", "DTO 값 불량");
-//      resMap.put("failOrSucc", false);
-//    }
-//
-//    if (msg != null && msg.equals("")) {
-//      resMap = loginService.insertUpLogin(loginDTO);
-//    } else {
-//      resMap.put("msg", msg);
-//      resMap.put("failOrSucc", false);
-//    }
-//    return resMap;
-//  }
+    @PostMapping(TodayCodyConstUrl.signUp)
+    public ResponseEntity<Map<String,Object>> signup(@RequestBody SignRequest request, BindingResult bindingResult) throws Exception {     
+      Map<String, Object> result = new HashMap<>();
+      String msg = "";
+  
+      try {
+        msg = check_loginDTO(request, bindingResult, "up");
+      } catch (Exception e) {
+        result.put("msg", "DTO 값 불량");
+        result.put("failOrSucc", false);
+      }
+  
+      if (msg != null && msg.equals("")) {
+        result.put("failOrSucc",loginService.register(request));
+      } else {
+        result.put("msg", msg);
+        result.put("failOrSucc", false);
+      }
 
-  //위 코드와 병합 요망(추후 작업 예정)
-  @PostMapping(TodayCodyConstUrl.signUp)
-  public ResponseEntity<Boolean> signup(@RequestBody SignRequest request) throws Exception {
-//    Map<String, Object> resMap = new HashMap<>();
-//    String msg = "";
-//
-//    try {
-//      msg = check_loginDTO(loginDTO, bindingResult, "up");
-//    } catch (Exception e) {
-//      resMap.put("msg", "DTO 값 불량");
-//      resMap.put("failOrSucc", false);
-//    }
-//
-//    if (msg != null && msg.equals("")) {
-//      resMap = loginService.insertUpLogin(loginDTO);
-//    } else {
-//      resMap.put("msg", msg);
-//      resMap.put("failOrSucc", false);
-//    }
-    return new ResponseEntity<>(loginService.register(request), HttpStatus.OK);
+      return ResponseEntity.ok().body(result);
   }
   //==========================================================================================================================================================
   //==========================================================================================================================================================
@@ -121,13 +99,13 @@ public class LoginController {
   //==========================================================================================================================================================
   // 통합 유효성 검사
   //==========================================================================================================================================================
-  public String check_loginDTO(LoginDTO loginDTO, BindingResult bindingResult, String inUpMode) {
+  public String check_loginDTO(SignRequest request, BindingResult bindingResult, String inUpMode) {
 
     String msg = "";
 
     LoginValidator loginValidator = new LoginValidator(inUpMode);
 
-    loginValidator.validate(loginDTO, bindingResult);
+    loginValidator.validate(request, bindingResult);
 
     if (bindingResult.hasErrors()) {
       msg = bindingResult.getFieldError().getCode();
