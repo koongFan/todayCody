@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
@@ -9,6 +9,7 @@ export default function Login() {
     password: "",
   });
   const [formIsValid, setFormIsValid] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -29,24 +30,28 @@ export default function Login() {
     e.preventDefault();
     const baseUrl = "http://52.78.103.73:8081";
     try {
-      const { data } = await axios.post(`${baseUrl}/member/signIn.do`, inputs, {
+      const res = await axios.post(`${baseUrl}/member/signIn.do`, inputs, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
 
-      if (data.token) {
-        const token = data.token;
+      if (res.status === 200) {
+        const token = res.data.token;
 
         localStorage.setItem("token", token);
         const expiration = new Date();
-        expiration.setHours(expiration.getHours() + 1);
+        expiration.setHours(expiration.getHours() + 0.5); //만료시간 30분
         localStorage.setItem("expiration", expiration.toISOString());
 
+        // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
         alert("로그인 되셨습니다");
-        window.location.replace("/");
-      } else {
-        alert("아이디 또는 비밀번호가 틀렸습니다.");
+        navigate("/");
+      } else if (res.status === 404) {
+        alert(res.errorMsg);
       }
     } catch (error) {
       console.log(error);
