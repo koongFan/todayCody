@@ -7,6 +7,7 @@ import com.example.todayCody.login.model.Authority;
 import com.example.todayCody.login.model.Member;
 import com.example.todayCody.login.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,10 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("loginService")
+@Log4j2
 @Transactional
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
@@ -34,12 +37,23 @@ public class LoginServiceImpl implements LoginService {
 
 
   public SignResponse login(SignRequest request) throws Exception {
-    Member member = memberRepository.findByAccount(request.getAccount()).orElseThrow(() ->
-            new BadCredentialsException("잘못된 계정정보입니다."));
+
+//    Member member = memberRepository.findByAccount(request.getAccount()).orElseThrow(() ->
+//            new BadCredentialsException("잘못된 계정정보입니다."));
+
+
+    Optional<Member> optionalMember = memberRepository.findByAccount(request.getAccount());
+
+    if (optionalMember.isEmpty()) {
+      return SignResponse.builder().errorMsg("아이디를 찾을 수 없습니다.").build();
+    }
+
+    Member member = optionalMember.get();
 
     if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
-      throw new BadCredentialsException("잘못된 계정정보입니다.");
+      return SignResponse.builder().errorMsg("비밀번호가 틀렸습니다").build();
     }
+
 
     return SignResponse.builder()
             .user_seq(member.getUser_seq())
@@ -48,6 +62,7 @@ public class LoginServiceImpl implements LoginService {
             .email(member.getEmail())
             .u_nickname(member.getU_nickname())
             .roles(member.getRoles())
+            .errorMsg("")
             .token(jwtProvider.createToken(member.getAccount(), member.getRoles()))
             .build();
 

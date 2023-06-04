@@ -28,6 +28,9 @@ public class SignResponse {
 
   private String token;
 
+  private String errorMsg;
+
+
   public SignResponse(Member member) {
     this.user_seq = member.getUser_seq();
     this.account = member.getAccount();

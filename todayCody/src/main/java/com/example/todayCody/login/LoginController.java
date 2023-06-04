@@ -19,9 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +40,16 @@ public class LoginController {
   //==========================================================================================================================================================
   @PostMapping(TodayCodyConstUrl.signIn)
   public ResponseEntity<SignResponse> signin(@RequestBody SignRequest request) throws Exception {
-    return new ResponseEntity<>(loginService.login(request), HttpStatus.OK);
+
+    SignResponse sr = loginService.login(request);
+
+    if(sr.getErrorMsg().equals("비밀번호가 틀렸습니다"))
+      return new ResponseEntity<>(sr,HttpStatus.NOT_FOUND);
+
+    if(sr.getErrorMsg().equals("아이디를 찾을 수 없습니다."))
+      return new ResponseEntity<>(sr,HttpStatus.NOT_FOUND);
+
+    return new ResponseEntity<>(sr, HttpStatus.OK);
   }
   //==========================================================================================================================================================
   //==========================================================================================================================================================
