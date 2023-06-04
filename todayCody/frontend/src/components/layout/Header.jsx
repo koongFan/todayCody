@@ -1,4 +1,4 @@
-import { redirect, Link, useRouteLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 
 export default function Header() {
@@ -38,7 +38,7 @@ export default function Header() {
                   onClick={() => {
                     localStorage.removeItem("token");
                     localStorage.removeItem("expiration");
-                    return redirect("/");
+                    window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
                   }}
                 >
                   LOGOUT

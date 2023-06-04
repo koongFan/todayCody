@@ -50,11 +50,11 @@ export default function Login() {
 
         alert("로그인 되셨습니다");
         navigate("/");
-      } else if (res.status === 404) {
-        alert(res.errorMsg);
       }
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 404) {
+        alert(error.response.data.errorMsg);
+      }
     }
   };
 

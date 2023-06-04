@@ -32,12 +32,11 @@ const router = createBrowserRouter([
       { path: "/board/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage /> },
+      { path: "/logout", action: logoutAction },
     ],
   },
-
   { path: "/signin", element: <SignIn /> },
   { path: "/signup", element: <SignUp /> },
-  { path: "/logout", action: logoutAction },
   { path: "/newpost", element: <NewPost /> },
   { path: "/editpost", element: <NewPost /> },
 ]);
