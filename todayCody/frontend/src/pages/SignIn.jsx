@@ -51,7 +51,7 @@ export default function Login() {
         alert("로그인 되셨습니다");
         navigate("/");
       } else if (res.status === 404) {
-        alert(res.errMsg);
+        alert(res.errorMsg);
       }
     } catch (error) {
       console.log(error);
