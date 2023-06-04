@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Modal from "components/feed/Modal";
-import heart from "assets/icons/heart.svg";
-import message from "assets/icons/message.svg";
+import { ReactComponent as Heart } from "assets/icons/heart.svg";
+import { ReactComponent as Ballon } from "assets/icons/ballon.svg";
 
 export default function FeedList({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const { id, nickname, profileImg, feedImg, likes, feedText, tags, comments } =
+  const { nickname, profileImg, feedImg, likes, feedText, tags, comments } =
     data;
 
   return (
@@ -16,33 +16,38 @@ export default function FeedList({ data }) {
             <div className="imgContainer">
               <img src={profileImg} alt="profileImg" />
             </div>
-            <span>{nickname}</span>
+            <span className="nickname">{nickname}</span>
           </div>
           <button>팔로우</button>
         </div>
+        <div className="imgContainer">
+          <img src={feedImg} alt="feedImg" />
+        </div>
         <div className="feedContent">
-          <div className="imgContainer">
-            <img src={feedImg} alt="feedImg" />
-          </div>
           <div className="icons">
-            <span>{heart}</span>
+            <Heart width="23" height="20" />
+            <Ballon width="21" height="21" />
           </div>
           <p className="likes">좋아요 {likes}개</p>
-          {tags.map((item) => (
-            <span>{item}</span>
-          ))}
-          <div className="feedText">
-            <span>{nickname}</span>
-            <p>{feedText}</p>
-          </div>
+          <ul className="tags">
+            {tags.map((item) => (
+              <li>#{item}</li>
+            ))}
+          </ul>
+          <p className="feedText">
+            <span>{nickname}</span> &nbsp;
+            {feedText}
+          </p>
           <div className="comments">
+            <p className="more">View all 33 comments</p>
             {comments.slice(0, 2).map((item) => (
-              <div key={item.userId}>
+              <p className="comment" key={item.userId}>
                 <span>{item.nickname}</span>
-                <p>{item.text}</p>
-              </div>
+                {item.text}
+              </p>
             ))}
           </div>
+          <div className="time">한 시간 전</div>
         </div>
       </div>
       {modalOpen && <Modal setModalOpen={setModalOpen} data={data} />}
