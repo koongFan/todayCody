@@ -45,7 +45,7 @@ public class FeedServiceImpl implements FeedService {
       //파일정보 테이블에 들어갈 파라미터로 쓰일 맵
       HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
       fileInfoMap.put("feed_seq", newFeedSeq);
-
+      fileInfoMap.put("image_path",uploadPath+ "feed_" + newFeedSeq + "/" + fileInfoMap.get("file_name") + "/");
       if (fileInfoMap.get("file_name") != null && ((String) fileInfoMap.get("file_name")).length() > 0) {
         if ("file[]".equals(aMultipartFile.get(fileIndex).getName())) {
           //파일 업로드
@@ -71,7 +71,32 @@ public class FeedServiceImpl implements FeedService {
   }
 
 
-  public List<Map<String,Object>> getFeedList() throws Exception{
-    return null;
+  public List<Object> getFeedList() throws Exception{
+
+    //==================================================================
+    List<Object> listAfter = new ArrayList<>();
+    List<FeedDTO> getFeedList = feedDAO.getFeedList();
+		
+		for(int i=0; i<getFeedList.size(); i++) {				
+			String feedSeq = getFeedList.get(i).getFeed_seq();
+			
+			List<Object> impl = new ArrayList<>();			
+			Map<String,Object> listBefore = new HashMap<>();	
+			impl.add(getFeedList.get(i));
+			
+			for(int n=i+1; n<getFeedList.size(); n++) {				
+				String nextFeedSeq = getFeedList.get(n).getFeed_seq();
+				if(feedSeq.equals(nextFeedSeq)) {					
+					impl.add(getFeedList.get(n));
+					getFeedList.remove(n);		
+					n--;
+				}				
+			}
+			listBefore.put("feed_seq",feedSeq);
+			listBefore.put("feed_list", impl);
+			listAfter.add(listBefore);
+		}	
+		return listAfter;
+    //==================================================================
   };
 }

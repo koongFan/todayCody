@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Modal from "components/feed/Modal";
 import { ReactComponent as Heart } from "assets/icons/heart.svg";
 import { ReactComponent as Ballon } from "assets/icons/ballon.svg";
+import Slider from "./Slider";
 
 export default function FeedList({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const { nickname, profileImg, feedImg, likes, feedText, tags, comments } =
+  const { nickname, profileImg, feedImgs, likes, feedText, tags, comments } =
     data;
 
   return (
@@ -20,9 +21,11 @@ export default function FeedList({ data }) {
           </div>
           <button>팔로우</button>
         </div>
-        <div className="imgContainer">
+        {/* <div className="imgContainer">
           <img src={feedImg} alt="feedImg" />
-        </div>
+        </div> */}
+        {/* 슬라이더로 변경 */}
+        <Slider imgs={feedImgs} />
         <div className="feedContent">
           <div className="icons">
             <Heart width="23" height="20" />

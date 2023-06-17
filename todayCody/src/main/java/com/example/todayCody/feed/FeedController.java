@@ -90,7 +90,7 @@ public class FeedController {
   //==========================================================================================================================================================
   @GetMapping(TodayCodyConstUrl.feedList)
   public Object feedList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
-    List<Map<String,Object>> feedList = this.feedService.getFeedList();
+    List<Object> feedList = this.feedService.getFeedList();
     return feedList;
   }
 
