@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css';
 import '../scss/pages/_newpost.scss';
 
 export default function NewPost() {
@@ -38,10 +40,6 @@ export default function NewPost() {
       };
       reader.readAsDataURL(file);
     }
-  };
-  
-  const handleContentChange = (event) => {
-    setFeedContent(event.target.value); // 피드 내용 상태 업데이트
   };
 
   const handleUpload = async (e) => {
@@ -117,11 +115,11 @@ export default function NewPost() {
           )}
         </div>
         <div className="text-upload">
-          <textarea
-            placeholder="피드 내용을 입력해주세요"
+          <ReactQuill
+            theme="snow"
             value={feedContent}
-            onChange={handleContentChange}
-          ></textarea>
+            onChange={setFeedContent}
+          />
           {!uploading ? (
             <button onClick={handleUpload}>피드 업로드</button>
           ) : (
