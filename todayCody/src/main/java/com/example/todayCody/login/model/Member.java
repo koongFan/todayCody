@@ -29,6 +29,8 @@ public class Member {
 
   private String u_name;
 
+  private String u_birth;
+
   @Column(unique = true)
   private String email;
 
