@@ -23,6 +23,8 @@ public class SignResponse {
 
   private String u_name;
 
+  private String u_birth;
+
   private String email;
   private List<Authority> roles = new ArrayList<>();
 
