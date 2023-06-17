@@ -7,11 +7,14 @@ public class FeedDTO {
     
 
     // 기본 피드 DTO
-    private int feed_seq;
-    private int user_seq;
+    private String feed_seq;
+    private String user_seq;
     private String content;
-    private int likes;
+    private String likes;
     private String comment;
+    //===============================
+    private String image_path;
+    private String u_nickname;
 
     
 

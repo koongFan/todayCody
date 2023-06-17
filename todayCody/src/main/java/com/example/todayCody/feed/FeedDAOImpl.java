@@ -5,7 +5,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Log4j2
 @Repository("feedDAO")
@@ -27,5 +29,11 @@ public class FeedDAOImpl implements FeedDAO {
     return sqlSession.insert("com.example.todayCody.feed.FeedDAO.insertFileInfo", jsonMap);
   }
 
+  @Override
+  public List<FeedDTO> getFeedList(){
 
+    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList");
+  
+    return getFeedList;
+  }
 }
