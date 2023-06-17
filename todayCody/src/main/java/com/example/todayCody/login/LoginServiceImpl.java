@@ -76,6 +76,7 @@ public class LoginServiceImpl implements LoginService {
               .password(passwordEncoder.encode(request.getPassword()))
               .u_name(request.getU_name())
               .u_nickname(request.getU_nickname())
+              .u_birth(request.getU_birth())
               .email(request.getEmail())
               .build();
 

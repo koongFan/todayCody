@@ -45,7 +45,7 @@ public class FeedServiceImpl implements FeedService {
       //파일정보 테이블에 들어갈 파라미터로 쓰일 맵
       HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
       fileInfoMap.put("feed_seq", newFeedSeq);
-
+      fileInfoMap.put("image_path",uploadPath+ "feed_" + newFeedSeq + "/" + fileInfoMap.get("file_name") + "/");
       if (fileInfoMap.get("file_name") != null && ((String) fileInfoMap.get("file_name")).length() > 0) {
         if ("file[]".equals(aMultipartFile.get(fileIndex).getName())) {
           //파일 업로드
