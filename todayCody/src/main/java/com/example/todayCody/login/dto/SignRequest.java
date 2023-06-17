@@ -17,6 +17,8 @@ public class SignRequest {
 
   private String u_name;
 
+  private String u_birth;
+
   private String email;
 
 }

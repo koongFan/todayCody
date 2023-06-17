@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css';
 import '../scss/pages/_newpost.scss';
 
 export default function NewPost() {
+  const navigate = useNavigate();
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]); // 파일 미리보기 이미지 URL 배열
   const [feedContent, setFeedContent] = useState(""); // 피드 내용 상태 변수
@@ -36,12 +41,6 @@ export default function NewPost() {
       reader.readAsDataURL(file);
     }
   };
-  
-  
-
-  const handleContentChange = (event) => {
-    setFeedContent(event.target.value); // 피드 내용 상태 업데이트
-  };
 
   const handleUpload = async (e) => {
     if (selectedFiles.length > 0) {
@@ -63,12 +62,16 @@ export default function NewPost() {
   
         const response = await axios.post('/feed/write.do', formData);
         console.log(response.data);
+
         // 요청 성공 시 동작
-  
         setSelectedFiles([]); // 선택한 파일 초기화
         setFilePreviews([]); // 미리보기 초기화
         setFeedContent(""); // 피드 내용 초기화
         setUploading(false); // 파일 업로드 완료 시 상태 업데이트
+
+        // 업로드 완료 후 페이지 이동
+        alert("피드 업로드가 완료되었습니다.");
+        navigate('/mypage');
       } catch (error) {
         console.log(error);
         // 요청 실패 시 동작
@@ -77,8 +80,6 @@ export default function NewPost() {
     }
   };
   
-  
-
   const handlePreviewRemove = (index) => {
     const updatedFiles = [...selectedFiles];
     const updatedPreviews = [...filePreviews];
@@ -114,11 +115,11 @@ export default function NewPost() {
           )}
         </div>
         <div className="text-upload">
-          <textarea
-            placeholder="피드 내용을 입력해주세요"
+          <ReactQuill
+            theme="snow"
             value={feedContent}
-            onChange={handleContentChange}
-          ></textarea>
+            onChange={setFeedContent}
+          />
           {!uploading ? (
             <button onClick={handleUpload}>피드 업로드</button>
           ) : (
