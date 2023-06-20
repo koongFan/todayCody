@@ -47,14 +47,26 @@ export default function NewPost() {
       const formData = new FormData();
   
       selectedFiles.forEach((fileData, index) => {
-        formData.append('file[]', fileData, fileData.name); // 파일 추가
-        formData.append('order_num', index + 1); // 파일 순서 추가
+        formData.append('file[]', fileData);  // 파일 추가
       });
+
+      const fileDataArray = selectedFiles.map((file, index) => ({
+        file_name: file.name,
+        order_num: index + 1,
+      }));
   
       const feedData = {
-        user_seq: 1, // 사용자 고유 번호 (하드 코딩 예시)
-        content: feedContent // 피드 내용
+        user_seq: 1,
+        content: feedContent,
+        file: [
+          ...fileDataArray,
+          {
+            file_name: "",
+            order_num: "",
+          },
+        ],
       };
+
       formData.append('jsonData', JSON.stringify(feedData));
   
       try {
