@@ -1,88 +1,26 @@
 header {
-  // position: fixed;
-  // top: 0;
-  // right: 0;
-
-  width: 100%;
-  height: 150px;
-
-  background-color: #fff;
-
   display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.4);
+  padding: 0 0.5rem;
+  height: $header-height;
 
-  .left {
-    width: 30%;
+  .menu-icon-btn {
+    background: none;
+    border: none;
+    padding: 0;
 
-    border-right: 1px solid #222222;
-    border-bottom: 1px solid #222222;
+    .menu-icon {
+      width: 25px;
+      height: 25px;
+      fill: $medium-gray;
+      cursor: pointer;
 
-    .logo {
-      font-size: 7rem;
-      text-align: center;
-    }
-  }
-
-  .right {
-    width: 70%;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    font-weight: 600;
-
-    .top {
-      height: 110px;
-      display: flex;
-
-      .top-left {
-        width: 55%;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-inline: 3rem;
-
-        border-right: 1px solid #222222;
-
-        font-size: 1rem;
-      }
-
-      .top-right {
-        width: 45%;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding-inline: 3rem;
-      }
-    }
-
-    .bottom {
-      width: 100%;
-      height: 40px;
-
-      display: flex;
-      align-items: center;
-      padding-left: 3rem;
-
-      background-color: black;
-      color: #fff;
-
-      .search-icon {
-        margin-right: 1rem;
-        font-size: 1.2rem;
-      }
-
-      input {
-        display: block;
-        height: 100%;
-        color: #fff;
-
-        &::placeholder {
-          color: #fff;
-        }
+      &:hover {
+        fill: $dark-gray;
       }
     }
   }
