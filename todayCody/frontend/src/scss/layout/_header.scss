@@ -1,14 +1,16 @@
 header {
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  background-color: $bg-color;
+  width: 100%;
   height: $header-height;
-  border-bottom: 1px solid #e7e7e7;
+  position: fixed;
+  top: 0;
+  z-index: 4;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  background-color: $bg-color;
+  border-bottom: 1px solid #e7e7e7;
 
   .head-left {
     display: flex;

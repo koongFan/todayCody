@@ -1,4 +1,8 @@
 .main-wrapper {
+  width: calc(100vw - 90px);
+  position: absolute;
+  top: $header-height;
+  left: 90px;
   .banner {
     height: 400px;
 

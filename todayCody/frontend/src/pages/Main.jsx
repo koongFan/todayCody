@@ -91,14 +91,13 @@ export default function Main() {
     <div className="main-wrapper">
       <Banner />
       <Coder codyRanker={codyRanker} />
-      <Marquee />
+
       <Trend trend={trend} title="지금 뜨는 20대 LOOK" />
       <Trend trend={trend} title="이 LOOK은 어떤가요?" />
       <div className="board-container">
         <Board title="자유게시판" posts={posts} />
         <Board title="Q&A" posts={posts} />
       </div>
-      <Marquee reverse="true" />
     </div>
   );
 }
