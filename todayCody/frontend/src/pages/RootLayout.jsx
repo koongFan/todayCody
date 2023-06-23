@@ -22,7 +22,7 @@ function RootLayout() {
   return (
     <>
       <Header />
-      {/* <Sidebar /> */}
+      <Sidebar />
       <Outlet />
       <Footer />
     </>
