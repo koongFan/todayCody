@@ -26,7 +26,7 @@ export default function Main() {
       age: "30대",
       tag: ["미니멀", "스포티", "시티보이"],
       likes: 23,
-      rank: 4,
+      rank: 3,
     },
     {
       img: "https://i.pinimg.com/236x/d7/82/52/d7825262b259d9400c60939976c34e2f.jpg",
@@ -34,7 +34,7 @@ export default function Main() {
       age: "30대",
       tag: ["미니멀", "스포티", "시티보이"],
       likes: 23,
-      rank: 3,
+      rank: 4,
     },
   ];
   const trend = [

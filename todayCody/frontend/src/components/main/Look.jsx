@@ -1,5 +1,5 @@
 export default function Look({ look, category }) {
-  const { img, tag } = look;
+  const { img, tag, rank } = look;
   return (
     <div className="look-content">
       <div className="img-container">
@@ -7,10 +7,17 @@ export default function Look({ look, category }) {
       </div>
       <div className="likes">
         <img src="/icons/heart.svg" className="haert" alt="heart-icon" />
-
         <p>23</p>
       </div>
-      {category === "coder" && <img src="/icons/star.png" alt="star-img" />}
+      {category === "coder" && (
+        <div className="medal">
+          <img
+            src={`/icons/${rank === 1 ? "star" : "blackStar"}.svg`}
+            alt="star-img"
+          />
+          <span>{rank}</span>
+        </div>
+      )}
       <ul className="tags">
         {tag.map((item) => (
           <li>#{item}</li>
