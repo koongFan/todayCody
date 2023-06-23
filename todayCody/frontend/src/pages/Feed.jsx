@@ -7,12 +7,8 @@ export default function Feed() {
     {
       id: 1,
       nickname: "꿀맛나는샐러리",
-      profileImg:
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-      feedImgs: [
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-      ],
+      profileImg: "/img/p1.png",
+      feedImgs: ["/img/p2.png", "/img/p3.png"],
       likes: 1003,
       feedText:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quos cum sint assumenda vero voluptatem quia ipsam eum. ",
@@ -33,12 +29,8 @@ export default function Feed() {
     {
       id: 2,
       nickname: "꿀맛나는샐러리",
-      profileImg:
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-      feedImgs: [
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-        "https://i.pinimg.com/564x/31/c6/f7/31c6f7d8b4392c7b7c48e3c0f2a4eb9e.jpg",
-      ],
+      profileImg: "/img/p1.png",
+      feedImgs: ["/img/p1.png", "/img/p2.png"],
       likes: 1003,
       feedText:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quos cum sint assumenda vero voluptatem quia ipsam eum. ",

@@ -44,11 +44,9 @@ li {
 }
 
 .wrapper {
+  width: calc(100vw - 90px);
+  min-height: calc(100vw - 70px);
   position: absolute;
   top: 70px;
   left: 90px;
-  max-width: 1200px;
-  margin: 0 auto;
-  //margin-top: 150px; //header 높이에 따라 달라질 예정
-  min-height: calc(100vh - 70px);
 }

@@ -3,6 +3,7 @@
   position: absolute;
   top: $header-height;
   left: 90px;
+
   .banner {
     height: 450px;
 
@@ -27,175 +28,9 @@
     margin: 4rem auto;
   }
 
-  .coder-container {
-    width: 100%;
-    max-width: 850px;
-    height: 415px;
-
-    margin-inline: auto;
-
-    display: flex;
-
-    .left {
-      width: 350px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      border-right: 1px solid #222;
-
-      .coder-title {
-        font-size: 3rem;
-        font-weight: 300;
-        letter-spacing: 0.8rem;
-
-        span {
-          font-weight: 500;
-        }
-      }
-
-      p {
-        margin-top: 1rem;
-        color: #858585;
-      }
-    }
-    .right {
-      width: 950px;
-
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-
-      padding-left: 2rem;
-      padding-block: 2.3rem;
-
-      .coder {
-        width: 210px;
-        height: 100%;
-
-        .coder-content {
-          border: 1px solid #222;
-
-          .img-container {
-            width: 100%;
-            height: 280px;
-            border-bottom: 1px solid #222;
-
-            img {
-              width: 100%;
-              height: 100%;
-              aspect-ratio: 3/4;
-              object-fit: cover;
-            }
-          }
-
-          .coder-desc {
-            height: 20%;
-            display: flex;
-
-            font-size: 0.8rem;
-            color: #222;
-
-            .rank-badge {
-              width: 2.5rem;
-
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              background-color: #222;
-              color: #fff;
-            }
-
-            .tags {
-              width: 100%;
-
-              display: flex;
-              justify-content: center;
-
-              padding-block: 0.5rem;
-            }
-          }
-        }
-        .more {
-          margin-top: 0.5rem;
-          font-size: 0.8rem;
-
-          .heart {
-            display: flex;
-            align-items: center;
-
-            font-size: 1rem;
-
-            .heart-icon {
-              margin-right: 0.2rem;
-
-              color: #ff4c13;
-            }
-          }
-
-          .name {
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
-  .marquee {
-    width: 100vw;
-    height: 2.5rem;
-
-    position: relative;
-    overflow: hidden;
-
-    .track {
-      width: 200%;
-      height: 2.5rem;
-
-      display: flex;
-
-      position: absolute;
-      overflow: hidden;
-
-      animation: marquee 20s linear infinite;
-
-      .content {
-        width: 100%;
-
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-
-        background-color: #111;
-        color: #ff4c13;
-
-        font-size: 1.2rem;
-        font-weight: 700;
-
-        &.reverse {
-          background-color: #ff4c13;
-          color: #111;
-        }
-      }
-
-      @keyframes marquee {
-        0% {
-          left: 0;
-        }
-        100% {
-          left: -100%;
-        }
-      }
-    }
-  }
-
   .trend-container {
     width: 100%;
-    max-width: 850px;
-    height: 345px;
+    max-width: 915px;
 
     margin: 3rem auto 6rem auto;
 
@@ -246,8 +81,8 @@
           align-items: center;
           position: absolute;
           gap: 0.5rem;
-          bottom: 6rem;
-          right: 0.2rem;
+          bottom: 4.5rem;
+          right: 0.5rem;
 
           img {
             width: 1rem;
@@ -298,7 +133,7 @@
 
     .board {
       width: 100%;
-      max-width: 850px;
+      max-width: 915px;
       margin-inline: auto;
       display: flex;
       flex-direction: column;
