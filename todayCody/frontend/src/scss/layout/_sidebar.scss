@@ -1,8 +1,7 @@
 .sidebar {
-  width: 96px;
+  width: 90px;
   flex-shrink: 0;
   overflow: hidden;
-  border-right: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
   height: calc(100vh - $header-height);
@@ -13,7 +12,8 @@
   position: sticky;
   left: 0;
   top: $header-height;
-  box-shadow: 8px 4px 15px 0px #0000000d;
+  background-color: $bg-color;
+  box-shadow: 15px 2px 39px 0px #00000005;
 
   .sidebar-container {
     width: 100%;
@@ -53,11 +53,12 @@
       &::after {
         content: "";
         background-color: $accent-color;
+        border-radius: 4px 0 0 4px;
         height: 100%;
         position: absolute;
         right: 0;
         top: 0;
-        width: 3px;
+        width: 4px;
       }
     }
   }
