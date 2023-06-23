@@ -18,7 +18,10 @@ export default function Board({ title, posts }) {
             <tr key={post.postId} className="board-row">
               <td>{post.postId}</td>
               <td>
-                <Link to={`/board/${post.postId}`}>{post.title}</Link>
+                <Link to={`/board/${post.postId}`}>
+                  {post.title}
+                  &nbsp;<p>(100)</p>
+                </Link>
               </td>
               <td>{post.view}</td>
               <td>{post.date}</td>

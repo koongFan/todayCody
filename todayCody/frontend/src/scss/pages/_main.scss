@@ -243,29 +243,29 @@
 
   .board-container {
     width: 1100px;
-
-    margin: 4rem auto 6rem auto;
+    margin: 4rem auto;
 
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
 
     .board {
+      width: 70%;
+      margin-inline: auto;
       display: flex;
       flex-direction: column;
+      gap: 20px;
 
       font-size: 0.8rem;
 
       .board-title {
-        align-self: center;
-
-        font-size: 1.6rem;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       .board-table {
-        width: 500px;
+        width: 100%;
 
-        margin-top: 2rem;
         border-collapse: collapse;
 
         thead {
@@ -273,27 +273,37 @@
             height: 2rem;
 
             background-color: #fff;
-            border-block: 1px solid #111111;
-
+            border-bottom: 1.5px solid #111111;
             th {
-              font-weight: 600;
+              padding: 1rem;
+              font-size: 11px;
+              font-weight: 700;
+              line-height: 16px;
+              letter-spacing: -0.02em;
+              text-align: left;
             }
           }
         }
 
         tbody {
           .board-row {
-            height: 2rem;
-
+            height: 2.5rem;
+            border-bottom: 1px solid #cecece;
             background-color: #fff;
 
             td {
+              padding: 1rem;
+
               a {
-                &:hover {
+                display: flex;
+                p {
                   color: #ff4c13;
                 }
+                // &:hover {
+                //   color: #ff4c13;
+                // }
               }
-              text-align: center;
+              // text-align: center;
             }
           }
         }
