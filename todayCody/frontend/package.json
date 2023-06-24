@@ -17,7 +17,7 @@
     "swiper": "^9.4.1",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://52.78.103.73:8081",
+  "proxy": "http://52.79.65.236:8081",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
