@@ -2,31 +2,27 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import { Navigation, Pagination } from "swiper";
+import { Pagination } from "swiper";
 
-export default function Slider(imgs) {
-  console.log(imgs);
+export default function Slider({ imgs }) {
   return (
-    <>
-      <Swiper
-        pagination={true}
-        navigation={true}
-        modules={[Navigation, Pagination]}
-        className="mySwiper"
-      >
+    <Swiper
+      spaceBetween={30}
+      pagination={{
+        clickable: true,
+      }}
+      modules={[Pagination]}
+      className="mySwiper"
+    >
+      {imgs.map((img) => (
         <SwiperSlide>
           <div className="imgContainer">
-            <img src={imgs[0]} alt="feedImg" />
+            <img src={img} alt="feedImg" />
           </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <div className="imgContainer">
-            <img src={imgs[1]} alt="feedImg" />
-          </div>
-        </SwiperSlide>
-      </Swiper>
-    </>
+      ))}
+    </Swiper>
   );
 }

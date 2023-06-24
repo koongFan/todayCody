@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useLoaderData, useSubmit } from "react-router-dom";
 
 import Header from "components/layout/Header";
+import Sidebar from "components/layout/Sidebar";
 import Footer from "components/layout/Footer";
 
 function RootLayout() {
@@ -21,6 +22,7 @@ function RootLayout() {
   return (
     <>
       <Header />
+      <Sidebar />
       <Outlet />
       <Footer />
     </>

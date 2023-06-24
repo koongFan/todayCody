@@ -21,10 +21,7 @@ export default function FeedList({ data }) {
           </div>
           <button>팔로우</button>
         </div>
-        {/* <div className="imgContainer">
-          <img src={feedImg} alt="feedImg" />
-        </div> */}
-        {/* 슬라이더로 변경 */}
+
         <Slider imgs={feedImgs} />
         <div className="feedContent">
           <div className="icons">
