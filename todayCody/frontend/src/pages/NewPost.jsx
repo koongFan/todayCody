@@ -29,18 +29,28 @@ export default function NewPost() {
   
     // 파일 미리보기 이미지 URL 생성
     const previews = [];
-    for (let i = 0; i < updatedFiles.length; i++) {
-      const file = updatedFiles[i];
+    const updatedFilePreviews = [];
+  
+    const readAndSetPreview = (file, index) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         previews.push(e.target.result);
         if (previews.length === updatedFiles.length) {
-          setFilePreviews(previews);
+          setFilePreviews(updatedFilePreviews);
         }
       };
       reader.readAsDataURL(file);
+    };
+  
+    for (let i = 0; i < updatedFiles.length; i++) {
+      const file = updatedFiles[i];
+      if (file) {
+        updatedFilePreviews.push(file);
+        readAndSetPreview(file, i);
+      }
     }
-  };
+  }; 
+  
 
   const handleUpload = async (e) => {
     if (selectedFiles.length > 0) {
