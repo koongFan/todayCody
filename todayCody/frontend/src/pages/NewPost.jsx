@@ -24,7 +24,7 @@ export default function NewPost() {
     }
   
     // 선택한 파일들을 배열에 추가
-    const updatedFiles = [...selectedFiles, ...newFiles];
+    const updatedFiles = [...selectedFiles, ...newFiles].filter((file) => file !== null && file !== undefined);
     setSelectedFiles(updatedFiles);
   
     // 파일 미리보기 이미지 URL 생성
