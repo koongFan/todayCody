@@ -19,7 +19,7 @@ export default function Slider({ imgs }) {
       {imgs.map((img) => (
         <SwiperSlide>
           <div className="imgContainer">
-            <img src={img} alt="feedImg" />
+            <img src={img.slice(0, -1)} alt="feedImg" />
           </div>
         </SwiperSlide>
       ))}

@@ -3,6 +3,7 @@ import { useGetFeeds } from "api/feed";
 
 export default function Feed() {
   const feeds = useGetFeeds();
+  console.log(feeds);
   const feedDatas = [
     {
       feed_seq: 1,
@@ -27,36 +28,11 @@ export default function Feed() {
       ],
     },
   ];
-  const feedLists = [
-    {
-      feed_seq: 1,
-      u_nickname: "꿀맛나는샐러리",
-      image_path: ["/img/p2.png", "/img/p3.png"],
-      likes: 1003,
-      content:
-        "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quos cum sint assumenda vero voluptatem quia ipsam eum.</p>",
-    },
-    {
-      feed_seq: 1,
-      u_nickname: "꿀맛나는샐러리",
-      image_path: ["/img/p2.png", "/img/p3.png"],
-      likes: 1003,
-      content:
-        "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quos cum sint assumenda vero voluptatem quia ipsam eum.</p>",
-    },
-    {
-      feed_seq: 1,
-      u_nickname: "꿀맛나는샐러리",
-      image_path: ["/img/p2.png", "/img/p3.png"],
-      likes: 1003,
-      content:
-        "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quos cum sint assumenda vero voluptatem quia ipsam eum.</p>",
-    },
-  ];
+
   return (
     <div className="wrapper">
       <ul className="feedList">
-        {feeds.map((feed) => (
+        {feeds?.map((feed) => (
           <FeedList key={feed.feed_seq} data={feed} />
         ))}
       </ul>
