@@ -13,7 +13,6 @@ import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import { tokenLoader } from "util/auth";
-import { action as logoutAction } from "./pages/Logout";
 
 import "./scss/main.scss";
 
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
       { path: "/board/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage /> },
-      { path: "/logout", action: logoutAction },
     ],
   },
   { path: "/signin", element: <SignIn /> },

@@ -3,11 +3,11 @@ import Modal from "components/feed/Modal";
 import { ReactComponent as Heart } from "assets/icons/heart.svg";
 import { ReactComponent as Ballon } from "assets/icons/ballon.svg";
 import Slider from "./Slider";
+import parse from "html-react-parser";
 
 export default function FeedList({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const { nickname, profileImg, feedImgs, likes, feedText, tags, comments } =
-    data;
+  const { u_nickname, likes, content, image_path } = data;
 
   return (
     <>
@@ -15,30 +15,30 @@ export default function FeedList({ data }) {
         <div className="feedTop">
           <div className="profile">
             <div className="imgContainer">
-              <img src={profileImg} alt="profileImg" />
+              <img src="/img/p1.png" alt="profileImg" />
             </div>
-            <span className="nickname">{nickname}</span>
+            <span className="nickname">{u_nickname}</span>
           </div>
           <button>팔로우</button>
         </div>
 
-        <Slider imgs={feedImgs} />
+        <Slider imgs={image_path} />
         <div className="feedContent">
           <div className="icons">
             <Heart width="23" height="20" />
             <Ballon width="21" height="21" />
           </div>
           <p className="likes">좋아요 {likes}개</p>
-          <ul className="tags">
+          {/* <ul className="tags">
             {tags.map((item) => (
               <li>#{item}</li>
             ))}
-          </ul>
+          </ul> */}
           <p className="feedText">
-            <span>{nickname}</span> &nbsp;
-            {feedText}
+            <span>{u_nickname}</span> &nbsp;
+            {parse(content)}
           </p>
-          <div className="comments">
+          {/* <div className="comments">
             <p className="more" onClick={() => setModalOpen(true)}>
               View all 33 comments
             </p>
@@ -48,7 +48,7 @@ export default function FeedList({ data }) {
                 {item.text}
               </p>
             ))}
-          </div>
+          </div> */}
           <div className="time">한 시간 전</div>
         </div>
       </div>

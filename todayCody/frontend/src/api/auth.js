@@ -51,8 +51,8 @@ export const signin = async (userData) => {
       const token = res.data.token;
 
       localStorage.setItem("token", token);
-      let expiration = new Date();
-      expiration.setHours(expiration.getHours() + 1); //만료시간 30분
+      // 만료시간 30분
+      const expiration = new Date(new Date().getTime() + 30 * 60 * 1000);
       localStorage.setItem("expiration", expiration.toISOString());
 
       // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
@@ -69,9 +69,10 @@ export const signin = async (userData) => {
 };
 
 //로그아웃
-export const singout = () => {
+export const signout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expiration");
+  alert("로그아웃 되었습니다.");
   window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
 };
 
