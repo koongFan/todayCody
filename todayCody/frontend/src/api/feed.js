@@ -9,10 +9,11 @@ export function useGetFeeds() {
 
   useEffect(() => {
     axios({
-      url: `${baseUrl}/v1/messages`,
+      url: `${baseUrl}/feed/list.do`,
       method: "get",
     })
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setFeeds(res.data);
         }
