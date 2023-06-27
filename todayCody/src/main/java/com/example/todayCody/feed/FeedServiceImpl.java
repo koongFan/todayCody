@@ -71,32 +71,40 @@ public class FeedServiceImpl implements FeedService {
   }
 
 
-  public List<Object> getFeedList() throws Exception{
+  // public List<Object> getFeedList() throws Exception{
+
+  //   //==================================================================
+  //   List<Object> listAfter = new ArrayList<>();
+  //   List<FeedDTO> getFeedList = feedDAO.getFeedList();
+		
+	// 	for(int i=0; i<getFeedList.size(); i++) {				
+	// 		String feedSeq = getFeedList.get(i).getFeed_seq();
+			
+	// 		List<Object> impl = new ArrayList<>();			
+	// 		Map<String,Object> listBefore = new HashMap<>();	
+	// 		impl.add(getFeedList.get(i));
+			
+	// 		for(int n=i+1; n<getFeedList.size(); n++) {				
+	// 			String nextFeedSeq = getFeedList.get(n).getFeed_seq();
+	// 			if(feedSeq.equals(nextFeedSeq)) {					
+	// 				impl.add(getFeedList.get(n));
+	// 				getFeedList.remove(n);		
+	// 				n--;
+	// 			}				
+	// 		}
+	// 		listBefore.put("feed_seq",feedSeq);
+	// 		listBefore.put("feed_list", impl);
+	// 		listAfter.add(listBefore);
+	// 	}	
+	// 	return listAfter;
+  //   //==================================================================
+  // };
+
+  public List<FeedDTO> getFeedList() throws Exception{
 
     //==================================================================
-    List<Object> listAfter = new ArrayList<>();
-    List<FeedDTO> getFeedList = feedDAO.getFeedList();
-		
-		for(int i=0; i<getFeedList.size(); i++) {				
-			String feedSeq = getFeedList.get(i).getFeed_seq();
-			
-			List<Object> impl = new ArrayList<>();			
-			Map<String,Object> listBefore = new HashMap<>();	
-			impl.add(getFeedList.get(i));
-			
-			for(int n=i+1; n<getFeedList.size(); n++) {				
-				String nextFeedSeq = getFeedList.get(n).getFeed_seq();
-				if(feedSeq.equals(nextFeedSeq)) {					
-					impl.add(getFeedList.get(n));
-					getFeedList.remove(n);		
-					n--;
-				}				
-			}
-			listBefore.put("feed_seq",feedSeq);
-			listBefore.put("feed_list", impl);
-			listAfter.add(listBefore);
-		}	
-		return listAfter;
+    List<FeedDTO> getFeedList = feedDAO.getFeedList();	
+		return getFeedList;
     //==================================================================
   };
 }

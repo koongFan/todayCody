@@ -10,5 +10,8 @@ public interface FeedService {
   public Map<String,Object> feedWrite(Map<String, Object> jsonMap,
                                           List<MultipartFile> aMultipartFile) throws Exception;
    
-  public List<Object> getFeedList() throws Exception;
+  // public List<Object> getFeedList() throws Exception;
+
+  
+  public List<FeedDTO> getFeedList() throws Exception;
 }
