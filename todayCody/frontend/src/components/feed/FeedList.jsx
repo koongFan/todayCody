@@ -8,7 +8,7 @@ import parse from "html-react-parser";
 export default function FeedList({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const { u_nickname, likes, content, image_path } = data;
-
+  console.log(image_path.split(","));
   return (
     <>
       <div className="feedContainer">
@@ -22,7 +22,7 @@ export default function FeedList({ data }) {
           <button>팔로우</button>
         </div>
 
-        <Slider imgs={image_path} />
+        <Slider imgs={image_path.split(",")} />
         <div className="feedContent">
           <div className="icons">
             <Heart width="23" height="20" />

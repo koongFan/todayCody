@@ -13,7 +13,6 @@ export function useGetFeeds() {
       method: "get",
     })
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           setFeeds(res.data);
         }
