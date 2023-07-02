@@ -28,27 +28,27 @@ export default function NewPost() {
     setSelectedFiles(updatedFiles);
   
     // 파일 미리보기 이미지 URL 생성
-    const previews = [];
     const updatedFilePreviews = [];
   
     const readAndSetPreview = (file, index) => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        previews.push(e.target.result);
-        if (previews.length === updatedFiles.length) {
-          setFilePreviews(updatedFilePreviews);
+        const preview = e.target.result; // 파일 미리보기 이미지 URL을 변수에 저장
+        updatedFilePreviews.push(preview); // 파일 미리보기 이미지 URL을 updatedFilePreviews 배열에 추가
+        if (updatedFilePreviews.length === updatedFiles.length) {
+          setFilePreviews([...updatedFilePreviews]);
         }
       };
       reader.readAsDataURL(file);
     };
-  
+    
     for (let i = 0; i < updatedFiles.length; i++) {
       const file = updatedFiles[i];
       if (file) {
-        updatedFilePreviews.push(file);
         readAndSetPreview(file, i);
       }
     }
+
   }; 
   
 
@@ -68,13 +68,7 @@ export default function NewPost() {
       const feedData = {
         user_seq: 1,
         content: feedContent,
-        file: [
-          ...fileDataArray,
-          {
-            file_name: "",
-            order_num: "",
-          },
-        ],
+        file: fileDataArray,
       };
 
       formData.append('jsonData', JSON.stringify(feedData));
@@ -82,8 +76,10 @@ export default function NewPost() {
       try {
         setUploading(true); // 파일 업로드 시작 시 상태 업데이트
   
-        const response = await axios.post('/feed/write.do', formData);
-        console.log(response.data);
+        const response = await axios.post('http://52.79.65.236:8081/feed/write.do', formData);
+        
+        const uploadedFileURLs = response.data.fileURLs;
+        setFilePreviews([...filePreviews, ...uploadedFileURLs]);
 
         // 요청 성공 시 동작
         setSelectedFiles([]); // 선택한 파일 초기화
@@ -105,8 +101,10 @@ export default function NewPost() {
   const handlePreviewRemove = (index) => {
     const updatedFiles = [...selectedFiles];
     const updatedPreviews = [...filePreviews];
+
     updatedFiles.splice(index, 1);
     updatedPreviews.splice(index, 1);
+
     setSelectedFiles(updatedFiles);
     setFilePreviews(updatedPreviews);
   };
