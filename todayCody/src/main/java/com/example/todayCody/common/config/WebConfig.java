@@ -14,10 +14,7 @@ public class WebConfig implements WebMvcConfigurer  {
     private String resourcePath = "file:///home/ubuntu/data/upload/feeds/";
 
 //    윈도우
-//    private String resourcePath = "file:///C:/data/upload/feeds/";
-
-  @Value("file:C:/data/upload/feeds/")
-  private String imageDir;
+//    private String resourcePath = "file:///C:/home/ubuntu/data/upload/feeds/";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

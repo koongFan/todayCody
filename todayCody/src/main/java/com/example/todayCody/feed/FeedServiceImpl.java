@@ -33,7 +33,7 @@ public class FeedServiceImpl implements FeedService {
     for (Object fileInfo : fileInfoList) {
       HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
       fileInfoMap.put("feed_seq", newFeedSeq);
-      fileInfoMap.put("image_path", "feeds/feed_" + newFeedSeq + "/images/" + fileInfoMap.get("file_name") + "/");
+      fileInfoMap.put("image_path", "/feeds/feed_" + newFeedSeq + "/images/" + fileInfoMap.get("file_name") + "/");
       String fileName = (String) fileInfoMap.get("file_name");
       if (fileName != null && !fileName.isEmpty() && "file[]".equals(aMultipartFile.get(fileIndex).getName())) {
         String savedFileName = FileUtil.uploadFile(uploadPath + "feed_" + newFeedSeq + "/images", aMultipartFile.get(fileIndex));
