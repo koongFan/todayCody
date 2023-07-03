@@ -24,87 +24,42 @@ public class FeedServiceImpl implements FeedService {
 
   @Override
   public Map<String, Object> feedWrite(Map<String, Object> jsonMap, List<MultipartFile> aMultipartFile) throws Exception {
-
-    //file 정보
     ArrayList<?> fileInfoList = (ArrayList<?>) jsonMap.get("file");
-
-    //피드 정보 DB에 insert 하고 새로운 피드 번호 받아옴
     int newFeedSeq = feedDAO.insertFeedInfo((HashMap<String, Object>) jsonMap);
-//    int newFeedSeq = 3;
     log.info("새로운 피드 번호 : " + newFeedSeq);
-
-
     log.info("fileInfoList=[" + fileInfoList + "]");
-
-    for (int i = 0; i < aMultipartFile.size(); i++) {
-      log.info("업로드할 파일[" + i + "]=[" + aMultipartFile.get(i).getOriginalFilename() + "]");
-    }
 
     int fileIndex = 0;
     for (Object fileInfo : fileInfoList) {
-      //파일정보 테이블에 들어갈 파라미터로 쓰일 맵
       HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
       fileInfoMap.put("feed_seq", newFeedSeq);
-      fileInfoMap.put("image_path",uploadPath+ "feed_" + newFeedSeq + "/" + fileInfoMap.get("file_name") + "/");
-      if (fileInfoMap.get("file_name") != null && ((String) fileInfoMap.get("file_name")).length() > 0) {
-        if ("file[]".equals(aMultipartFile.get(fileIndex).getName())) {
-          //파일 업로드
-          String savedFileName = FileUtil.uploadFile(uploadPath+ "feed_" + newFeedSeq, aMultipartFile.get(fileIndex));
-
-          log.info("[파일 저장 성공] 저장된 파일명 : " + savedFileName);
-          String[] fileSplitArr = savedFileName.split("\\.");
-          fileInfoMap.put("file_name",fileSplitArr[0]);
-          fileInfoMap.put("ext_name",fileSplitArr[1]);
-
-          fileIndex++;
-        }
+      fileInfoMap.put("image_path", "feeds/feed_" + newFeedSeq + "/images/" + fileInfoMap.get("file_name") + "/");
+      String fileName = (String) fileInfoMap.get("file_name");
+      if (fileName != null && !fileName.isEmpty() && "file[]".equals(aMultipartFile.get(fileIndex).getName())) {
+        String savedFileName = FileUtil.uploadFile(uploadPath + "feed_" + newFeedSeq + "/images", aMultipartFile.get(fileIndex));
+        log.info("[파일 저장 성공] 저장된 파일명 : " + savedFileName);
+        String[] fileSplitArr = savedFileName.split("\\.");
+        fileInfoMap.put("file_name", fileSplitArr[0]);
+        fileInfoMap.put("ext_name", fileSplitArr[1]);
+        fileIndex++;
       }
       feedDAO.insertFileInfo(fileInfoMap);
-
     }
 
     jsonMap.put("retCode", "000");
     jsonMap.put("retMsg", "정상적으로 등록되었습니다.");
 
-
     return jsonMap;
   }
 
 
-  // public List<Object> getFeedList() throws Exception{
-
-  //   //==================================================================
-  //   List<Object> listAfter = new ArrayList<>();
-  //   List<FeedDTO> getFeedList = feedDAO.getFeedList();
-		
-	// 	for(int i=0; i<getFeedList.size(); i++) {				
-	// 		String feedSeq = getFeedList.get(i).getFeed_seq();
-			
-	// 		List<Object> impl = new ArrayList<>();			
-	// 		Map<String,Object> listBefore = new HashMap<>();	
-	// 		impl.add(getFeedList.get(i));
-			
-	// 		for(int n=i+1; n<getFeedList.size(); n++) {				
-	// 			String nextFeedSeq = getFeedList.get(n).getFeed_seq();
-	// 			if(feedSeq.equals(nextFeedSeq)) {					
-	// 				impl.add(getFeedList.get(n));
-	// 				getFeedList.remove(n);		
-	// 				n--;
-	// 			}				
-	// 		}
-	// 		listBefore.put("feed_seq",feedSeq);
-	// 		listBefore.put("feed_list", impl);
-	// 		listAfter.add(listBefore);
-	// 	}	
-	// 	return listAfter;
-  //   //==================================================================
-  // };
-
-  public List<FeedDTO> getFeedList() throws Exception{
+  public List<FeedDTO> getFeedList() throws Exception {
 
     //==================================================================
-    List<FeedDTO> getFeedList = feedDAO.getFeedList();	
-		return getFeedList;
+    List<FeedDTO> getFeedList = feedDAO.getFeedList();
+    return getFeedList;
     //==================================================================
-  };
+  }
+
+  ;
 }
