@@ -2,11 +2,16 @@ package com.example.todayCody.common.util;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -73,5 +78,21 @@ public class FileUtil {
     }
 
     return savedFileName;
+  }
+
+  public List<MultipartFile> getNonEmptyMultipartFiles(HttpServletRequest request) {
+    if (!(request instanceof MultipartHttpServletRequest)) {
+      return Collections.emptyList();
+    }
+
+    MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+    List<MultipartFile> aMultipartFile = new ArrayList<>(multipartRequest.getFiles("file[]"));
+
+    aMultipartFile.removeIf(file -> file.getOriginalFilename() == null || file.getOriginalFilename().trim().isEmpty());
+
+    // 디버깅
+    aMultipartFile.forEach(file -> log.info("getOriginalFilename()[" + file.getName() + "]:" + file.getOriginalFilename()));
+
+    return aMultipartFile;
   }
 }
