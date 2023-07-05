@@ -23,4 +23,9 @@ public class TodayCodyConstUrl {
     // 피드 상세보기
     public static final String feedList = "/feed/list.do";
 
+
+
+  // 게시판 업로드
+  public static final String boardWrite = "/board/write.do";
+
 }
