@@ -20,12 +20,13 @@ public class TodayCodyConstUrl {
     // 피드 상세보기
     public static final String feedDetail = "/feed/detail.do";
 
-    // 피드 상세보기
+    // 피드 리스트 불러오기
     public static final String feedList = "/feed/list.do";
 
+    // 마이페이지
+    public static final String myPage = "/myPage/list.do";
 
-
-  // 게시판 업로드
-  public static final String boardWrite = "/board/write.do";
+    // 게시판 업로드
+    public static final String boardWrite = "/board/write.do";
 
 }
