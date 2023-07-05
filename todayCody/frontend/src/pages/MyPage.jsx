@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "components/layout/Footer";
 
 export default function MyPage() {
   const [category, setCategory] = useState("posts");
@@ -76,6 +77,7 @@ export default function MyPage() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 .my-container {
   width: 1000px;
-  height: 1280px;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -48,8 +47,8 @@
           height: 36px;
           padding: 0.4rem 1.5rem;
           border-radius: 4px;
-          background-color: #ff7042;
-          color: #ffffff;
+          background-color: $accent-color;
+          color: $bg-color;
           font-weight: 500;
         }
       }
@@ -75,7 +74,7 @@
       .bottom {
         p {
           font-weight: 500;
-          color: #505050;
+          color: $text-gray;
         }
       }
     }
@@ -128,7 +127,7 @@
       height: 250px;
       border-radius: 5px;
       overflow: hidden;
-      border: 1px solid #111111;
+      border: 1px solid $dark-gray;
 
       img {
         width: 100%;
