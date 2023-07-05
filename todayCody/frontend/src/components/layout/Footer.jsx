@@ -1,8 +1,26 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
-    <footer className="footer">
-      <h1 className="logo">OH!CO</h1>
-      <p>일이삼사오륙칠팔구십일이삼사오륙칠팔구십일이삼사오륙칠팔구십</p>
+    <footer className="footer-container">
+      <div className="top">
+        <div className="item">
+          <Link to="#">Terms & Conditions</Link>
+          <Link to="#">Privacy Policy</Link>
+        </div>
+        <div className="logo">
+          <Link to="/">
+            <img src="/icons/footer-logo.png" alt="logo" />
+          </Link>
+        </div>
+        <div className="item">
+          <Link to="#">Cookies</Link>
+          <Link to="#">Refunds</Link>
+          <Link to="#">License</Link>
+        </div>
+      </div>
+      <div className="border"></div>
+      <div className="bottom">CopyRight 2023</div>
     </footer>
   );
 }
