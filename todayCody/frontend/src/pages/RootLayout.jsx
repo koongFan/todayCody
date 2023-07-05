@@ -28,7 +28,7 @@ function RootLayout() {
       <Header />
       <Sidebar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
