@@ -5,6 +5,7 @@ import com.example.todayCody.common.util.FileUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,11 @@ import java.util.Map;
 @CrossOrigin
 public class BoardController {
 
+  @Autowired
+  BoardService boardService;
+
   @PostMapping(TodayCodyConstUrl.boardWrite)
-  public Object boardWrite(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws JsonProcessingException {
+  public Object boardWrite(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception {
     String jsonData = params.get("jsonData");
 
     List<MultipartFile> aMultipartFile = new FileUtil().getNonEmptyMultipartFiles(request);
@@ -32,7 +36,8 @@ public class BoardController {
 //    HashMap<String, Object> jsonMap = mapper.readValue(jsonData, HashMap.class);
     BoardDTO dto = mapper.readValue(jsonData, BoardDTO.class);
     log.fatal(dto.toString());
-    return null;
+    log.fatal(aMultipartFile.size());
+    return boardService.boardWrite(dto,aMultipartFile);
   }
 
 }

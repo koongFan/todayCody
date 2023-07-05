@@ -37,7 +37,7 @@ public class FeedServiceImpl implements FeedService {
         fileInfoMap.put("image_path", "/feeds/feed_" + newFeedSeq + "/images/" + fileInfoMap.get("file_name") + "/");
         String fileName = (String) fileInfoMap.get("file_name");
         if (fileName != null && !fileName.isEmpty() && "file[]".equals(aMultipartFile.get(fileIndex).getName())) {
-          String savedFileName = FileUtil.uploadFile(uploadPath + "feed_" + newFeedSeq + "/images", aMultipartFile.get(fileIndex));
+          String savedFileName = FileUtil.uploadFile(uploadPath + "feeds/feed_" + newFeedSeq + "/images", aMultipartFile.get(fileIndex));
           log.info("[파일 저장 성공] 저장된 파일명 : " + savedFileName);
           String[] fileSplitArr = savedFileName.split("\\.");
           fileInfoMap.put("file_name", fileSplitArr[0]);
@@ -50,14 +50,12 @@ public class FeedServiceImpl implements FeedService {
       jsonMap.put("retCode", "000");
       jsonMap.put("retMsg", "정상적으로 등록되었습니다.");
 
-      return jsonMap;
     } catch (Exception e) {
       jsonMap.put("retCode", "999");
       jsonMap.put("retMsg", "에러가 발생했습니다: " + e.getMessage());
-      return jsonMap;
     }
+    return jsonMap;
   }
-
 
 
   public List<FeedDTO> getFeedList() throws Exception {

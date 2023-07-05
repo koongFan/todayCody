@@ -10,15 +10,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer  {
 
-    private String connectPath = "/feeds/**";
-    private String resourcePath = "file:///home/ubuntu/data/upload/feeds/";
+  private String feedsConnectPath = "/feeds/**";
+  private String feedsResourcePath = "file:///home/ubuntu/data/upload/feeds/";
+
+  private String boardsConnectPath = "/boards/**";
+  private String boardsResourcePath = "file:///home/ubuntu/data/upload/boards/";
+
 
 //    윈도우
 //    private String resourcePath = "file:///C:/home/ubuntu/data/upload/feeds/";
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(connectPath)
-                .addResourceLocations(resourcePath);
-    }
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler(feedsConnectPath, boardsConnectPath)
+            .addResourceLocations(feedsResourcePath, boardsResourcePath);
+  }
 }
