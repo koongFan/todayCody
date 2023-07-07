@@ -97,6 +97,25 @@ export const getMyData = async (token) => {
   }
 };
 
+//마이페이지 정보 가져오기
+export const useGetMyPage = async (user_seq) => {
+  const [myPage, setMyPage] = useState([]);
+
+  useEffect(() => {
+    axios({
+      // url: `${baseUrl}/myPage/list.do?user_seq=${user_seq}`,
+      url: `${baseUrl}/myPage/list.do?user_seq=1`,
+      method: "get",
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setMyPage(res.data);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, [user_seq]);
+};
+
 // 유저 아이디로 정보 불러오기
 export function useGetUserDataById(userId) {
   const [user, setUser] = useState();

@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Footer from "components/layout/Footer";
+import { AuthContext } from "contexts/AuthContext";
+import { useGetMyPage } from "api/auth";
 
 export default function MyPage() {
+  const user = useContext(AuthContext);
+  const myPage = useGetMyPage(user.user_seq);
+  console.log(myPage);
+  // const {feed_seq, user_seq, content, likes, comment, image_path, u_nickname, postCnt}=myPage;
+
   const [category, setCategory] = useState("posts");
   const categoryList = [
     {
