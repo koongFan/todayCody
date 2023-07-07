@@ -49,4 +49,7 @@ li {
   position: absolute;
   top: 70px;
   left: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

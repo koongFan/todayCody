@@ -1,5 +1,6 @@
 import FeedList from "components/feed/FeedList";
 import { useGetFeeds } from "api/feed";
+import Footer from "components/layout/Footer";
 
 export default function Feed() {
   const feeds = useGetFeeds();
@@ -36,6 +37,7 @@ export default function Feed() {
           <FeedList key={feed.feed_seq} data={feed} />
         ))}
       </ul>
+      <Footer />
     </div>
   );
 }

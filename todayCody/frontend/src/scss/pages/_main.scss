@@ -3,6 +3,9 @@
   position: absolute;
   top: $header-height;
   left: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .banner {
     height: 450px;
