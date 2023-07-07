@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { decodeToken } from "util/auth";
 
 const baseUrl = "http://52.79.65.236:8081";
 
@@ -79,17 +80,16 @@ export const signout = () => {
 //내 정보 가져오기
 export const getMyData = async (token) => {
   try {
+    const id = decodeToken(token);
     const res = await axios({
-      url: `${baseUrl}/member/info`,
+      url: `${baseUrl}/user/get?account=${id}`,
       method: "get",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     if (res.status === 200) {
       const user = await res.data;
-      console.log(user);
       return user;
     }
   } catch (error) {
