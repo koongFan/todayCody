@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { getAuthToken } from "util/auth";
+import { getAuthToken } from "../util/sign/auth";
 import { getMyData } from "../api/auth";
 
 export const AuthContext = createContext();

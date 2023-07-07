@@ -77,18 +77,17 @@ export const signout = () => {
 };
 
 //내 정보 가져오기
-export const getMyData = async (token, id) => {
+export const getMyData = async (token) => {
   try {
     const res = await axios({
-      url: `${baseUrl}/user/get?/account=${id}`,
+      url: `${baseUrl}/member/info`,
       method: "get",
       headers: {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     if (res.status === 200) {
-      console.log(res);
       const user = await res.data;
       console.log(user);
       return user;
