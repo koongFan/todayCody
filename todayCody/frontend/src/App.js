@@ -13,6 +13,7 @@ import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import { tokenLoader } from "util/auth";
+import { AuthContextProvider } from "contexts/AuthContext";
 
 import "./scss/main.scss";
 
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />;
+    </AuthContextProvider>
+  );
 }
 
 export default App;
