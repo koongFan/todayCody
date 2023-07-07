@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface BoardService {
   public Map<String,Object> boardWrite(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception;
-  public List<BoardDTO> getBoardList() throws Exception;
+  public Map<String, Object> getBoardList(BoardDTO boardDTO) throws Exception;
   public Map<String,Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception;
   public Map<String,Object> boardDelete(BoardDTO boardDTO) throws Exception;
 

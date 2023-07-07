@@ -26,7 +26,9 @@ public class TodayCodyConstUrl {
     // 마이페이지
     public static final String myPage = "/myPage/list.do";
 
-    // 게시판 업로드
-    public static final String boardWrite = "/board/write.do";
+
+  // 게시판 업로드
+//  public static final String boardWrite = "/board/write.do";
+  public static final String axiosBoardController = "/AxiosBoardController.do";
 
 }

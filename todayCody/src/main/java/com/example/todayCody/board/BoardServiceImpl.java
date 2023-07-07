@@ -25,25 +25,27 @@ public class BoardServiceImpl implements BoardService {
     Map<String, Object> retMap = new HashMap<>();
     try {
       ArrayList<?> fileInfoList = (ArrayList<?>) boardDTO.getFile_info();
-      int newBordSeq = boardDAO.insertBoard(boardDTO);
-      log.info("새로운 게시글 번호 : " + newBordSeq);
+      int newBoardSeq = boardDAO.insertBoard(boardDTO);
+      log.info("새로운 게시글 번호 : " + newBoardSeq);
       log.info("fileInfoList=[" + fileInfoList + "]");
 
-      int fileIdx = 0;
-      for(Object fileInfo : fileInfoList) {
-        HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
-        fileInfoMap.put("board_seq", newBordSeq);
-        fileInfoMap.put("image_path", "/boards/board_" + newBordSeq + "/images/" + fileInfoMap.get("file_name") + "/");
-        String fileName = (String) fileInfoMap.get("file_name");
-        if (fileName != null && !fileName.isEmpty() && "file[]".equals(aMultipartFile.get(fileIdx).getName())) {
-          String savedFileName = FileUtil.uploadFile(uploadPath + "board/board_" + newBordSeq + "/images", aMultipartFile.get(fileIdx));
-          log.info("[파일 저장 성공] 저장된 파일명 : " + savedFileName);
-          String[] fileSplitArr = savedFileName.split("\\.");
-          fileInfoMap.put("file_name", fileSplitArr[0]);
-          fileInfoMap.put("file_ext", fileSplitArr[1]);
-          fileIdx++;
+      if (aMultipartFile.size() != 0) {
+        int fileIdx = 0;
+        for (Object fileInfo : fileInfoList) {
+          HashMap<String, Object> fileInfoMap = (HashMap<String, Object>) fileInfo;
+          fileInfoMap.put("board_seq", newBoardSeq);
+          fileInfoMap.put("image_path", "/boards/board_" + newBoardSeq + "/images/" + fileInfoMap.get("file_name") + "/");
+          String fileName = (String) fileInfoMap.get("file_name");
+          if (fileName != null && !fileName.isEmpty() && "file[]".equals(aMultipartFile.get(fileIdx).getName())) {
+            String savedFileName = FileUtil.uploadFile(uploadPath + "board/board_" + newBoardSeq + "/images", aMultipartFile.get(fileIdx));
+            log.info("[파일 저장 성공] 저장된 파일명 : " + savedFileName);
+            String[] fileSplitArr = savedFileName.split("\\.");
+            fileInfoMap.put("file_name", fileSplitArr[0]);
+            fileInfoMap.put("ext_name", fileSplitArr[1]);
+            fileIdx++;
+          }
+          boardDAO.insertFileInfo(fileInfoMap);
         }
-        boardDAO.insertFileInfo(fileInfoMap);
       }
 
       retMap.put("retCode", "000");
@@ -58,8 +60,33 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<BoardDTO> getBoardList() throws Exception {
-    return null;
+  public Map<String, Object> getBoardList(BoardDTO boardDTO) throws Exception {
+
+    int maxRetCnt = boardDTO.getMax_ret_cnt();
+    int pageNum = boardDTO.getPage_num();
+    int startIdx = boardDTO.getStart_index();
+
+    Map<String, Object> retMap = new HashMap<>();
+
+    retMap.put("page_num", pageNum);
+    retMap.put("max_ret_cnt", maxRetCnt);
+    retMap.put("start_index", startIdx);
+    retMap.put("total_count", "100");
+
+    if(boardDTO.getSort_tp() == null) {
+      boardDTO.setSort_tp("1");
+    }
+
+    List<?> boardList = boardDAO.getBoardList(boardDTO);
+    if(boardList.size() == 0) {
+      retMap.put("retCode", "999");
+      retMap.put("retMsg", "조건에 맞는 데이타가 없습니다.");
+      return retMap;
+    }
+    retMap.put("board_list",boardList);
+
+
+    return retMap;
   }
 
   @Override

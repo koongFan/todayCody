@@ -24,13 +24,13 @@ public class BoardDAOImpl implements BoardDAO{
   }
 
   @Override
-  public int insertFileInfo(HashMap<String, Object> jsonMap) {
-    return sqlSessionTemplate.insert("com.example.todayCody.board.BoardDAO.insertFileInfo",jsonMap);
+  public void insertFileInfo(HashMap<String, Object> jsonMap) {
+    sqlSessionTemplate.insert("com.example.todayCody.board.BoardDAO.insertFileInfo", jsonMap);
   }
 
   @Override
-  public List<BoardDTO> getBoardList() throws Exception {
-    return null;
+  public List<?> getBoardList(BoardDTO boardDTO) throws Exception {
+    return sqlSessionTemplate.selectList("com.example.todayCody.board.BoardDAO.getBoardList",boardDTO);
   }
 
   @Override
