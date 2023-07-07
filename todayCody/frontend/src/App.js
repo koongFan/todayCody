@@ -15,6 +15,7 @@ import SignUp from "pages/SignUp";
 import { tokenLoader } from "util/auth";
 
 import "./scss/main.scss";
+import { AuthContextProvider } from "contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

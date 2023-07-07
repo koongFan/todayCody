@@ -1,10 +1,14 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleOpen } from "store/sidebar";
+import { useContext } from "react";
+import { AuthContext } from "contexts/AuthContext";
 
 export default function Header() {
   const token = useRouteLoaderData("root");
   const dispatch = useDispatch();
+  const user = useContext(AuthContext);
+  console.log(user);
 
   return (
     <>
@@ -29,13 +33,13 @@ export default function Header() {
             <img src="/icons/search.svg" alt="search-icon" />
           </form>
           <Link to="/mypage">마이페이지</Link>
-          <div>고승신님</div>
+          {token && user && <div>{user.u_nickname}</div>}
           {token ? (
             <button
               onClick={() => {
                 localStorage.removeItem("token");
                 localStorage.removeItem("expiration");
-                window.location.href = "/"; //redirect, navigate으로 하면 새로고침이 안됨
+                window.location.href = "/";
               }}
             >
               Logout
