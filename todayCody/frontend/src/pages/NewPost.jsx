@@ -5,6 +5,8 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import '../scss/pages/_newpost.scss';
 
+const addPhotoIconPath = process.env.PUBLIC_URL + '/img/addphoto.png';
+
 export default function NewPost() {
   const navigate = useNavigate();
 
@@ -28,27 +30,27 @@ export default function NewPost() {
     setSelectedFiles(updatedFiles);
   
     // 파일 미리보기 이미지 URL 생성
-    const previews = [];
     const updatedFilePreviews = [];
   
     const readAndSetPreview = (file, index) => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        previews.push(e.target.result);
-        if (previews.length === updatedFiles.length) {
-          setFilePreviews(updatedFilePreviews);
+        const preview = e.target.result; // 파일 미리보기 이미지 URL을 변수에 저장
+        updatedFilePreviews.push(preview); // 파일 미리보기 이미지 URL을 updatedFilePreviews 배열에 추가
+        if (updatedFilePreviews.length === updatedFiles.length) {
+          setFilePreviews([...updatedFilePreviews]);
         }
       };
       reader.readAsDataURL(file);
     };
-  
+    
     for (let i = 0; i < updatedFiles.length; i++) {
       const file = updatedFiles[i];
       if (file) {
-        updatedFilePreviews.push(file);
         readAndSetPreview(file, i);
       }
     }
+
   }; 
   
 
@@ -68,13 +70,7 @@ export default function NewPost() {
       const feedData = {
         user_seq: 1,
         content: feedContent,
-        file: [
-          ...fileDataArray,
-          {
-            file_name: "",
-            order_num: "",
-          },
-        ],
+        file: fileDataArray,
       };
 
       formData.append('jsonData', JSON.stringify(feedData));
@@ -82,8 +78,10 @@ export default function NewPost() {
       try {
         setUploading(true); // 파일 업로드 시작 시 상태 업데이트
   
-        const response = await axios.post('/feed/write.do', formData);
-        console.log(response.data);
+        const response = await axios.post('http://52.79.65.236:8081/feed/write.do', formData);
+        
+        const uploadedFileURLs = response.data.fileURLs;
+        setFilePreviews([...filePreviews, ...uploadedFileURLs]);
 
         // 요청 성공 시 동작
         setSelectedFiles([]); // 선택한 파일 초기화
@@ -105,31 +103,40 @@ export default function NewPost() {
   const handlePreviewRemove = (index) => {
     const updatedFiles = [...selectedFiles];
     const updatedPreviews = [...filePreviews];
+
     updatedFiles.splice(index, 1);
     updatedPreviews.splice(index, 1);
+
     setSelectedFiles(updatedFiles);
     setFilePreviews(updatedPreviews);
   };
 
   return (
     <>
+    <h1 className="fileup">게시물 작성</h1>
       <div className="wrapper">
-        <h1>New Post</h1>
         <div className="file-upload">
-          <input
-            type="file"
-            onChange={handleFileSelect}
-            accept="image/*"
-            multiple  // 다중 파일 선택 가능하도록 설정
-            maxLength={5} // 최대 5개 파일까지 선택 가능
-          />
+          <label htmlFor="file-input" className="file-input-label">
+            <input
+              type="file"
+              id="file-input"
+              onChange={handleFileSelect}
+              accept="image/*"
+              multiple
+              maxLength={5}
+              style={{ display: "none" }}
+            />
+            <img src={addPhotoIconPath} alt="" className="add-photo-icon" />
+            <div>파일 선택</div>
+          </label>
+
           {filePreviews.length > 0 && (
             <div className="image-preview">
               {filePreviews.map((preview, index) => (
                 <div key={index} className="preview-item">
                   <img src={preview} alt={`미리보기 ${index + 1}`} />
                   <button onClick={() => handlePreviewRemove(index)}>
-                    Remove
+                    삭제
                   </button>
                 </div>
               ))}
@@ -137,6 +144,13 @@ export default function NewPost() {
           )}
         </div>
         <div className="text-upload">
+          <div className="comment">
+            <div className="comment-text">
+              사진 용량: 5MB 미만<br />
+              사진 사이즈: 최소 640px * 640px<br />
+              규격에 맞춰서 최대 5장 업로드 (최소 1장 이상)
+            </div>
+          </div>
           <ReactQuill
             theme="snow"
             value={feedContent}
@@ -145,7 +159,7 @@ export default function NewPost() {
           {!uploading ? (
             <button onClick={handleUpload}>피드 업로드</button>
           ) : (
-            <button disabled>Uploading...</button>
+            <button disabled>업로드 중...</button>
           )}
         </div>
       </div>
