@@ -8,7 +8,6 @@ export default function Header() {
   const token = useRouteLoaderData("root");
   const dispatch = useDispatch();
   const user = useContext(AuthContext);
-  console.log(user);
 
   return (
     <>
