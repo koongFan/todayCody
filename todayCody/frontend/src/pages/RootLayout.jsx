@@ -3,7 +3,6 @@ import { Outlet, useLoaderData } from "react-router-dom";
 
 import Header from "components/layout/Header";
 import Sidebar from "components/layout/Sidebar";
-import Footer from "components/layout/Footer";
 
 import { getTokenDuration } from "util/auth";
 import { signout } from "api/auth";
@@ -28,7 +27,7 @@ function RootLayout() {
       <Header />
       <Sidebar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

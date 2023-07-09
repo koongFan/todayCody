@@ -13,7 +13,8 @@ import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
 import { tokenLoader } from "util/auth";
-
+import { checkAuthLoader } from "util/auth";
+import { AuthContextProvider } from "contexts/AuthContext";
 import "./scss/main.scss";
 
 const router = createBrowserRouter([
@@ -25,22 +26,27 @@ const router = createBrowserRouter([
     loader: tokenLoader,
     children: [
       { index: true, element: <Main /> },
+      { path: "/signin", element: <SignIn /> },
+      { path: "/signup", element: <SignUp /> },
       { path: "/ranking", element: <Ranking /> },
       { path: "/lookinfo", element: <LookInfo /> },
       { path: "/board", element: <Board /> },
       { path: "/board/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
-      { path: "/mypage", element: <MyPage /> },
+      { path: "/mypage", element: <MyPage />, loader: checkAuthLoader },
     ],
   },
-  { path: "/signin", element: <SignIn /> },
-  { path: "/signup", element: <SignUp /> },
+
   { path: "/newpost", element: <NewPost /> },
   { path: "/editpost", element: <NewPost /> },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  );
 }
 
 export default App;

@@ -9,7 +9,7 @@ const menus = [
   { id: 3, name: "룩별정보", value: "info", to: "/lookInfo" },
   { id: 4, name: "게시판", value: "board", to: "/board" },
   { id: 5, name: "피드", value: "feed", to: "/feed" },
-  { id: 5, name: "마이페이지", value: "user", to: "/mypage" },
+  { id: 6, name: "마이페이지", value: "user", to: "/mypage" },
 ];
 
 export default function Sidebar() {

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.example.todayCody.common.util.FileUtil;
 
 @Log4j2
 @RestController
@@ -29,49 +30,20 @@ public class FeedController {
   // 피드 글쓰기
   //==========================================================================================================================================================
   @PostMapping(TodayCodyConstUrl.feedWrite)
-  public Object feedWrite(HttpServletRequest request,
-                          HttpServletResponse response,
-                          @RequestParam Map<String, String> params) throws Exception {
+  public Object feedWrite(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception {
 
     String jsonData = params.get("jsonData");
 
-    Map<String, Object> resMap = new HashMap<>();
-
-    try {
-      jsonData = URLDecoder.decode(jsonData, "UTF-8");
-    } catch (Exception e2) {
-      log.info(e2);
-      resMap.put("retcode", "999");
-      resMap.put("retmsg", "수신데이타 파싱에러:" + e2);
-      return resMap;
-    }
-
-    log.info("[URLDecoder.decode 후..] >jsondata=\n" + jsonData);
-
-    List<MultipartFile> aMultipartFile = null;
-
-    if (request instanceof MultipartHttpServletRequest) {
-      MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-      aMultipartFile = new ArrayList<>(multipartRequest.getFiles("file[]"));
-      for (int i = 0; i < aMultipartFile.size(); i++) {
-        if (aMultipartFile.get(i).getOriginalFilename() == null || aMultipartFile.get(i).getOriginalFilename().trim().length() == 0) {
-          aMultipartFile.remove(i);
-          i--; // 이거 중요..
-        }
-      }
-      // 디버깅
-      for (int i = 0; i < aMultipartFile.size(); i++) {
-        log.info("[" + i + "] >> getOriginalFilename()[" + aMultipartFile.get(i).getName() + "]:" + aMultipartFile.get(i).getOriginalFilename());
-      }
-    }
+    List<MultipartFile> aMultipartFile = new FileUtil().getNonEmptyMultipartFiles(request);
 
     ObjectMapper mapper = new ObjectMapper();
     HashMap<String, Object> jsonMap = mapper.readValue(jsonData, HashMap.class);
 
-    resMap = feedService.feedWrite(jsonMap, aMultipartFile);
-
-    return resMap;
+    return feedService.feedWrite(jsonMap, aMultipartFile);
   }
+
+
+
 
   //==========================================================================================================================================================
   //

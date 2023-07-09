@@ -1,5 +1,6 @@
 import React from "react";
 import BoardList from "components/board/BoardList";
+import Footer from "components/layout/Footer";
 
 export default function Board() {
   const posts = [
@@ -49,6 +50,7 @@ export default function Board() {
           </tbody>
         </table>
       </div>
+      <Footer />
     </div>
   );
 }

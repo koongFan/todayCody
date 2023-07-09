@@ -1,6 +1,7 @@
 import Banner from "components/main/Banner";
 import Trend from "components/main/Trend";
 import Board from "components/main/Board";
+import Footer from "components/layout/Footer";
 
 export default function Main() {
   const codyRanker = [
@@ -106,6 +107,7 @@ export default function Main() {
           <Board title="Q&A" posts={posts} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

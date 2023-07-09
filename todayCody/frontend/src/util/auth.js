@@ -1,4 +1,5 @@
 import { redirect } from "react-router-dom";
+import jwt from "jsonwebtoken";
 
 export function getTokenDuration() {
   const storedExpirationDate = localStorage.getItem("expiration");
@@ -41,4 +42,9 @@ export function checkAuthLoader() {
   }
 
   return null;
+}
+
+export function decodeToken(token) {
+  const id = jwt.decode(token).sub;
+  return id;
 }
