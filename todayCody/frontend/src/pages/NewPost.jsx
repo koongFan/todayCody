@@ -5,6 +5,8 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import '../scss/pages/_newpost.scss';
 
+const addPhotoIconPath = process.env.PUBLIC_URL + '/img/addphoto.png';
+
 export default function NewPost() {
   const navigate = useNavigate();
 
@@ -111,23 +113,30 @@ export default function NewPost() {
 
   return (
     <>
+    <h1 className="fileup">게시물 작성</h1>
       <div className="wrapper">
-        <h1>New Post</h1>
         <div className="file-upload">
-          <input
-            type="file"
-            onChange={handleFileSelect}
-            accept="image/*"
-            multiple  // 다중 파일 선택 가능하도록 설정
-            maxLength={5} // 최대 5개 파일까지 선택 가능
-          />
+          <label htmlFor="file-input" className="file-input-label">
+            <input
+              type="file"
+              id="file-input"
+              onChange={handleFileSelect}
+              accept="image/*"
+              multiple
+              maxLength={5}
+              style={{ display: "none" }}
+            />
+            <img src={addPhotoIconPath} alt="" className="add-photo-icon" />
+            <div>파일 선택</div>
+          </label>
+
           {filePreviews.length > 0 && (
             <div className="image-preview">
               {filePreviews.map((preview, index) => (
                 <div key={index} className="preview-item">
                   <img src={preview} alt={`미리보기 ${index + 1}`} />
                   <button onClick={() => handlePreviewRemove(index)}>
-                    Remove
+                    삭제
                   </button>
                 </div>
               ))}
@@ -135,6 +144,13 @@ export default function NewPost() {
           )}
         </div>
         <div className="text-upload">
+          <div className="comment">
+            <div className="comment-text">
+              사진 용량: 5MB 미만<br />
+              사진 사이즈: 최소 640px * 640px<br />
+              규격에 맞춰서 최대 5장 업로드 (최소 1장 이상)
+            </div>
+          </div>
           <ReactQuill
             theme="snow"
             value={feedContent}
@@ -143,7 +159,7 @@ export default function NewPost() {
           {!uploading ? (
             <button onClick={handleUpload}>피드 업로드</button>
           ) : (
-            <button disabled>Uploading...</button>
+            <button disabled>업로드 중...</button>
           )}
         </div>
       </div>
