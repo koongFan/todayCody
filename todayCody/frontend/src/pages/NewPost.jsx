@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css';
-import '../scss/pages/_newpost.scss';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import Footer from "components/layout/Footer";
 
-const addPhotoIconPath = process.env.PUBLIC_URL + '/img/addphoto.png';
+const addPhotoIconPath = process.env.PUBLIC_URL + "/img/addphoto.png";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -17,21 +17,23 @@ export default function NewPost() {
 
   const handleFileSelect = (event) => {
     const newFiles = event.target.files; // 선택한 파일들
-  
+
     if (newFiles.length + selectedFiles.length > 5) {
       // 선택한 파일 개수가 5를 초과하는 경우
       alert("최대 5개의 파일까지 선택할 수 있습니다.");
       event.target.value = null; // 파일 선택 초기화
       return;
     }
-  
+
     // 선택한 파일들을 배열에 추가
-    const updatedFiles = [...selectedFiles, ...newFiles].filter((file) => file !== null && file !== undefined);
+    const updatedFiles = [...selectedFiles, ...newFiles].filter(
+      (file) => file !== null && file !== undefined
+    );
     setSelectedFiles(updatedFiles);
-  
+
     // 파일 미리보기 이미지 URL 생성
     const updatedFilePreviews = [];
-  
+
     const readAndSetPreview = (file, index) => {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -43,43 +45,44 @@ export default function NewPost() {
       };
       reader.readAsDataURL(file);
     };
-    
+
     for (let i = 0; i < updatedFiles.length; i++) {
       const file = updatedFiles[i];
       if (file) {
         readAndSetPreview(file, i);
       }
     }
-
-  }; 
-  
+  };
 
   const handleUpload = async (e) => {
     if (selectedFiles.length > 0) {
       const formData = new FormData();
-  
+
       selectedFiles.forEach((fileData, index) => {
-        formData.append('file[]', fileData);  // 파일 추가
+        formData.append("file[]", fileData); // 파일 추가
       });
 
       const fileDataArray = selectedFiles.map((file, index) => ({
         file_name: file.name,
         order_num: index + 1,
       }));
-  
+
       const feedData = {
         user_seq: 1,
         content: feedContent,
         file: fileDataArray,
       };
 
-      formData.append('jsonData', JSON.stringify(feedData));
-  
+      formData.append("jsonData", JSON.stringify(feedData));
+
       try {
         setUploading(true); // 파일 업로드 시작 시 상태 업데이트
-  
-        const response = await axios.post('http://52.79.65.236:8081/feed/write.do', formData);
-        
+
+        const response = await axios.post(
+          "http://52.79.65.236:8081/feed/write.do",
+          formData
+        );
+
         const uploadedFileURLs = response.data.fileURLs;
         setFilePreviews([...filePreviews, ...uploadedFileURLs]);
 
@@ -91,7 +94,7 @@ export default function NewPost() {
 
         // 업로드 완료 후 페이지 이동
         alert("피드 업로드가 완료되었습니다.");
-        navigate('/mypage');
+        navigate("/mypage");
       } catch (error) {
         console.log(error);
         // 요청 실패 시 동작
@@ -99,7 +102,7 @@ export default function NewPost() {
       }
     }
   };
-  
+
   const handlePreviewRemove = (index) => {
     const updatedFiles = [...selectedFiles];
     const updatedPreviews = [...filePreviews];
@@ -112,57 +115,76 @@ export default function NewPost() {
   };
 
   return (
-    <>
-    <h1 className="fileup">게시물 작성</h1>
-      <div className="wrapper">
-        <div className="file-upload">
-          <label htmlFor="file-input" className="file-input-label">
-            <input
-              type="file"
-              id="file-input"
-              onChange={handleFileSelect}
-              accept="image/*"
-              multiple
-              maxLength={5}
-              style={{ display: "none" }}
-            />
-            <img src={addPhotoIconPath} alt="" className="add-photo-icon" />
-            <div>파일 선택</div>
-          </label>
+    <div className="wrapper">
+      <div className="newContainer">
+        <h1 className="top">게시물 작성</h1>
+        <div className="bottom">
+          <div className="left">
+            <div className="add">
+              <div className="tag">대표사진</div>
+              <input
+                id="img-input"
+                type="file"
+                onChange={handleFileSelect}
+                accept="image/*"
+                multiple
+                maxLength={5}
+                style={{ display: "none" }}
+              />
 
-          {filePreviews.length > 0 && (
-            <div className="image-preview">
-              {filePreviews.map((preview, index) => (
-                <div key={index} className="preview-item">
-                  <img src={preview} alt={`미리보기 ${index + 1}`} />
-                  <button onClick={() => handlePreviewRemove(index)}>
-                    삭제
-                  </button>
-                </div>
-              ))}
+              {filePreviews.length > 0 ? (
+                <img
+                  className="represent-img"
+                  src={filePreviews[0]}
+                  alt="represent-img"
+                />
+              ) : (
+                <label htmlFor="img-input" className="img-input">
+                  <img src="/icons/photo.png" alt="" className="addPhoto" />
+                  <p>아이콘을 클릭해서 사진을 추가해주세요!</p>
+                </label>
+              )}
             </div>
-          )}
-        </div>
-        <div className="text-upload">
-          <div className="comment">
-            <div className="comment-text">
-              사진 용량: 5MB 미만<br />
-              사진 사이즈: 최소 640px * 640px<br />
-              규격에 맞춰서 최대 5장 업로드 (최소 1장 이상)
-            </div>
+
+            {filePreviews.length > 0 && (
+              <ul className="preview">
+                {filePreviews.map((preview, index) => (
+                  <li key={index} className="previewItem">
+                    <img src={preview} alt={`미리보기 ${index + 1}`} />
+                    <button onClick={() => handlePreviewRemove(index)}>
+                      x
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <ReactQuill
-            theme="snow"
-            value={feedContent}
-            onChange={setFeedContent}
-          />
-          {!uploading ? (
-            <button onClick={handleUpload}>피드 업로드</button>
-          ) : (
-            <button disabled>업로드 중...</button>
-          )}
+          <div className="right">
+            <div className="recommend">
+              <p>사진 용량: 5MB 미만</p>
+              <p>사진 사이즈: 최소 640px * 640px</p>
+              <p>규격에 맞춰서 최대 5장 업로드 (최소 1장 이상)</p>
+            </div>
+            {/* <ReactQuill
+              className="quill"
+              theme="snow"
+              value={feedContent}
+              onChange={setFeedContent}
+            /> */}
+            <textarea
+              cols="30"
+              rows="10"
+              placeholder="코멘트 입력.."
+              value={feedContent}
+              onChange={(e) => setFeedContent(e.target.value)}
+            ></textarea>
+            <button onClick={handleUpload} disabled={uploading}>
+              {uploading ? "업로드 중..." : "업로드"}
+            </button>
+          </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
