@@ -7,6 +7,7 @@ import { TbBoxMultiple } from "react-icons/tb";
 export default function MyPage() {
   const user = useContext(AuthContext);
   const myPage = useGetMyPage(user?.user_seq);
+  console.log(myPage);
   const [category, setCategory] = useState("posts");
   const categoryList = [
     {

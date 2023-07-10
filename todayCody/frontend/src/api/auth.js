@@ -63,6 +63,7 @@ export const signin = async (userData) => {
       window.location.replace("/");
     }
   } catch (error) {
+    console.log(error);
     if (error.response.status === 404) {
       alert(error.response.data.errorMsg);
     }
