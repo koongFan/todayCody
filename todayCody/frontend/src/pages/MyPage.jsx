@@ -2,13 +2,11 @@ import React, { useContext, useState } from "react";
 import Footer from "components/layout/Footer";
 import { AuthContext } from "contexts/AuthContext";
 import { useGetMyPage } from "api/auth";
+import { TbBoxMultiple } from "react-icons/tb";
 
 export default function MyPage() {
   const user = useContext(AuthContext);
-  const myPage = useGetMyPage(user.user_seq);
-  console.log(myPage);
-  // const {feed_seq, user_seq, content, likes, comment, image_path, u_nickname, postCnt}=myPage;
-
+  const myPage = useGetMyPage(user?.user_seq);
   const [category, setCategory] = useState("posts");
   const categoryList = [
     {
@@ -22,7 +20,6 @@ export default function MyPage() {
       value: "saved",
     },
   ];
-  const photoList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="wrapper">
       <div className="my-container">
@@ -35,7 +32,7 @@ export default function MyPage() {
           </div>
           <div className="desc">
             <div className="top">
-              <h3>꿀맛나는 샐러리</h3>
+              <h3>{user?.u_nickname}</h3>
               <button>팔로우</button>
             </div>
             <div className="middle">
@@ -74,12 +71,12 @@ export default function MyPage() {
           ))}
         </div>
         <div className="posts">
-          {photoList.map((item) => (
-            <div className="imgContainer">
-              <img
-                src="https://images.pexels.com/photos/4380970/pexels-photo-4380970.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt="post"
-              />
+          {myPage.map((item) => (
+            <div className="imgContainer" key={item.feed_seq}>
+              <img src={item.image_path.split(",")[0]} alt="post" />
+              {item.image_path.split.length > 1 && (
+                <TbBoxMultiple className="icon" />
+              )}
             </div>
           ))}
         </div>

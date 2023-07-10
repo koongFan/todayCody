@@ -88,6 +88,7 @@ export const getMyData = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
+
     if (res.status === 200) {
       const user = await res.data;
       return user;
@@ -98,7 +99,7 @@ export const getMyData = async (token) => {
 };
 
 //마이페이지 정보 가져오기
-export const useGetMyPage = async (user_seq) => {
+export const useGetMyPage = (user_seq) => {
   const [myPage, setMyPage] = useState([]);
 
   useEffect(() => {
@@ -114,6 +115,8 @@ export const useGetMyPage = async (user_seq) => {
       })
       .catch((error) => console.log(error));
   }, [user_seq]);
+
+  return myPage;
 };
 
 // 유저 아이디로 정보 불러오기
