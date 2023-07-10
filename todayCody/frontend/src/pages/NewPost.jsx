@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import Footer from "components/layout/Footer";
-
-const addPhotoIconPath = process.env.PUBLIC_URL + "/img/addphoto.png";
+import { BsCheckLg } from "react-icons/bs";
 
 export default function NewPost() {
   const navigate = useNavigate();
@@ -150,6 +147,7 @@ export default function NewPost() {
               <ul className="preview">
                 {filePreviews.map((preview, index) => (
                   <li key={index} className="previewItem">
+                    {index === 0 && <BsCheckLg className="check-icon" />}
                     <img src={preview} alt={`미리보기 ${index + 1}`} />
                     <button onClick={() => handlePreviewRemove(index)}>
                       x
