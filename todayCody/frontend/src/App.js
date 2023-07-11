@@ -34,11 +34,10 @@ const router = createBrowserRouter([
       { path: "/board/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage />, loader: checkAuthLoader },
+      { path: "/newpost", element: <NewPost />, loader: checkAuthLoader },
+      { path: "/editpost", element: <NewPost /> },
     ],
   },
-
-  { path: "/newpost", element: <NewPost /> },
-  { path: "/editpost", element: <NewPost /> },
 ]);
 
 function App() {
