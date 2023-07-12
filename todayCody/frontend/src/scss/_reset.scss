@@ -45,11 +45,12 @@ li {
 
 .wrapper {
   width: calc(100vw - 90px);
-  min-height: calc(100vw - 70px);
+  min-height: calc(100vh - 70px);
   position: absolute;
   top: 70px;
   left: 90px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  line-height: 1.5;
 }
