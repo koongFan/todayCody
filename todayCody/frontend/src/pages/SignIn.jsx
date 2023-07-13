@@ -33,38 +33,33 @@ export default function Login() {
 
   return (
     <div className="wrapper">
-      <div className="formContainer">
-        <form onSubmit={handleSubmit}>
-          <h3>오늘코디</h3>
+      <form onSubmit={handleSubmit} className="formContainer">
+        <div className="title">
+          <img src="/icons/logo.png" alt="logo" />
           <p>오늘코디 계정으로 로그인</p>
-          <input
-            type="text"
-            name="account"
-            required
-            value={inputs.account}
-            onChange={changeHandler}
-            placeholder="아이디"
-          />
-          <input
-            type="password"
-            name="password"
-            value={inputs.password}
-            onChange={changeHandler}
-            placeholder="비밀번호"
-          />
-          <button
-            type="submit"
-            disabled={!formIsValid}
-            className={`${!formIsValid && "disabled"}`}
-          >
-            로그인
-          </button>
-          <div className="aboutSign">
-            <Link to="#">비밀번호 찾기</Link>
-            <Link to="/signUp">회원가입</Link>
-          </div>
-        </form>
-      </div>
+        </div>
+        <input
+          type="text"
+          name="account"
+          required
+          value={inputs.account}
+          onChange={changeHandler}
+          placeholder="아이디"
+        />
+        <input
+          type="password"
+          name="password"
+          value={inputs.password}
+          onChange={changeHandler}
+          placeholder="비밀번호"
+        />
+        <button type="submit" disabled={!formIsValid}>
+          로그인
+        </button>
+        <div className="help">
+          <Link to="#">비밀번호 찾기</Link> | <Link to="/signUp">회원가입</Link>
+        </div>
+      </form>
     </div>
   );
 }
