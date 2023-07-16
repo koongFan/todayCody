@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Log4j2
-@Repository("feedDAO")
+@Repository("mypageDao")
 public class MypageDAOImpl implements MypageDAO {
 
   @Autowired
@@ -20,7 +20,7 @@ public class MypageDAOImpl implements MypageDAO {
 
   //마이페이지 정보 불러오기
   @Override
-  public List<MypageDTO> doSelectMypageList(SignRequest info) {
+  public List<MypageDTO> doSelectMypageList(MypageDTO info) {
     return sqlSession.selectList("com.example.todayCody.mypage.MypageDAO.doSelectMypageList", info);     
   }
 

@@ -27,8 +27,8 @@ public class MypageController {
 
     // 마이페이지 불러오기
     @GetMapping(TodayCodyConstUrl.myPage)
-    public Object doSelectMypageList(HttpServletRequest request, HttpServletResponse response, SignRequest info) throws Exception {
-  
+    public Object doSelectMypageList(HttpServletRequest request, HttpServletResponse response, MypageDTO info) throws Exception {
+
         List<MypageDTO> myPageList = mypageService.doSelectMypageList(info);
 
         return myPageList;
