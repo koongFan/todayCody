@@ -17,7 +17,7 @@ public class MypageServiceImpl implements MypageService {
     MypageDAO mypageDAO;
 
     @Override
-    public List<MypageDTO> doSelectMypageList(SignRequest info){
+    public List<MypageDTO> doSelectMypageList(MypageDTO info){
         return mypageDAO.doSelectMypageList(info);
     };
 
