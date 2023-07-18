@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.log4j.Log4j2;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -18,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.example.todayCody.common.util.FileUtil;
+import com.example.todayCody.common.util.ReturnJsonUtil;
 
 @Log4j2
 @RestController
@@ -62,9 +66,19 @@ public class FeedController {
   //==========================================================================================================================================================
   @GetMapping(TodayCodyConstUrl.feedList)
   public Object feedList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
-    // List<Object> feedList = this.feedService.getFeedList();
+    //=========================================
+    JSONObject jsonObject = new JSONObject();
+    //=========================================
     List<FeedDTO> feedList = this.feedService.getFeedList();
-    return feedList;
+    //=========================================
+    String[] filterList = new String[] {
+        "feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname"
+    };
+    //=========================================
+    
+    jsonObject = ReturnJsonUtil.getJson("0", feedList.size(), JSONArray.fromObject(feedList), filterList);
+
+    return jsonObject;
   }
 
 }
