@@ -23,7 +23,7 @@ export default function Header() {
             <img src="/icons/menu.svg" className="menu-icon" alt="menu-icon" />
           </button>
           <Link to="/" className="logo">
-            <img src="/icons/logo.png" alt="logo" />
+            <img src="/assets/icon/logo.svg" alt="logo" />
           </Link>
         </div>
         <div className="head-right">

@@ -34,10 +34,7 @@ export default function Login() {
   return (
     <div className="wrapper">
       <form onSubmit={handleSubmit} className="formContainer">
-        <div className="title">
-          <img src="/icons/logo.png" alt="logo" />
-          <p>오늘코디 계정으로 로그인</p>
-        </div>
+        <img src="assets/icon/sign-logo.svg" alt="" />
         <input
           type="text"
           name="account"

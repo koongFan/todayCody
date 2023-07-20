@@ -96,8 +96,11 @@ export default function NewPost() {
               ) : (
                 <label htmlFor="img-input" className="img-input">
                   <div className="imgContainer">
-                    <img src="/icons/photo.png" alt="" className="camera" />
-                    <img src="/icons/add.png" alt="" className="plus" />
+                    <img
+                      src="assets/icon/camera.svg"
+                      alt="camera-icon"
+                      className="camera"
+                    />
                   </div>
                   <p>아이콘을 클릭해서 사진을 추가해주세요!</p>
                 </label>
