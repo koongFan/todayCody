@@ -43,7 +43,7 @@ export default function BoardPost() {
             </div>
           </div>
           <button className="report">
-            <img src="/icons/report.svg" alt="icon" />
+            <img src="/assets/icon/report.svg" alt="icon" />
             신고하기
           </button>
         </div>
@@ -69,7 +69,7 @@ export default function BoardPost() {
               <div className="comment">
                 <div className="desc">
                   <div className="author">
-                    <img src="/icons/avatar.png" alt="avatar" />
+                    <img src="/assets/img/avatar.png" alt="avatar" />
                     꿀먹은 샐러리
                   </div>
                   <p>2023-07-12 23:13:12</p>

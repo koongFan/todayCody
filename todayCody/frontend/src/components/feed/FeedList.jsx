@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Modal from "components/feed/Modal";
-import { ReactComponent as Heart } from "assets/icons/heart.svg";
-import { ReactComponent as Ballon } from "assets/icons/ballon.svg";
 import Slider from "./Slider";
 import parse from "html-react-parser";
 
@@ -25,8 +23,8 @@ export default function FeedList({ data }) {
         <Slider imgs={image_path.split(",")} />
         <div className="feedContent">
           <div className="icons">
-            <Heart width="23" height="20" />
-            <Ballon width="21" height="21" />
+            <img src="/assets/icon/heart.svg" alt="heart-icon" />
+            <img src="/assets/icon/balloon.svg" alt="balloon-icon" />
           </div>
           <p className="likes">좋아요 {likes}개</p>
           {/* <ul className="tags">

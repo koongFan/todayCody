@@ -67,7 +67,7 @@ export default function Board() {
           <div className="util">
             <div className="pagination"></div>
             <button onClick={() => navigate("/#")}>
-              <img src="/icons/write.svg" alt="icon" />글 작성
+              <img src="/assets/icon/write.svg" alt="icon" />글 작성
             </button>
           </div>
         </div>
