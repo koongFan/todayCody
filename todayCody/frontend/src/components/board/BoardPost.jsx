@@ -14,7 +14,7 @@ export default function BoardPost() {
           <h1 className="title">제목입니다 </h1>
           <div className="desc">
             <div className="author">
-              <img src="/icons/avatar.png" alt="avatar" />
+              <img src="/assets/img/avatar.png" alt="avatar" />
               꿀먹은 샐러리
             </div>
             <div className="detail">
@@ -38,7 +38,7 @@ export default function BoardPost() {
           </div>
           <div className="content">
             <div className="recommendBtn">
-              <img src="/icons/thumb.svg" alt="icon" />
+              <img src="/assets/icon/thumb.svg" alt="icon" />
               추천
             </div>
           </div>

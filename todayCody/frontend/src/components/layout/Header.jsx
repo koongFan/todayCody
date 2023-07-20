@@ -36,7 +36,7 @@ export default function Header() {
             <img src="/assets/icon/search.svg" alt="search-icon" />
           </form>
           <Link to="/mypage">마이페이지</Link>
-          {token && user && <div>{user.u_nickname}</div>}
+          {token && user && <div>{user.u_nickname} 님</div>}
           {token ? (
             <button
               onClick={() => {
