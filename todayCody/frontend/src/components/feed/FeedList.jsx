@@ -8,7 +8,7 @@ import parse from "html-react-parser";
 export default function FeedList({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const { u_nickname, likes, content, image_path } = data;
-  console.log(image_path.split(","));
+
   return (
     <>
       <div className="feedContainer">

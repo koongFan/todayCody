@@ -15,7 +15,6 @@ export const feedUpload = async (formData, navigate) => {
 // 피드 불러오기
 export function useGetFeeds() {
   const [feeds, setFeeds] = useState();
-
   useEffect(() => {
     axios({
       url: `${baseUrl}/feed/list.do`,
@@ -23,10 +22,11 @@ export function useGetFeeds() {
     })
       .then((res) => {
         if (res.status === 200) {
-          setFeeds(res.data);
+          setFeeds(res.data.list);
         }
       })
       .catch((error) => console.log(error));
   }, []);
+
   return feeds;
 }

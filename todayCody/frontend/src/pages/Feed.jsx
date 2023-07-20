@@ -4,7 +4,7 @@ import Footer from "components/layout/Footer";
 
 export default function Feed() {
   const feeds = useGetFeeds();
-  console.log(feeds);
+
   const feedDatas = [
     {
       feed_seq: 1,
