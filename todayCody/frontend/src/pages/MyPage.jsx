@@ -6,8 +6,8 @@ import { TbBoxMultiple } from "react-icons/tb";
 
 export default function MyPage() {
   const user = useContext(AuthContext);
-  const myPage = useGetMyPage(user?.user_seq);
-  console.log(myPage);
+  const myPageList = useGetMyPage(user?.user_seq);
+  console.log(myPageList);
   const [category, setCategory] = useState("posts");
   const categoryList = [
     {
@@ -72,7 +72,7 @@ export default function MyPage() {
           ))}
         </div>
         <div className="posts">
-          {myPage.map((item) => (
+          {myPageList.map((item) => (
             <div className="imgContainer" key={item.feed_seq}>
               <img src={item.image_path.split(",")[0]} alt="post" />
               {item.image_path.split.length > 1 && (
