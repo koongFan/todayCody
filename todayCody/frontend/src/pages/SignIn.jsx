@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { signin } from "api/auth";
+import Footer from "components/layout/Footer";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
@@ -57,6 +58,7 @@ export default function Login() {
           <Link to="#">비밀번호 찾기</Link> | <Link to="/signUp">회원가입</Link>
         </div>
       </form>
+      <Footer />
     </div>
   );
 }
