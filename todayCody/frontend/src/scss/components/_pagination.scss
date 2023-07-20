@@ -1,0 +1,28 @@
+.pagination {
+  width: 210px;
+  height: 30px;
+  display: flex;
+
+  justify-content: center;
+  margin-top: 1rem;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  button {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    color: #353535;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      border-radius: 500px;
+      background-color: #fff0eb;
+      color: #ff7042;
+    }
+  }
+}

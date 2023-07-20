@@ -1,8 +1,17 @@
 import Footer from "components/layout/Footer";
 import React from "react";
+import { useState } from "react";
+import Pagination from "components/common/Pagination";
 
 export default function BoardPost() {
-  const comments = [1, 2, 3, 4, 5];
+  const comments = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentComments = comments.slice(firstPostIndex, lastPostIndex);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //댓글 등록
@@ -65,7 +74,7 @@ export default function BoardPost() {
             <div className="numCharacter">0/2500</div>
           </div>
           <div className="commentList">
-            {comments.map((c) => (
+            {currentComments.map((c) => (
               <div className="comment">
                 <div className="desc">
                   <div className="author">
@@ -79,8 +88,13 @@ export default function BoardPost() {
                 </p>
               </div>
             ))}
-            <div className="pagination"></div>
           </div>
+          <Pagination
+            totalPosts={comments.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Footer />
