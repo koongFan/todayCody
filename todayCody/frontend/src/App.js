@@ -12,6 +12,7 @@ import MyPage from "pages/MyPage";
 import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
+import ScrollToTop from "components/layout/ScrollToTop";
 import { tokenLoader } from "util/auth";
 import { checkAuthLoader } from "util/auth";
 import { AuthContextProvider } from "contexts/AuthContext";
@@ -20,7 +21,7 @@ import "./scss/main.scss";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: [<RootLayout />, <ScrollToTop />],
     errorElement: <NotFound />,
     id: "root",
     loader: tokenLoader,

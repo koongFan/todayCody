@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BoardList from "components/board/BoardList";
 import Footer from "components/layout/Footer";
+import Pagination from "components/common/Pagination";
 
 export default function Board() {
   const [selected, setSelected] = useState("free");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
 
   const navigate = useNavigate();
-  const posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const posts = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+  ];
+  const currentPosts = posts.slice(firstPostIndex, lastPostIndex);
   const category = [
     { id: 1, name: "자유게시판", value: "free" },
     { id: 2, name: "Q&A", value: "qa" },
@@ -59,15 +69,20 @@ export default function Board() {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
+              {currentPosts.map((post) => (
                 <BoardList post={post} />
               ))}
             </tbody>
           </table>
           <div className="util">
-            <div className="pagination"></div>
-            <button onClick={() => navigate("/#")}>
-              <img src="/icons/write.svg" alt="icon" />글 작성
+            <Pagination
+              totalPosts={posts.length}
+              postsPerPage={postsPerPage}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+            <button onClick={() => navigate("/#")} className="write">
+              <img src="/assets/icon/write.svg" alt="icon" />글 작성
             </button>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { signin } from "api/auth";
+import Footer from "components/layout/Footer";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
@@ -34,10 +35,7 @@ export default function Login() {
   return (
     <div className="wrapper">
       <form onSubmit={handleSubmit} className="formContainer">
-        <div className="title">
-          <img src="/icons/logo.png" alt="logo" />
-          <p>오늘코디 계정으로 로그인</p>
-        </div>
+        <img src="assets/icon/sign-logo.svg" alt="" />
         <input
           type="text"
           name="account"
@@ -60,6 +58,7 @@ export default function Login() {
           <Link to="#">비밀번호 찾기</Link> | <Link to="/signUp">회원가입</Link>
         </div>
       </form>
+      <Footer />
     </div>
   );
 }

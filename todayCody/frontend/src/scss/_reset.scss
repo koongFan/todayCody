@@ -5,7 +5,8 @@
 }
 
 body {
-  // font-family: ;
+  font-family: "SUIT";
+  font-weight: 400;
   position: relative;
 }
 
@@ -24,6 +25,7 @@ select,
 textarea {
   background-color: transparent;
   border: 0;
+  font-family: "SUIT";
 
   &:focus {
     outline: none;
