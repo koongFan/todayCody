@@ -29,7 +29,7 @@ export default function Sidebar() {
             >
               <Link to={menu.to} className="sidebar-link">
                 <img
-                  src={`/assets/icon/nav/${menu.value}-${
+                  src={`/icon/nav/${menu.value}-${
                     selected === menu.value ? "active" : "normal"
                   }.svg`}
                   className="sidebar-icon"

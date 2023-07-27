@@ -82,7 +82,7 @@ export default function Board() {
               currentPage={currentPage}
             />
             <button onClick={() => navigate("/#")} className="write">
-              <img src="/assets/icon/write.svg" alt="icon" />글 작성
+              <img src="/icon/write.svg" alt="icon" />글 작성
             </button>
           </div>
         </div>

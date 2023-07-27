@@ -23,8 +23,8 @@ export default function FeedList({ data }) {
         <Slider imgs={image_path.split(",")} />
         <div className="feedContent">
           <div className="icons">
-            <img src="/assets/icon/heart.svg" alt="heart-icon" />
-            <img src="/assets/icon/balloon.svg" alt="balloon-icon" />
+            <img src="/icon/heart.svg" alt="heart-icon" />
+            <img src="/icon/balloon.svg" alt="balloon-icon" />
           </div>
           <p className="likes">좋아요 {likes}개</p>
           {/* <ul className="tags">

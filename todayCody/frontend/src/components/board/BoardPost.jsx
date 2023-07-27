@@ -23,7 +23,7 @@ export default function BoardPost() {
           <h1 className="title">제목입니다 </h1>
           <div className="desc">
             <div className="author">
-              <img src="/assets/img/avatar.png" alt="avatar" />
+              <img src="/img/avatar.png" alt="avatar" />
               꿀먹은 샐러리
             </div>
             <div className="detail">
@@ -47,12 +47,12 @@ export default function BoardPost() {
           </div>
           <div className="content">
             <div className="recommendBtn">
-              <img src="/assets/icon/thumb.svg" alt="icon" />
+              <img src="/icon/thumb.svg" alt="icon" />
               추천
             </div>
           </div>
           <button className="report">
-            <img src="/assets/icon/report.svg" alt="icon" />
+            <img src="/icon/report.svg" alt="icon" />
             신고하기
           </button>
         </div>
@@ -78,7 +78,7 @@ export default function BoardPost() {
               <div className="comment">
                 <div className="desc">
                   <div className="author">
-                    <img src="/assets/img/avatar.png" alt="avatar" />
+                    <img src="/img/avatar.png" alt="avatar" />
                     꿀먹은 샐러리
                   </div>
                   <p>2023-07-12 23:13:12</p>
