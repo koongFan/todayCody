@@ -33,9 +33,12 @@ public class MypageController {
     // 마이페이지 불러오기
     @ApiOperation(value="마이페이지 불러오기")
     @ApiImplicitParam(
-        name="user_seq"
-        ,value="사용자고유번호"
-      )
+        name = "user_seq"
+        , value = "사용자 고유번호"
+        , required = true
+        , dataType = "string"
+        , paramType = "path"
+        , defaultValue = "None")
     @GetMapping(TodayCodyConstUrl.myPage)
     public JSONObject doSelectMypageList(HttpServletRequest request, HttpServletResponse response, MypageDTO info) throws Exception {
         JSONObject jsonObject = new JSONObject();

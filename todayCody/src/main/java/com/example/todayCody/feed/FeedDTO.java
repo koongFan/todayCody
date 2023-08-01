@@ -17,6 +17,6 @@ public class FeedDTO {
     private String u_nickname;
 
     
-
+    
 
 }
