@@ -30,3 +30,12 @@ export function useGetFeeds() {
 
   return feeds;
 }
+
+//query funtion
+export const getFeeds = async () => {
+  const res = await axios({
+    url: `${baseUrl}/feed/list.do`,
+    method: "get",
+  });
+  return res.data.list;
+};
