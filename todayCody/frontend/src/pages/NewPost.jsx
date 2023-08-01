@@ -97,7 +97,7 @@ export default function NewPost() {
                 <label htmlFor="img-input" className="img-input">
                   <div className="imgContainer">
                     <img
-                      src="assets/icon/camera.svg"
+                      src="/icon/camera.svg"
                       alt="camera-icon"
                       className="camera"
                     />

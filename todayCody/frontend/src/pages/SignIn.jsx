@@ -35,7 +35,7 @@ export default function Login() {
   return (
     <div className="wrapper">
       <form onSubmit={handleSubmit} className="formContainer">
-        <img src="assets/icon/sign-logo.svg" alt="" />
+        <img src="/icon/sign-logo.svg" alt="" />
         <input
           type="text"
           name="account"

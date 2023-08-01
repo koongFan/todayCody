@@ -31,7 +31,7 @@ export default function SignUp() {
       <div className="wrapper">
         <div className="signup-container">
           <div className="signup-title">
-            <img src="/assets/icon/logo.svg" alt="logo" />
+            <img src="/icon/logo.svg" alt="logo" />
             <p className="title">오늘코디 계정으로 회원가입</p>
           </div>
 

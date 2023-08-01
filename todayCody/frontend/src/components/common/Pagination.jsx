@@ -32,7 +32,7 @@ const Pagination = ({
           }
         }}
       >
-        <img src="/assets/icon/prev.svg" alt="prev" />
+        <img src="/icon/prev.svg" alt="prev" />
       </button>
       {currentStep.map((page, index) => {
         return (
@@ -56,7 +56,7 @@ const Pagination = ({
           }
         }}
       >
-        <img src="/assets/icon/next.svg" alt="next" />
+        <img src="/icon/next.svg" alt="next" />
       </button>
     </div>
   );

@@ -111,7 +111,7 @@ export const useGetMyPage = (user_seq) => {
     })
       .then((res) => {
         if (res.status === 200) {
-          setMyPage(res.data);
+          setMyPage(res.data.list);
         }
       })
       .catch((error) => console.log(error));
