@@ -81,7 +81,7 @@ export default function Board() {
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
             />
-            <button onClick={() => navigate("/#")} className="write">
+            <button onClick={() => navigate("/newboard")} className="write">
               <img src="/icon/write.svg" alt="icon" />글 작성
             </button>
           </div>
