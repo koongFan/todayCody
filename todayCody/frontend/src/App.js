@@ -17,6 +17,7 @@ import { tokenLoader } from "util/auth";
 import { checkAuthLoader } from "util/auth";
 import { AuthContextProvider } from "contexts/AuthContext";
 import "./scss/main.scss";
+import NewBoard from "pages/NewBoard";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage />, loader: checkAuthLoader },
       { path: "/newpost", element: <NewPost />, loader: checkAuthLoader },
+      { path: "/newboard", element: <NewBoard /> },
       { path: "/editpost", element: <NewPost /> },
     ],
   },
