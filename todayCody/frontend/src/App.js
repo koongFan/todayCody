@@ -12,12 +12,13 @@ import MyPage from "pages/MyPage";
 import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
+import NewBoard from "pages/NewBoard";
 import ScrollToTop from "components/layout/ScrollToTop";
 import { tokenLoader } from "util/auth";
 import { checkAuthLoader } from "util/auth";
 import { AuthContextProvider } from "contexts/AuthContext";
 import "./scss/main.scss";
-import NewBoard from "pages/NewBoard";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -44,11 +45,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </QueryClientProvider>
   );
 }
 
