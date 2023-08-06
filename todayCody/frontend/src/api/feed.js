@@ -31,11 +31,13 @@ export function useGetFeeds() {
   return feeds;
 }
 
-//query funtion
+//쿼리 함수
 export const getFeeds = async () => {
-  const res = await axios({
-    url: `${baseUrl}/feed/list.do`,
-    method: "get",
-  });
+  const res = await axios.get(`${baseUrl}/feed/list.do`);
   return res.data.list;
+};
+
+export const uploadFeed = async (formData) => {
+  const res = await axios.post(`${baseUrl}/feed/write.do`, formData);
+  return res;
 };

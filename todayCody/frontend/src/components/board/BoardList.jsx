@@ -6,7 +6,7 @@ export default function BoardList({ post }) {
     <tr key={post} className="post">
       <td>{post}</td>
       <td>
-        <Link to={`/board/${post}`}>
+        <Link to={`/board/free/${post}`}>
           제목입니다아아아아 <span>+3</span>
         </Link>
       </td>
