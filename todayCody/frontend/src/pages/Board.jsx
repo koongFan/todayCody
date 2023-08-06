@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BoardList from "components/board/BoardList";
 import Footer from "components/layout/Footer";
 import Pagination from "components/common/Pagination";
+import BoardTable from "components/board/BoardTable";
+import Category from "components/board/Category";
+import BoardGrid from "components/board/BoardGrid";
 
-export default function Board() {
+export default function Board({ category }) {
   const [selected, setSelected] = useState("free");
+  const handleClick = (value) => {
+    setSelected(value);
+  };
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const postsPerPage = selected === "free" ? 10 : 12;
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -18,10 +23,6 @@ export default function Board() {
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
   ];
   const currentPosts = posts.slice(firstPostIndex, lastPostIndex);
-  const category = [
-    { id: 1, name: "자유게시판", value: "free" },
-    { id: 2, name: "Q&A", value: "qa" },
-  ];
   const options = [
     { id: 1, name: "정렬", value: "" },
     { id: 2, name: "추천순", value: "recommend" },
@@ -34,17 +35,7 @@ export default function Board() {
   return (
     <div className="wrapper">
       <div className="boardContainer">
-        <div className="category">
-          {category.map((c) => (
-            <span
-              key={c.id}
-              onClick={() => setSelected(c.value)}
-              className={`${selected === c.value && "selected"}`}
-            >
-              {c.name}
-            </span>
-          ))}
-        </div>
+        <Category selected={selected} handleClick={handleClick} />
         <form className="search" onSubmit={handleSubmit}>
           <input type="text" placeholder="내용을 입력해주세요" />
           <button>검색</button>
@@ -57,23 +48,11 @@ export default function Board() {
               </option>
             ))}
           </select>
-          <table className="boardTable">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>제목</th>
-                <th>글쓴이</th>
-                <th>날짜</th>
-                <th>조회수</th>
-                <th>추천수</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentPosts.map((post) => (
-                <BoardList post={post} />
-              ))}
-            </tbody>
-          </table>
+          {selected === "free" ? (
+            <BoardTable currentPosts={currentPosts} />
+          ) : (
+            <BoardGrid currentPosts={currentPosts} />
+          )}
           <div className="util">
             <Pagination
               totalPosts={posts.length}

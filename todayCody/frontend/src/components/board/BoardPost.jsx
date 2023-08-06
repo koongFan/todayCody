@@ -46,6 +46,13 @@ export default function BoardPost() {
             </div>
           </div>
           <div className="content">
+            <div className="text">
+              <p>이 가방 정보 좀 주세요.</p>
+              <img
+                src="https://images.pexels.com/photos/1374910/pexels-photo-1374910.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="img"
+              />
+            </div>
             <div className="recommendBtn">
               <img src="/icon/thumb.svg" alt="icon" />
               추천
