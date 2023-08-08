@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMutation } from "react-query"
 import { signup } from "api/auth";
 
 export default function SignUp() {
@@ -14,6 +15,9 @@ export default function SignUp() {
 
   //추후 이메일 인증이 필요하면 api/authEmail함수 사용
 
+  // reactQuery useMutation 사용
+  const mutation = useMutation(signup);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     for (let key in user) {
@@ -22,7 +26,7 @@ export default function SignUp() {
         return;
       }
     }
-    signup(user);
+    mutation.mutate(user);
   };
 
   return (
