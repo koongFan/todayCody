@@ -1,10 +1,14 @@
 import FeedList from "components/feed/FeedList";
-import { useGetFeeds } from "api/feed";
+import { getFeeds } from "api/feed";
 import Footer from "components/layout/Footer";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Feed() {
-  const feeds = useGetFeeds();
-  console.log(feeds);
+  const { data, isLoading } = useQuery({
+    queryKey: ["feeds"],
+    queryFn: getFeeds,
+  });
+
   const feedDatas = [
     {
       feed_seq: 1,
@@ -32,8 +36,9 @@ export default function Feed() {
 
   return (
     <div className="wrapper">
+      {isLoading && <p>Loading...</p>}
       <ul className="feedList">
-        {feeds?.map((feed) => (
+        {data?.map((feed) => (
           <FeedList key={feed.feed_seq} data={feed} />
         ))}
       </ul>

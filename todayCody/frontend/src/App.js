@@ -12,15 +12,18 @@ import MyPage from "pages/MyPage";
 import NewPost from "pages/NewPost";
 import SignIn from "pages/SignIn";
 import SignUp from "pages/SignUp";
+import NewBoard from "pages/NewBoard";
+import ScrollToTop from "components/layout/ScrollToTop";
 import { tokenLoader } from "util/auth";
 import { checkAuthLoader } from "util/auth";
 import { AuthContextProvider } from "contexts/AuthContext";
 import "./scss/main.scss";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: [<RootLayout />, <ScrollToTop />],
     errorElement: <NotFound />,
     id: "root",
     loader: tokenLoader,
@@ -31,20 +34,26 @@ const router = createBrowserRouter([
       { path: "/ranking", element: <Ranking /> },
       { path: "/lookinfo", element: <LookInfo /> },
       { path: "/board", element: <Board /> },
-      { path: "/board/:postId", element: <BoardPost /> },
+      { path: "/board/free/:postId", element: <BoardPost /> },
+      { path: "/board/qa/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
       { path: "/mypage", element: <MyPage />, loader: checkAuthLoader },
       { path: "/newpost", element: <NewPost />, loader: checkAuthLoader },
+      { path: "/newboard", element: <NewBoard /> },
       { path: "/editpost", element: <NewPost /> },
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </QueryClientProvider>
   );
 }
 

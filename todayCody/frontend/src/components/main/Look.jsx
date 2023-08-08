@@ -6,13 +6,13 @@ export default function Look({ look, category }) {
         <img src={img} alt="look-img" />
       </div>
       <div className="likes">
-        <img src="/icons/heart.svg" className="haert" alt="heart-icon" />
+        <img src="/icon/orange-heart.svg" className="haert" alt="heart-icon" />
         <p>23</p>
       </div>
       {category === "coder" && (
         <div className="medal">
           <img
-            src={`/icons/${rank === 1 ? "star" : "blackStar"}.svg`}
+            src={`/icon/${rank === 1 ? "star" : "blackStar"}.svg`}
             alt="star-img"
           />
           <span>{rank}</span>

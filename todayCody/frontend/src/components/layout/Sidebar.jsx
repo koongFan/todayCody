@@ -7,9 +7,9 @@ const menus = [
   { id: 1, name: "홈", value: "home", to: "/" },
   { id: 2, name: "코디랭킹", value: "rank", to: "/ranking" },
   { id: 3, name: "룩별정보", value: "info", to: "/lookInfo" },
-  { id: 4, name: "게시판", value: "board", to: "/board" },
-  { id: 5, name: "피드", value: "feed", to: "/feed" },
-  { id: 6, name: "마이페이지", value: "user", to: "/mypage" },
+  { id: 4, name: "게시판", value: "list", to: "/board" },
+  { id: 5, name: "피드", value: "photo", to: "/feed" },
+  { id: 6, name: "마이페이지", value: "my", to: "/mypage" },
 ];
 
 export default function Sidebar() {
@@ -29,7 +29,9 @@ export default function Sidebar() {
             >
               <Link to={menu.to} className="sidebar-link">
                 <img
-                  src={`/icons/${menu.value}.svg`}
+                  src={`/icon/nav/${menu.value}-${
+                    selected === menu.value ? "active" : "normal"
+                  }.svg`}
                   className="sidebar-icon"
                   alt="side-icon"
                 />

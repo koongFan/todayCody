@@ -10,7 +10,7 @@ export default function Footer() {
         </div>
         <div className="logo">
           <Link to="/">
-            <img src="/icons/footer-logo.png" alt="logo" />
+            <img src="/icon/footer-logo.svg" alt="logo" />
           </Link>
         </div>
         <div className="item">

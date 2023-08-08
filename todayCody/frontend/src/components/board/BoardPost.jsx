@@ -1,8 +1,17 @@
 import Footer from "components/layout/Footer";
 import React from "react";
+import { useState } from "react";
+import Pagination from "components/common/Pagination";
 
 export default function BoardPost() {
-  const comments = [1, 2, 3, 4, 5];
+  const comments = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentComments = comments.slice(firstPostIndex, lastPostIndex);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //댓글 등록
@@ -14,7 +23,7 @@ export default function BoardPost() {
           <h1 className="title">제목입니다 </h1>
           <div className="desc">
             <div className="author">
-              <img src="/icons/avatar.png" alt="avatar" />
+              <img src="/img/avatar.png" alt="avatar" />
               꿀먹은 샐러리
             </div>
             <div className="detail">
@@ -37,13 +46,20 @@ export default function BoardPost() {
             </div>
           </div>
           <div className="content">
+            <div className="text">
+              <p>이 가방 정보 좀 주세요.</p>
+              <img
+                src="https://images.pexels.com/photos/1374910/pexels-photo-1374910.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="img"
+              />
+            </div>
             <div className="recommendBtn">
-              <img src="/icons/thumb.svg" alt="icon" />
+              <img src="/icon/thumb.svg" alt="icon" />
               추천
             </div>
           </div>
           <button className="report">
-            <img src="/icons/report.svg" alt="icon" />
+            <img src="/icon/report.svg" alt="icon" />
             신고하기
           </button>
         </div>
@@ -65,11 +81,11 @@ export default function BoardPost() {
             <div className="numCharacter">0/2500</div>
           </div>
           <div className="commentList">
-            {comments.map((c) => (
+            {currentComments.map((c) => (
               <div className="comment">
                 <div className="desc">
                   <div className="author">
-                    <img src="/icons/avatar.png" alt="avatar" />
+                    <img src="/img/avatar.png" alt="avatar" />
                     꿀먹은 샐러리
                   </div>
                   <p>2023-07-12 23:13:12</p>
@@ -79,8 +95,13 @@ export default function BoardPost() {
                 </p>
               </div>
             ))}
-            <div className="pagination"></div>
           </div>
+          <Pagination
+            totalPosts={comments.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Footer />

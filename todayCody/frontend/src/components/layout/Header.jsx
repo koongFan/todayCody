@@ -20,19 +20,19 @@ export default function Header() {
             className="menu-icon-btn"
             data-menu-icon-btn
           >
-            <img src="/icons/menu.svg" className="menu-icon" alt="menu-icon" />
+            <img src="/icon/menu.svg" className="menu-icon" alt="menu-icon" />
           </button>
           <Link to="/" className="logo">
-            <img src="/icons/logo.png" alt="logo" />
+            <img src="/icon/logo.svg" alt="logo" />
           </Link>
         </div>
         <div className="head-right">
           <form className="search">
             <input type="text" />
-            <img src="/icons/search.svg" alt="search-icon" />
+            <img src="/icon/search.svg" alt="search-icon" />
           </form>
           <Link to="/mypage">마이페이지</Link>
-          {token && user && <div>{user.u_nickname}</div>}
+          {token && user && <div>{user.u_nickname} 님</div>}
           {token ? (
             <button
               onClick={() => {

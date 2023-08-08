@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { AuthContext } from "contexts/AuthContext";
+import { feedUpload, uploadFeed } from "api/feed";
 import Footer from "components/layout/Footer";
 import { BsCheckLg } from "react-icons/bs";
+import { useMutation } from "@tanstack/react-query";
 
 export default function NewPost() {
+  const user = useContext(AuthContext);
   const navigate = useNavigate();
+
+  let formData = new FormData();
+  const mutation = useMutation({
+    mutationFn: uploadFeed(formData),
+    onSuccess: () => {
+      window.alert("피드 업로드 성공!");
+      navigate("/mypage");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]);
   const [feedContent, setFeedContent] = useState("");
-  const [uploading, setUploading] = useState(false);
+  //const [uploading, setUploading] = useState(false); //mutation.isLoading으로 대신함
 
   const handleFileSelect = (e) => {
     let imageLists = Object.values(e.target.files);
@@ -29,8 +44,6 @@ export default function NewPost() {
 
   const handleUpload = async (e) => {
     if (selectedFiles.length > 0) {
-      const formData = new FormData();
-
       selectedFiles.map((fileData) => formData.append("file[]", fileData));
 
       const fileDataArray = selectedFiles.map((file, idx) => ({
@@ -39,29 +52,24 @@ export default function NewPost() {
       }));
 
       const feedData = {
-        user_seq: 1,
+        user_seq: user?.user_seq,
         content: feedContent,
         file: fileDataArray,
       };
 
       formData.append("jsonData", JSON.stringify(feedData));
 
-      try {
-        setUploading(true);
+      //mutaion 사용 전 코드
+      //try {
+      //  setUploading(true);
+      //  feedUpload(formData, navigate);
+      //} catch (error) {
+      //  setUploading(false);
+      //  console.log(error);
+      //}
 
-        const res = await axios.post(
-          "http://52.79.65.236:8081/feed/write.do",
-          formData
-        );
-
-        if (res.status === 200) {
-          window.alert("피드 업로드 성공!");
-          navigate("/mypage");
-        }
-      } catch (error) {
-        setUploading(false);
-        console.log(error);
-      }
+      //mutation 사용 후 변경된 코드
+      mutation.mutate(formData);
     }
   };
 
@@ -103,8 +111,11 @@ export default function NewPost() {
               ) : (
                 <label htmlFor="img-input" className="img-input">
                   <div className="imgContainer">
-                    <img src="/icons/photo.png" alt="" className="camera" />
-                    <img src="/icons/add.png" alt="" className="plus" />
+                    <img
+                      src="/icon/camera.svg"
+                      alt="camera-icon"
+                      className="camera"
+                    />
                   </div>
                   <p>아이콘을 클릭해서 사진을 추가해주세요!</p>
                 </label>
@@ -139,8 +150,8 @@ export default function NewPost() {
               value={feedContent}
               onChange={(e) => setFeedContent(e.target.value)}
             ></textarea>
-            <button onClick={handleUpload} disabled={uploading}>
-              {uploading ? "업로드 중..." : "업로드"}
+            <button onClick={handleUpload} disabled={mutation.isLoading}>
+              {mutation.isLoading ? "업로드 중..." : "업로드"}
             </button>
           </div>
         </div>
