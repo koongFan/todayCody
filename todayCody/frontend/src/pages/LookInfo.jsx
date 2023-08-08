@@ -56,10 +56,10 @@ export default function LookInfo() {
             <div className="search-bar">
               <div className="search">
                 <div className="search-icon">
-                  <img src="/icons/lookInfoSearchIcon.svg" alt="검색" className="search-icon24"  />
+                  <img src="/img/lookInfoSearchIcon.svg" alt="검색" className="search-icon24"  />
                 </div>
                 <input type="text" placeholder="내용을 입력해주세요" />
-                <img src="/icons/xRemove.svg" alt="삭제" />
+                <img src="/img/xRemove.svg" alt="삭제" />
               </div>
             </div>
             <button type="submit" className="sumitBtn">검색</button>
