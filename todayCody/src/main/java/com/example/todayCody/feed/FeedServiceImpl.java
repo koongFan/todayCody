@@ -64,7 +64,5 @@ public class FeedServiceImpl implements FeedService {
     List<FeedDTO> getFeedList = feedDAO.getFeedList();
     return getFeedList;
     //==================================================================
-  }
-
-  ;
+  };
 }
