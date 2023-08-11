@@ -43,6 +43,7 @@ public class LoginServiceImpl implements LoginService {
 
 
     Optional<Member> optionalMember = memberRepository.findByAccount(request.getAccount());
+//    Optional<Member> optionalMember = memberRepository.findByAccount(request.getAccount());
 
     if (optionalMember.isEmpty()) {
       return SignResponse.builder().errorMsg("아이디를 찾을 수 없습니다.").build();

@@ -24,32 +24,32 @@ import net.sf.json.JSONObject;
 @CrossOrigin
 public class LookInfoController {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @Autowired
-    LookInfoService lookInfoService;
+  Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @ApiOperation(value="룩별정보 불러오기")
-    @GetMapping
-    public JSONObject doSelectLookInfoList(HttpServletRequest request, HttpServletResponse response, LookInfoDTO info) throws Exception {
-        JSONObject jsonObject = new JSONObject();
+  @Autowired
+  LookInfoService lookInfoService;
 
-        try{
-			
-            List<LookInfoDTO> list = lookInfoService.doSelectLookInfoList(info);
+  @ApiOperation(value = "룩별정보 불러오기")
+  @GetMapping
+  public JSONObject doSelectLookInfoList(HttpServletRequest request, HttpServletResponse response, LookInfoDTO info) throws Exception {
+    JSONObject jsonObject = new JSONObject();
 
-			String[] filterList = new String[] {
-					"feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname", "postCnt"
-			};
+    try {
 
-            jsonObject = ReturnJsonUtil.getJson("0", list.size(), JSONArray.fromObject(list), filterList);
+      List<LookInfoDTO> list = lookInfoService.doSelectLookInfoList(info);
 
-        } catch(Exception ex){
-			logger.error(ex.getMessage());
-			jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1500")));
-        }
+      String[] filterList = new String[]{
+              "feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname", "postCnt"
+      };
 
-        return jsonObject;
+      jsonObject = ReturnJsonUtil.getJson("0", list.size(), JSONArray.fromObject(list), filterList);
+
+    } catch (Exception ex) {
+      logger.error(ex.getMessage());
+      jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1500")));
     }
+
+    return jsonObject;
+  }
 
 }

@@ -60,33 +60,13 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public Map<String, Object> getBoardList(BoardDTO boardDTO) throws Exception {
-
-    int maxRetCnt = boardDTO.getMax_ret_cnt();
-    int pageNum = boardDTO.getPage_num();
-    int startIdx = boardDTO.getStart_index();
-
-    Map<String, Object> retMap = new HashMap<>();
-
-    retMap.put("page_num", pageNum);
-    retMap.put("max_ret_cnt", maxRetCnt);
-    retMap.put("start_index", startIdx);
-    retMap.put("total_count", "100");
-
+  public List<BoardDTO> getBoardList(BoardDTO boardDTO) throws Exception {
     if(boardDTO.getSort_tp() == null) {
       boardDTO.setSort_tp("1");
     }
+    List<BoardDTO> boardList = boardDAO.getBoardList(boardDTO);
 
-    List<?> boardList = boardDAO.getBoardList(boardDTO);
-    if(boardList.size() == 0) {
-      retMap.put("retCode", "999");
-      retMap.put("retMsg", "조건에 맞는 데이타가 없습니다.");
-      return retMap;
-    }
-    retMap.put("board_list",boardList);
-
-
-    return retMap;
+    return boardList;
   }
 
   @Override

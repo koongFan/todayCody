@@ -67,7 +67,7 @@ public class FeedController {
   //==========================================================================================================================================================
   // 피드 리스트 불러오기
   //==========================================================================================================================================================
-  @ApiOperation(value="피드 리스트 불러오기")
+//  @ApiOperation(value="피드 리스트 불러오기")
   @GetMapping(TodayCodyConstUrl.feedList)
   public Object feedList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
     JSONObject jsonObject = new JSONObject();

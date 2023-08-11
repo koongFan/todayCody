@@ -27,6 +27,7 @@ public class BoardDTO {
   private int start_index;  //불러오기 시작 될 데이터
   private int total_cnt;  //불러오기 시작 될 데이터
   private String sort_tp;    //정렬 타입
+  private String type;
   /*===============================================추가적으로 필요한 데이터*/
 
   public Object getFieldValue(String fieldName) {
