@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.todayCody.common.config.TodayCodyConstUrl;
 import com.example.todayCody.common.util.ResultInfo;
 import com.example.todayCody.common.util.ReturnJsonUtil;
 
@@ -30,7 +31,7 @@ public class LookInfoController {
     LookInfoService lookInfoService;
 
     @ApiOperation(value="룩별정보 불러오기")
-    @GetMapping
+    @GetMapping(TodayCodyConstUrl.lookInfo)
     public JSONObject doSelectLookInfoList(HttpServletRequest request, HttpServletResponse response, LookInfoDTO info) throws Exception {
         JSONObject jsonObject = new JSONObject();
 

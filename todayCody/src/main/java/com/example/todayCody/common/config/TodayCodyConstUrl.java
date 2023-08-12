@@ -26,6 +26,9 @@ public class TodayCodyConstUrl {
     // 마이페이지
     public static final String myPage = "/myPage/list.do";
 
+    // 룩별정보
+    public static final String lookInfo = "/lookInfo/list.do";
+
 
   // 게시판 업로드
 //  public static final String boardWrite = "/board/write.do";
