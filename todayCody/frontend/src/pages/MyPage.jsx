@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "components/layout/Footer";
 import { AuthContext } from "contexts/AuthContext";
 import { useGetMyPage } from "api/auth";
@@ -21,6 +22,7 @@ export default function MyPage() {
       value: "saved",
     },
   ];
+  const navigate = useNavigate();
   return (
     <div className="wrapper">
       <div className="my-container">
@@ -52,6 +54,7 @@ export default function MyPage() {
             </div>
             <div className="bottom">
               <p>안녕하세요리사 오늘코디화이팅</p>
+              <button onClick={() => navigate("/newboard")}>글 작성</button>
             </div>
           </div>
         </div>
@@ -63,7 +66,7 @@ export default function MyPage() {
               onClick={() => setCategory(item.value)}
             >
               <img
-                src={`/icons/${item.value}.svg`}
+                src={`/icon/${item.value}.svg`}
                 className="icon"
                 alt="icon"
               />
