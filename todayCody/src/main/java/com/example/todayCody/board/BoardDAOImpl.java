@@ -29,7 +29,7 @@ public class BoardDAOImpl implements BoardDAO{
   }
 
   @Override
-  public List<?> getBoardList(BoardDTO boardDTO) throws Exception {
+  public List<BoardDTO> getBoardList(BoardDTO boardDTO) throws Exception {
     return sqlSessionTemplate.selectList("com.example.todayCody.board.BoardDAO.getBoardList",boardDTO);
   }
 

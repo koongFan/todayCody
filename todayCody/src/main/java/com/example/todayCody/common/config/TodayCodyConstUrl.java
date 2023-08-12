@@ -29,9 +29,14 @@ public class TodayCodyConstUrl {
     // 룩별정보
     public static final String lookInfo = "/lookInfo/list.do";
 
+    // 게시판 업로드
+    public static final String boardWrite = "/board/write.do";
+  
+    public static final String boardList = "/board/list.do";
+  
+    public static final String axiosBoardController = "/AxiosBoardController.do";
 
-  // 게시판 업로드
-//  public static final String boardWrite = "/board/write.do";
-  public static final String axiosBoardController = "/AxiosBoardController.do";
+
+
 
 }

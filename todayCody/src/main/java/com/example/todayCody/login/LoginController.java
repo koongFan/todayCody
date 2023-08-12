@@ -75,33 +75,33 @@ public class LoginController {
   //==========================================================================================================================================================
   // 회원가입
   //==========================================================================================================================================================
-  @ApiOperation(value="회원가입")
-  @ApiImplicitParams({
-    @ApiImplicitParam(
-      name="id"
-      ,value="사용자아이디"
-    ),
-    @ApiImplicitParam(
-      name="password"
-      ,value="사용자비밀번호"
-    ),
-    @ApiImplicitParam(
-      name="email"
-      ,value="이메일"
-    ),
-    @ApiImplicitParam(
-      name="u_name"
-      ,value="사용자 이름"
-    ),
-    @ApiImplicitParam(
-      name="nickname"
-      ,value="사용자 별칭"
-    ),
-    @ApiImplicitParam(
-      name="birth"
-      ,value="생년월일"
-    )
-  })
+//  @ApiOperation(value="회원가입")
+//  @ApiImplicitParams({
+//    @ApiImplicitParam(
+//      name="id"
+//      ,value="사용자아이디"
+//    ),
+//    @ApiImplicitParam(
+//      name="password"
+//      ,value="사용자비밀번호"
+//    ),
+//    @ApiImplicitParam(
+//      name="email"
+//      ,value="이메일"
+//    ),
+//    @ApiImplicitParam(
+//      name="u_name"
+//      ,value="사용자 이름"
+//    ),
+//    @ApiImplicitParam(
+//      name="nickname"
+//      ,value="사용자 별칭"
+//    ),
+//    @ApiImplicitParam(
+//      name="birth"
+//      ,value="생년월일"
+//    )
+//  })
   @PostMapping(TodayCodyConstUrl.signUp)
   public ResponseEntity<Map<String,Object>> signup(@RequestBody SignRequest request, BindingResult bindingResult) throws Exception {     
     Map<String, Object> result = new HashMap<>();
