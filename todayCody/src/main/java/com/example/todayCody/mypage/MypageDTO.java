@@ -15,4 +15,5 @@ public class MypageDTO {
     private String image_path;
     private String u_nickname;
     private String postCnt;
+    private String tag;
 }
