@@ -13,7 +13,7 @@ export default function FeedList({ data }) {
         <div className="feedTop">
           <div className="profile">
             <div className="imgContainer">
-              <img src="/img/p1.png" alt="profileImg" />
+              <img src="/img/avatar.png" alt="profileImg" />
             </div>
             <span className="nickname">{u_nickname}</span>
           </div>
