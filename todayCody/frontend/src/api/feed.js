@@ -4,11 +4,18 @@ import { useState, useEffect } from "react";
 const baseUrl = "http://52.79.65.236:8081";
 
 export const feedUpload = async (formData, navigate) => {
-  const res = await axios.post(`${baseUrl}/feed/write.do`, formData);
+  try {
+    const res = await axios.post(`${baseUrl}/feed/write.do`, formData);
 
-  if (res.status === 200) {
-    window.alert("피드 업로드 성공!");
-    navigate("/mypage");
+    if (res.status === 200) {
+      window.alert("피드 업로드 성공!");
+      // navigate("/mypage");
+      console.log(res);
+    } else {
+      alert("피드 업로드에 문제가 생겼습니다." + res.data.msg);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -21,6 +28,7 @@ export function useGetFeeds() {
       method: "get",
     })
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           setFeeds(res.data.list);
         }

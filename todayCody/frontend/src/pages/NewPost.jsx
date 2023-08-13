@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "contexts/AuthContext";
-import { feedUpload, uploadFeed } from "api/feed";
+import { uploadFeed } from "api/feed";
 import Footer from "components/layout/Footer";
 import { BsCheckLg } from "react-icons/bs";
 import { useMutation } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ export default function NewPost() {
 
   let formData = new FormData();
   const mutation = useMutation({
-    mutationFn: uploadFeed(formData),
+    mutationFn: (formData) => uploadFeed(formData),
     onSuccess: () => {
       window.alert("피드 업로드 성공!");
       navigate("/mypage");
@@ -58,7 +58,6 @@ export default function NewPost() {
       };
 
       formData.append("jsonData", JSON.stringify(feedData));
-
       //mutaion 사용 전 코드
       //try {
       //  setUploading(true);

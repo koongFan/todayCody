@@ -23,6 +23,7 @@ export default function MyPage() {
     },
   ];
   const navigate = useNavigate();
+  const baseUrl = "http://52.79.65.236:8081";
   return (
     <div className="wrapper">
       <div className="my-container">
@@ -54,7 +55,17 @@ export default function MyPage() {
             </div>
             <div className="bottom">
               <p>안녕하세요리사 오늘코디화이팅</p>
-              <button onClick={() => navigate("/newboard")}>글 작성</button>
+              <button
+                onClick={() =>
+                  navigate("/newboard", {
+                    state: {
+                      type: 1,
+                    },
+                  })
+                }
+              >
+                글 작성
+              </button>
             </div>
           </div>
         </div>
@@ -77,7 +88,7 @@ export default function MyPage() {
         <div className="posts">
           {myPageList.map((item) => (
             <div className="imgContainer" key={item.feed_seq}>
-              <img src={item.image_path.split(",")[0]} alt="post" />
+              <img src={baseUrl + item.image_path.split(",")[0]} alt="post" />
               {item.image_path.split.length > 1 && (
                 <TbBoxMultiple className="icon" />
               )}

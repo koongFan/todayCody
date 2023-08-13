@@ -5,6 +5,7 @@ import Pagination from "components/common/Pagination";
 import BoardTable from "components/board/BoardTable";
 import Category from "components/board/Category";
 import BoardGrid from "components/board/BoardGrid";
+import { getBoard } from "api/board";
 
 export default function Board() {
   const [selected, setSelected] = useState("free");
@@ -32,6 +33,8 @@ export default function Board() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  getBoard();
   return (
     <div className="wrapper">
       <div className="boardContainer">

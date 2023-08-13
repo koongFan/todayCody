@@ -7,6 +7,15 @@ export const uploadBoard = async (formData, navigate) => {
 
   if (res.status === 200) {
     window.alert("피드 업로드 성공!");
-    navigate("/board");
+    return res;
+    //navigate("/board");
+  }
+};
+
+export const getBoard = async () => {
+  const res = await axios.get(`${baseUrl}/board/list.do?page_num=1`);
+
+  if (res.status === 200) {
+    console.log(res);
   }
 };

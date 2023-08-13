@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       { path: "/board/free/:postId", element: <BoardPost /> },
       { path: "/board/qa/:postId", element: <BoardPost /> },
       { path: "/feed", element: <Feed /> },
-      { path: "/mypage", element: <MyPage /> },
+      { path: "/mypage", element: <MyPage />, loader: checkAuthLoader },
       { path: "/newpost", element: <NewPost /> },
       { path: "/newboard", element: <NewBoard /> },
       { path: "/editpost", element: <NewPost /> },

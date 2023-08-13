@@ -8,7 +8,6 @@ const baseUrl = "http://52.79.65.236:8081";
 export const signup = async (user) => {
   try {
     const res = await axios.post(`${baseUrl}/member/signUp.do`, user);
-    console.log(res.data);
 
     if (res.data.failOrSucc) {
       alert("회원가입이 완료되었습니다.");
@@ -22,22 +21,6 @@ export const signup = async (user) => {
   }
 };
 
-//이메일 인증
-export const authEamil = async (email) => {
-  try {
-    const res = await axios.post(`${baseUrl}/signup/mailConfirm.do`, { email });
-    if (res.data.success) {
-      console.log("전송 성공");
-      alert("이메일로 인증코드가 전송되었습니다.");
-    } else {
-      alert("인증 코드 전송에 실패했습니다.");
-    }
-  } catch (err) {
-    console.log(err);
-    alert("인증 코드 전송에 실패했습니다.");
-  }
-};
-
 //로그인
 export const signin = async (userData) => {
   try {
@@ -46,7 +29,6 @@ export const signin = async (userData) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(res);
 
     if (res.status === 200) {
       const token = res.data.token;
@@ -102,7 +84,6 @@ export const getMyData = async (token) => {
 //마이페이지 정보 가져오기
 export const useGetMyPage = (user_seq) => {
   const [myPage, setMyPage] = useState([]);
-  console.log(user_seq);
 
   useEffect(() => {
     axios({
