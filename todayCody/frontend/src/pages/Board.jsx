@@ -6,7 +6,7 @@ import BoardTable from "components/board/BoardTable";
 import Category from "components/board/Category";
 import BoardGrid from "components/board/BoardGrid";
 
-export default function Board({ category }) {
+export default function Board() {
   const [selected, setSelected] = useState("free");
   const handleClick = (value) => {
     setSelected(value);
@@ -60,7 +60,16 @@ export default function Board({ category }) {
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
             />
-            <button onClick={() => navigate("/newboard")} className="write">
+            <button
+              onClick={() =>
+                navigate("/newboard", {
+                  state: {
+                    type: selected === "free" ? 1 : 2,
+                  },
+                })
+              }
+              className="write"
+            >
               <img src="/icon/write.svg" alt="icon" />글 작성
             </button>
           </div>
