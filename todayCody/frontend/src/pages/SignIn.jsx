@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 import { signin } from "api/auth";
@@ -11,6 +12,10 @@ export default function Login() {
     password: "",
   });
   const [formIsValid, setFormIsValid] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: (inputs) => signin(inputs),
+  });
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -29,7 +34,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signin(inputs);
+    mutation.mutate(inputs);
   };
 
   return (

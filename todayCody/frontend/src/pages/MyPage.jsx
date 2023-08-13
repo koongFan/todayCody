@@ -2,14 +2,15 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/layout/Footer";
 import { AuthContext } from "contexts/AuthContext";
-import { useGetMyPage } from "api/auth";
+import { getMyFeeds, useGetMyPage } from "api/auth";
 import { TbBoxMultiple } from "react-icons/tb";
+import { useQuery } from "@tanstack/react-query";
 
 export default function MyPage() {
   const user = useContext(AuthContext);
   const myPageList = useGetMyPage(user?.user_seq);
-  console.log(myPageList);
   const [category, setCategory] = useState("posts");
+
   const categoryList = [
     {
       id: 1,
@@ -22,8 +23,13 @@ export default function MyPage() {
       value: "saved",
     },
   ];
+
   const navigate = useNavigate();
   const baseUrl = "http://52.79.65.236:8081";
+  const { data, isLoading } = useQuery({
+    queryKey: ["myFeeds"],
+    queryFn: (userSeq) => getMyFeeds(user?.user_seq),
+  });
   return (
     <div className="wrapper">
       <div className="my-container">
@@ -86,7 +92,8 @@ export default function MyPage() {
           ))}
         </div>
         <div className="posts">
-          {myPageList.map((item) => (
+          {isLoading && <p>Loading...</p>}
+          {data?.map((item) => (
             <div className="imgContainer" key={item.feed_seq}>
               <img src={baseUrl + item.image_path.split(",")[0]} alt="post" />
               {item.image_path.split.length > 1 && (

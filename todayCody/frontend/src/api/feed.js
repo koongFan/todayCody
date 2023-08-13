@@ -6,11 +6,9 @@ const baseUrl = "http://52.79.65.236:8081";
 export const feedUpload = async (formData, navigate) => {
   try {
     const res = await axios.post(`${baseUrl}/feed/write.do`, formData);
-
     if (res.status === 200) {
       window.alert("피드 업로드 성공!");
-      // navigate("/mypage");
-      console.log(res);
+      navigate("/mypage");
     } else {
       alert("피드 업로드에 문제가 생겼습니다." + res.data.msg);
     }
@@ -41,8 +39,17 @@ export function useGetFeeds() {
 
 //쿼리 함수
 export const getFeeds = async () => {
-  const res = await axios.get(`${baseUrl}/feed/list.do`);
-  return res.data.list;
+  try {
+    const res = await axios.get(`${baseUrl}/feed/list.do`);
+    const reverse = [...res.data.list].reverse();
+    return reverse;
+  } catch (err) {
+    if (err.response.status === 404) {
+      alert("잘못된 요청입니다.");
+    } else if (err.response.status === 500) {
+      alert("서버에 문제가 있습니다.");
+    }
+  }
 };
 
 export const uploadFeed = async (formData) => {

@@ -34,7 +34,6 @@ export default function Board() {
     e.preventDefault();
   };
 
-  getBoard();
   return (
     <div className="wrapper">
       <div className="boardContainer">
@@ -64,13 +63,7 @@ export default function Board() {
               currentPage={currentPage}
             />
             <button
-              onClick={() =>
-                navigate("/newboard", {
-                  state: {
-                    type: selected === "free" ? 1 : 2,
-                  },
-                })
-              }
+              onClick={() => navigate(`/newboard/${selected}`)}
               className="write"
             >
               <img src="/icon/write.svg" alt="icon" />글 작성

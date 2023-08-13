@@ -101,6 +101,22 @@ export const useGetMyPage = (user_seq) => {
   return myPage;
 };
 
+//쿼리 함수
+export const getMyFeeds = async (user_seq) => {
+  try {
+    const res = await axios.get(
+      `${baseUrl}/myPage/list.do?user_seq=${user_seq}`
+    );
+    return res.data.list;
+  } catch (err) {
+    if (err.response.status === 404) {
+      alert("잘못된 요청입니다.");
+    } else if (err.response.status === 500) {
+      alert("서버에 문제가 있습니다.");
+    }
+  }
+};
+
 // 유저 아이디로 정보 불러오기
 export function useGetUserDataById(userId) {
   const [user, setUser] = useState();

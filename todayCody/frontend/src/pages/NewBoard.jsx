@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { uploadBoard } from "api/board";
 import { AuthContext } from "contexts/AuthContext";
 import Footer from "components/layout/Footer";
@@ -8,7 +8,7 @@ import { useRef, useMemo } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-export default function NewBoard() {
+export default function NewBoard({ type }) {
   const user = useContext(AuthContext);
   const quillRef = useRef();
 
@@ -17,8 +17,6 @@ export default function NewBoard() {
   const [content, setContent] = useState("");
   const [fileDataArray, setFileDataArray] = useState([]);
   const navigate = useNavigate();
-  //free:1, qa:2
-  const type = useLocation().state.type;
 
   const imageHandler = () => {
     const input = document.createElement("input");
@@ -61,7 +59,7 @@ export default function NewBoard() {
           ["bold", "italic", "underline", "strike"],
           [{ size: [1, 2, "normal"] }],
           [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
-          type === 1 ? ["link"] : ["link", "image"],
+          type === "1" ? ["link"] : ["link", "image"],
         ],
         handlers: {
           image: imageHandler,
