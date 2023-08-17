@@ -22,7 +22,7 @@ export function useGetFeeds() {
   const [feeds, setFeeds] = useState();
   useEffect(() => {
     axios({
-      url: `${baseUrl}/feed/list.do`,
+      url: `${baseUrl}/feed/list.do?&per_page=12&page=1`,
       method: "get",
     })
       .then((res) => {

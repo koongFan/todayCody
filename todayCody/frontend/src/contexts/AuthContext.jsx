@@ -1,17 +1,55 @@
-import { createContext, useState, useEffect } from "react";
-import { getAuthToken } from "util/auth";
-import { getMyData } from "../api/auth";
+import { createContext, useReducer } from "react";
 
-export const AuthContext = createContext();
+const INITIAL_STATE = {
+  user: null,
+  username: localStorage.getItem("username") || null,
+};
+
+export const AuthContext = createContext(INITIAL_STATE);
+
+const AuthReducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN_START":
+      return {
+        user: null,
+        username: null,
+      };
+    case "LOGIN_SUCCESS":
+      return {
+        user: action.payload.user,
+        username: action.payload.username,
+      };
+    case "LOGIN_FAILURE":
+      return {
+        user: null,
+        username: null,
+      };
+    case "LOGOUT":
+      return {
+        user: null,
+        username: null,
+      };
+    default:
+      return state;
+  }
+};
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState();
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
-  const token = getAuthToken();
+  // useEffect(() => {
+  //   getMyData(token).then((res) => setUser(res));
+  // }, [token]);
 
-  useEffect(() => {
-    getMyData(token).then((res) => setUser(res));
-  }, [token]);
-
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user: state.user,
+        username: state.username,
+        dispatch,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
