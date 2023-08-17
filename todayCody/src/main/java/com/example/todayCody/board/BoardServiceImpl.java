@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Log4j2
-@Service
+@Service("boardService")
 public class BoardServiceImpl implements BoardService {
   @Value("${upload.path}")
   private String uploadPath;

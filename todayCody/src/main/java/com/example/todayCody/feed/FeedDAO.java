@@ -3,6 +3,7 @@ package com.example.todayCody.feed;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface FeedDAO {
 
@@ -13,4 +14,7 @@ public interface FeedDAO {
   public int insertFileInfo(HashMap<String, Object> jsonMap);
 
   public List<FeedDTO> getFeedList();
+
+  //피드 좋아요
+  public int doUpdateFeedLike(Map<String, String> params);
 }

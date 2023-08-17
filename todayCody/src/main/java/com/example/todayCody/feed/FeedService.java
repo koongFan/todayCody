@@ -14,4 +14,7 @@ public interface FeedService {
 
   
   public List<FeedDTO> getFeedList() throws Exception;
+
+  // 피드 좋아요
+  public int doUpdateFeedLike(Map<String, String> params);
 }

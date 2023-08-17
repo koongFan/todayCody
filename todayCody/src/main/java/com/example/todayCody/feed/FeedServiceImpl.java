@@ -64,5 +64,12 @@ public class FeedServiceImpl implements FeedService {
     List<FeedDTO> getFeedList = feedDAO.getFeedList();
     return getFeedList;
     //==================================================================
-  };
+  }
+
+  @Override
+  // 피드 좋아요
+  public int doUpdateFeedLike(Map<String, String> params){
+    int count = feedDAO.doUpdateFeedLike(params);
+    return count;
+  }
 }
