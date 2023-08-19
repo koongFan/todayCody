@@ -1,0 +1,202 @@
+.rankContainer {
+  width: 1020px;
+  margin-inline: auto;
+  margin-block: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+
+  .top {
+    width: 728px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h1 {
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 12px;
+        color: #858585;
+      }
+    }
+
+    .podium {
+      width: 728px;
+      height: 439px;
+      margin-inline: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .rank {
+        width: 200px;
+        height: fit-content;
+        position: relative;
+
+        &:nth-child(2) {
+          align-self: flex-start;
+
+          .desc {
+            border-top: 1px solid #ff4c13;
+          }
+        }
+
+        .imgContainer {
+          width: 100%;
+          height: 265px;
+          border-radius: 5px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .likes {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          top: 238px;
+          right: 10px;
+
+          p {
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+
+        .desc {
+          width: 100%;
+          height: 83px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          margin-top: 10px;
+          padding-top: 10px;
+          border-top: 1px solid #111111;
+
+          .medal {
+            width: 1.5rem;
+            height: 1.5rem;
+            position: relative;
+
+            span {
+              position: absolute;
+              font-size: 10px;
+              font-weight: 700;
+              left: 9px;
+              top: 4.5px;
+              color: #ffffff;
+            }
+          }
+
+          .tags {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            li {
+              font-size: 12px;
+              color: #6a6a6a;
+            }
+          }
+
+          .user {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom {
+    width: 100%;
+    height: 1164px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+
+    .title {
+      height: 33px;
+      display: flex;
+      justify-content: space-between;
+
+      .name {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+
+        h2 {
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+        p {
+          font-size: 12px;
+          color: #858585;
+        }
+      }
+
+      .filter {
+        display: flex;
+        gap: 8px;
+        button {
+          height: 33px;
+          padding: 6px 12px;
+          border-radius: 3px;
+          background-color: #e7e7e7;
+          color: #858585;
+          font-size: 14px;
+
+          &.selected {
+            background-color: #ff7042;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+
+    .table {
+      border-collapse: collapse;
+      thead {
+        height: 45px;
+        border-block: 1px solid #111111;
+        th {
+          font-weight: 500;
+        }
+      }
+
+      tbody {
+        .row {
+          height: 192px;
+          border-bottom: 1px solid #cecece;
+          td {
+            text-align: center;
+            font-weight: 500;
+
+            .rankImg {
+              width: 140px;
+              height: 160px;
+              border-radius: 5px;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+    }
+  }
+}

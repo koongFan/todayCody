@@ -2,13 +2,12 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/layout/Footer";
 import { AuthContext } from "contexts/AuthContext";
-import { getMyFeeds, useGetMyPage } from "api/auth";
+import { getMyFeeds } from "api/auth";
 import { TbBoxMultiple } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
 
 export default function MyPage() {
-  const user = useContext(AuthContext);
-  const myPageList = useGetMyPage(user?.user_seq);
+  const { user } = useContext(AuthContext);
   const [category, setCategory] = useState("posts");
 
   const categoryList = [
@@ -28,8 +27,9 @@ export default function MyPage() {
   const baseUrl = "http://52.79.65.236:8081";
   const { data, isLoading } = useQuery({
     queryKey: ["myFeeds"],
-    queryFn: (userSeq) => getMyFeeds(user?.user_seq),
+    queryFn: () => getMyFeeds(user?.user_seq),
   });
+
   return (
     <div className="wrapper">
       <div className="my-container">
