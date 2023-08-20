@@ -1,21 +1,20 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadBoard } from "api/board";
 import { AuthContext } from "contexts/AuthContext";
-import Footer from "components/layout/Footer";
-
-import { useRef, useMemo } from "react";
+import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Footer from "components/layout/Footer";
 
 export default function NewBoard({ type }) {
-  const user = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const quillRef = useRef();
 
   let formData = new FormData();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [fileDataArray, setFileDataArray] = useState([]);
+  const [imgUrlList, setImgUrlList] = useState([]);
   const navigate = useNavigate();
 
   const imageHandler = () => {
@@ -24,30 +23,29 @@ export default function NewBoard({ type }) {
     input.setAttribute("accept", "image/*");
     input.click();
 
-    //formData로 이미지 구현
-    input.addEventListener("change", (e) => {
-      const formData = new FormData();
-      const imageLists = Object.values(e.target.files);
-      let imageUrlLists = [];
-      imageLists.map((item) => imageUrlLists.push(URL.createObjectURL(item)));
-      if (imageLists.length > 0) {
-        imageLists.map((item) => formData.append("file[]", item));
-        imageLists.map((file, idx) =>
-          setFileDataArray([
-            ...fileDataArray,
-            {
-              file_name: file.name,
-              order_num: idx + 1,
-            },
-          ])
+    input.addEventListener("change", async () => {
+      const editor = quillRef.current.getEditor();
+      const file = input.files[0];
+      const range = editor.getSelection(true);
+
+      setImgUrlList((prev) => [...prev, file]);
+
+      //이미지 업로드
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "upload");
+
+      try {
+        const uploadRes = await axios.post(
+          "https://api.cloudinary.com/v1_1/smosco/image/upload",
+          data
         );
-        const editor = quillRef.current.getEditor();
-        const range = editor.getSelection();
-        editor.insertEmbed(
-          range.index,
-          "image",
-          "https://images.pexels.com/photos/17715610/pexels-photo-17715610.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-        );
+        const { url } = uploadRes.data;
+
+        editor.insertEmbed(range.index, "image", url);
+        editor.setSelection(range.index + 1);
+      } catch (error) {
+        console.log(error);
       }
     });
   };
@@ -57,7 +55,7 @@ export default function NewBoard({ type }) {
       toolbar: {
         container: [
           ["bold", "italic", "underline", "strike"],
-          [{ size: [1, 2, "normal"] }],
+          [{ header: [1, 2, 3, false] }],
           [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
           type === "1" ? ["link"] : ["link", "image"],
         ],
@@ -68,20 +66,32 @@ export default function NewBoard({ type }) {
     };
   }, [type]);
 
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "list",
-    "bullet",
-    "align",
-    "link",
-    "image",
-  ];
+  const formats = useMemo(() => {
+    return [
+      "header",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "list",
+      "bullet",
+      "align",
+      "link",
+      "image",
+    ];
+  }, []);
 
   const handleUpload = () => {
+    let fileDataArray = [];
+    if (imgUrlList.length > 0) {
+      imgUrlList.map((item) => formData.append("file[]", item));
+
+      fileDataArray = imgUrlList.map((file, idx) => ({
+        file_name: file.name,
+        order_num: idx + 1,
+      }));
+    }
+
     const boardData = {
       user_seq: user?.user_seq,
       title,
@@ -89,8 +99,7 @@ export default function NewBoard({ type }) {
       type,
       file_info: fileDataArray,
     };
-
-    console.log(JSON.stringify(boardData));
+    console.log(boardData);
     formData.append("jsonData", JSON.stringify(boardData));
 
     try {

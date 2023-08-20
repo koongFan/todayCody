@@ -14,6 +14,7 @@ export default function Board() {
   };
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = selected === "free" ? 10 : 12;
+  getBoard({ page_num: "1", max_ret_cnt: "5", type: 1 });
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;

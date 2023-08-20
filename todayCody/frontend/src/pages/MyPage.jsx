@@ -61,17 +61,7 @@ export default function MyPage() {
             </div>
             <div className="bottom">
               <p>안녕하세요리사 오늘코디화이팅</p>
-              <button
-                onClick={() =>
-                  navigate("/newboard", {
-                    state: {
-                      type: 1,
-                    },
-                  })
-                }
-              >
-                글 작성
-              </button>
+              <button onClick={() => navigate("/newpost")}>글 작성</button>
             </div>
           </div>
         </div>

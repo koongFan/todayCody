@@ -17,9 +17,8 @@ export default function Header() {
     localStorage.removeItem("expiration");
     navigate("/");
   };
-
   console.log(user);
-  console.log(token, username);
+
   return (
     <>
       <header>

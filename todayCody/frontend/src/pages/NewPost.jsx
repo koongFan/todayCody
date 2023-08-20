@@ -7,12 +7,12 @@ import { BsCheckLg } from "react-icons/bs";
 import { useMutation } from "@tanstack/react-query";
 
 export default function NewPost() {
-  const user = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   let formData = new FormData();
   const mutation = useMutation({
-    mutationFn: (formData, navigate) => feedUpload(formData, navigate),
+    mutationFn: (formData) => feedUpload(formData, navigate),
   });
 
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -49,6 +49,8 @@ export default function NewPost() {
         content: feedContent,
         file: fileDataArray,
       };
+
+      console.log(feedData);
 
       formData.append("jsonData", JSON.stringify(feedData));
       //mutaion 사용 전 코드
