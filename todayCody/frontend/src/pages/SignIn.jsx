@@ -22,6 +22,7 @@ export default function Login() {
     try {
       const res = await axios.post(`${baseUrl}/member/signIn.do`, inputData);
       navigate("/");
+      console.log(res);
 
       dispatch({
         type: "LOGIN_SUCCESS",

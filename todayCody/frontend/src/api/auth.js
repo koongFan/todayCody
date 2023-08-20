@@ -99,6 +99,7 @@ export const getMyFeeds = async (user_seq) => {
     const res = await axios.get(
       `${baseUrl}/myPage/list.do?user_seq=${user_seq}`
     );
+    console.log(res.data);
     return res.data.list;
   } catch (err) {
     if (err.response.status === 404) {
