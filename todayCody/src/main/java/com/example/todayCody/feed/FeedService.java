@@ -13,7 +13,7 @@ public interface FeedService {
   // public List<Object> getFeedList() throws Exception;
 
   
-  public List<FeedDTO> getFeedList() throws Exception;
+  public List<FeedDTO> getFeedList(FeedDTO info) throws Exception;
 
   // 피드 좋아요
   public int doUpdateFeedLike(Map<String, String> params);

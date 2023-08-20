@@ -62,10 +62,17 @@ public class FeedController {
   //==========================================================================================================================================================
 //  @ApiOperation(value="피드 리스트 불러오기")
   @GetMapping(TodayCodyConstUrl.feedList)
-  public Object feedList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
+  public Object feedList(HttpServletRequest request, HttpServletResponse response, FeedDTO info) throws Exception{
     JSONObject jsonObject = new JSONObject();
     try{
-      List<FeedDTO> feedList = this.feedService.getFeedList();
+      if(info.getPer_page()==null || info.getPer_page().equals("")){
+        info.setPer_page("5");
+      }
+      if(info.getPage()==null || info.getPage().equals("")){
+        info.setPage("0");
+      }
+      
+      List<FeedDTO> feedList = this.feedService.getFeedList(info);
 
       String[] filterList = new String[] {
           "feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname"

@@ -31,9 +31,9 @@ public class FeedDAOImpl implements FeedDAO {
   }
 
   @Override
-  public List<FeedDTO> getFeedList(){
+  public List<FeedDTO> getFeedList(FeedDTO info){
 
-    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList");
+    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList",info);
   
     return getFeedList;
   }
