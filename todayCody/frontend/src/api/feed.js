@@ -19,31 +19,38 @@ export const feedUpload = async (formData, navigate) => {
 };
 
 // 피드 불러오기
-export function useGetFeeds() {
-  const [feeds, setFeeds] = useState();
-  useEffect(() => {
-    axios({
-      url: `${baseUrl}/feed/list.do?per_page=12&page=1`,
-      method: "get",
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setFeeds(res.data.list);
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
+export function useGetFeeds(page) {
+  const [feeds, setFeeds] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
 
-  return feeds;
+  useEffect(() => {
+    try {
+      setLoading(true);
+      axios
+        .get(`${baseUrl}/feed/list.do?page=${page}&per_page=5`)
+        .then((res) => {
+          console.log(res);
+          setFeeds((prev) => [...prev, ...res.data.list]);
+          setHasMore(res.data.docs.length > 0);
+          setLoading(false);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [page]);
+
+  return { feeds, loading, hasMore };
 }
 
 //쿼리 함수
-export const getFeeds = async () => {
+export const getFeeds = async (page) => {
   try {
-    const res = await axios.get(`${baseUrl}/feed/list.do?page=&per_page=12`);
-    const reverse = [...res.data.list].reverse();
-    return reverse;
+    const res = await axios.get(
+      `${baseUrl}/feed/list.do?page=${page}&per_page=5`
+    );
+    // const reverse = [...res.data.list].reverse();
+    return res.data.list;
   } catch (err) {
     if (err.response.status === 404) {
       alert("잘못된 요청입니다.");
