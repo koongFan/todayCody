@@ -26,9 +26,23 @@ public class TodayCodyConstUrl {
     // 마이페이지
     public static final String myPage = "/myPage/list.do";
 
+    // 피드 좋아요
+    public static final String feedLike = "/feed/like.do";
 
-  // 게시판 업로드
-//  public static final String boardWrite = "/board/write.do";
-  public static final String axiosBoardController = "/AxiosBoardController.do";
+    // 룩별정보
+    public static final String lookInfo = "/lookInfo/list.do";
+
+    // 게시판 업로드
+    public static final String boardWrite = "/board/write.do";
+  
+    public static final String boardList = "/board/list.do";
+  
+    public static final String axiosBoardController = "/AxiosBoardController.do";
+
+    // 메인화면
+    public static final String mainContent = "/main/list.do";
+
+
+
 
 }

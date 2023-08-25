@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Log4j2
-@Repository
+@Repository("boardDAO")
 public class BoardDAOImpl implements BoardDAO{
 
   @Autowired
@@ -29,17 +29,17 @@ public class BoardDAOImpl implements BoardDAO{
   }
 
   @Override
-  public List<?> getBoardList(BoardDTO boardDTO) throws Exception {
+  public List<BoardDTO> getBoardList(BoardDTO boardDTO) throws Exception {
     return sqlSessionTemplate.selectList("com.example.todayCody.board.BoardDAO.getBoardList",boardDTO);
   }
 
-  @Override
-  public Map<String, Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception {
-    return null;
-  }
+  // @Override
+  // public Map<String, Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception {
+  //   return null;
+  // }
 
-  @Override
-  public Map<String, Object> boardDelete(BoardDTO boardDTO) throws Exception {
-    return null;
-  }
+  // @Override
+  // public Map<String, Object> boardDelete(BoardDTO boardDTO) throws Exception {
+  //   return null;
+  // }
 }

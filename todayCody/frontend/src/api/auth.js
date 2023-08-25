@@ -5,14 +5,13 @@ import { decodeToken } from "util/auth";
 const baseUrl = "http://52.79.65.236:8081";
 
 //회원가입
-export const signup = async (user) => {
+export const signup = async (user, navigate) => {
   try {
     const res = await axios.post(`${baseUrl}/member/signUp.do`, user);
-    console.log(res.data);
 
     if (res.data.failOrSucc) {
       alert("회원가입이 완료되었습니다.");
-      window.location.replace("/signin");
+      navigate("/signin");
     } else {
       alert("회원가입에 실패했습니다. 다시 시도해주세요." + res.data.msg);
     }
@@ -22,45 +21,20 @@ export const signup = async (user) => {
   }
 };
 
-//이메일 인증
-export const authEamil = async (email) => {
-  try {
-    const res = await axios.post(`${baseUrl}/signup/mailConfirm.do`, { email });
-    if (res.data.success) {
-      console.log("전송 성공");
-      alert("이메일로 인증코드가 전송되었습니다.");
-    } else {
-      alert("인증 코드 전송에 실패했습니다.");
-    }
-  } catch (err) {
-    console.log(err);
-    alert("인증 코드 전송에 실패했습니다.");
-  }
-};
-
 //로그인
-export const signin = async (userData) => {
+export const signin = async (userData, navigate) => {
   try {
-    const res = await axios.post(`${baseUrl}/member/signIn.do`, userData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res);
+    const res = await axios.post(`${baseUrl}/member/signIn.do`, userData);
 
     if (res.status === 200) {
-      const token = res.data.token;
+      navigate("/");
 
+      const token = res.data.token;
       localStorage.setItem("token", token);
       // 만료시간 30분
       const expiration = new Date(new Date().getTime() + 30 * 60 * 1000);
       localStorage.setItem("expiration", expiration.toISOString());
-
-      // API 요청하는 콜마다 헤더에 accessToken 담아 보내도록 설정
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-      alert("로그인 되셨습니다");
-      window.location.replace("/");
+      localStorage.setItem("user", JSON.stringify(res.data));
     }
   } catch (error) {
     console.log(error);
@@ -102,7 +76,6 @@ export const getMyData = async (token) => {
 //마이페이지 정보 가져오기
 export const useGetMyPage = (user_seq) => {
   const [myPage, setMyPage] = useState([]);
-  console.log(user_seq);
 
   useEffect(() => {
     axios({
@@ -118,6 +91,23 @@ export const useGetMyPage = (user_seq) => {
   }, [user_seq]);
 
   return myPage;
+};
+
+//쿼리 함수
+export const getMyFeeds = async (user_seq) => {
+  try {
+    const res = await axios.get(
+      `${baseUrl}/myPage/list.do?user_seq=${user_seq}`
+    );
+    console.log(res.data);
+    return res.data.list;
+  } catch (err) {
+    if (err.response.status === 404) {
+      alert("잘못된 요청입니다.");
+    } else if (err.response.status === 500) {
+      alert("서버에 문제가 있습니다.");
+    }
+  }
 };
 
 // 유저 아이디로 정보 불러오기

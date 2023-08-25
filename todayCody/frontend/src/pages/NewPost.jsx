@@ -1,25 +1,18 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "contexts/AuthContext";
-import { feedUpload, uploadFeed } from "api/feed";
+import { feedUpload } from "api/feed";
 import Footer from "components/layout/Footer";
 import { BsCheckLg } from "react-icons/bs";
 import { useMutation } from "@tanstack/react-query";
 
 export default function NewPost() {
-  const user = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   let formData = new FormData();
   const mutation = useMutation({
-    mutationFn: uploadFeed(formData),
-    onSuccess: () => {
-      window.alert("피드 업로드 성공!");
-      navigate("/mypage");
-    },
-    onError: (error) => {
-      console.log(error);
-    },
+    mutationFn: (formData) => feedUpload(formData, navigate),
   });
 
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -57,8 +50,9 @@ export default function NewPost() {
         file: fileDataArray,
       };
 
-      formData.append("jsonData", JSON.stringify(feedData));
+      console.log(feedData);
 
+      formData.append("jsonData", JSON.stringify(feedData));
       //mutaion 사용 전 코드
       //try {
       //  setUploading(true);
@@ -69,7 +63,7 @@ export default function NewPost() {
       //}
 
       //mutation 사용 후 변경된 코드
-      mutation.mutate(formData);
+      mutation.mutate(formData, navigate);
     }
   };
 

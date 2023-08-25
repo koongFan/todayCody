@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Repository("feedDAO")
@@ -30,10 +31,16 @@ public class FeedDAOImpl implements FeedDAO {
   }
 
   @Override
-  public List<FeedDTO> getFeedList(){
+  public List<FeedDTO> getFeedList(FeedDTO info){
 
-    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList");
+    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList",info);
   
     return getFeedList;
+  }
+
+  // 피드 좋아요 update
+  @Override
+  public int doUpdateFeedLike(Map<String, String> params){
+    return sqlSession.update("com.example.todayCody.feed.FeedDAO.doUpdateFeedLike", params);
   }
 }

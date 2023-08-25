@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useMutation } from "react-query"
-import { signup } from "api/auth";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import Footer from "components/layout/Footer";
 
 export default function SignUp() {
@@ -14,20 +15,37 @@ export default function SignUp() {
     u_birth: "",
   });
 
-  //추후 이메일 인증이 필요하면 api/authEmail함수 사용
+  const navigate = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const signup = async () => {
+    try {
+      const res = await axios.post(`${baseUrl}/member/signUp.do`, user);
 
-  // reactQuery useMutation 사용
-  const mutation = useMutation(signup);
+      if (res.data.failOrSucc) {
+        alert("회원가입 성공!");
+        navigate("/signin");
+      } else {
+        alert("회원가입에 실패했습니다. 다시 시도해주세요." + res.data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const mutation = useMutation({
+    mutationFn: signup,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    for (let key in user) {
-      if (!user[key]) {
-        alert(`${key}를 입력해주세요`);
-        return;
-      }
-    }
-    mutation.mutate(user);
+    // for (let key in user) {
+    //   if (!user[key]) {
+    //     alert(`${key}를 입력해주세요`);
+    //     return;
+    //   }
+    // }
+    mutation.mutate();
   };
 
   return (
@@ -151,7 +169,7 @@ export default function SignUp() {
               </div>
             </div>
             <button type="submit" className="signup-btn">
-              회원가입
+              {mutation.isLoading ? "회원가입중" : "회원가입"}
             </button>
           </form>
         </div>

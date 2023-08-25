@@ -19,7 +19,7 @@ export default function LookInfo() {
       .catch(error => {
         console.error(error);
       });
-    
+
     const tagButtons = document.querySelectorAll('.categories button');
     tagButtons.forEach(button => {
       button.style.backgroundColor = '#E7E7E7'; // 기본 색으로 초기화
@@ -152,4 +152,4 @@ export default function LookInfo() {
       <Footer />
     </div>
   );
-}
+};

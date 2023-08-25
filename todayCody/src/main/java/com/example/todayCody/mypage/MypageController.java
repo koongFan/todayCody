@@ -25,45 +25,45 @@ import net.sf.json.JSONObject;
 @CrossOrigin
 public class MypageController {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @Autowired
-    MypageService mypageService;
+  Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // 마이페이지 불러오기
-    @ApiOperation(value="마이페이지 불러오기")
-    @ApiImplicitParam(
-        name = "user_seq"
-        , value = "사용자 고유번호"
-        , required = true
-        , dataType = "string"
-        , paramType = "path"
-        , defaultValue = "None")
-    @GetMapping(TodayCodyConstUrl.myPage)
-    public JSONObject doSelectMypageList(HttpServletRequest request, HttpServletResponse response, MypageDTO info) throws Exception {
-        JSONObject jsonObject = new JSONObject();
+  @Autowired
+  MypageService mypageService;
 
-        if("".equals(info.getUser_seq())){
-			jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1002")));
-			return jsonObject;
-        }
+  // 마이페이지 불러오기
+  @ApiOperation(value="마이페이지 불러오기")
+  @ApiImplicitParam(
+          name = "user_seq"
+          , value = "사용자 고유번호"
+          , required = true
+          , dataType = "string"
+          , paramType = "path"
+          , defaultValue = "None")
+  @GetMapping(TodayCodyConstUrl.myPage)
+  public JSONObject doSelectMypageList(HttpServletRequest request, HttpServletResponse response, MypageDTO info) throws Exception {
+    JSONObject jsonObject = new JSONObject();
 
-        try{
-
-            List<MypageDTO> myPageList = mypageService.doSelectMypageList(info);
-			
-			String[] filterList = new String[] {
-					"feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname", "postCnt"
-			};
-
-            jsonObject = ReturnJsonUtil.getJson("0", myPageList.size(), JSONArray.fromObject(myPageList), filterList);
-
-        } catch(Exception ex){
-			logger.error(ex.getMessage());
-			jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1500")));
-        }
-
-        return jsonObject;
+    if("".equals(info.getUser_seq())){
+      jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1002")));
+      return jsonObject;
     }
+
+    try{
+
+      List<MypageDTO> myPageList = mypageService.doSelectMypageList(info);
+
+      String[] filterList = new String[] {
+              "feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname", "postCnt"
+      };
+
+      jsonObject = ReturnJsonUtil.getJson("0", myPageList.size(), JSONArray.fromObject(myPageList), filterList);
+
+    } catch(Exception ex){
+      logger.error(ex.getMessage());
+      jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1500")));
+    }
+
+    return jsonObject;
+  }
 
 }

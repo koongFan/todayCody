@@ -16,6 +16,8 @@ public class FeedDTO {
     private String image_path;
     private String u_nickname;
 
+    private String per_page;
+    private String page;
     
     
 

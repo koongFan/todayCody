@@ -49,13 +49,6 @@ public class FeedController {
     return feedService.feedWrite(jsonMap, aMultipartFile);
   }
 
-
-
-
-  //==========================================================================================================================================================
-  //
-  //==========================================================================================================================================================
-
   //==========================================================================================================================================================
   // 피드 글 삭제
   //==========================================================================================================================================================
@@ -67,18 +60,50 @@ public class FeedController {
   //==========================================================================================================================================================
   // 피드 리스트 불러오기
   //==========================================================================================================================================================
-  @ApiOperation(value="피드 리스트 불러오기")
+//  @ApiOperation(value="피드 리스트 불러오기")
   @GetMapping(TodayCodyConstUrl.feedList)
-  public Object feedList(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
+  public Object feedList(HttpServletRequest request, HttpServletResponse response, FeedDTO info) throws Exception{
     JSONObject jsonObject = new JSONObject();
     try{
-      List<FeedDTO> feedList = this.feedService.getFeedList();
+      if(info.getPer_page()==null || info.getPer_page().equals("")){
+        info.setPer_page("5");
+      }
+      if(info.getPage()==null || info.getPage().equals("")){
+        info.setPage("0");
+      }
+      
+      List<FeedDTO> feedList = this.feedService.getFeedList(info);
 
       String[] filterList = new String[] {
           "feed_seq", "user_seq", "content", "likes", "comment", "image_path", "u_nickname"
       };
 
       jsonObject = ReturnJsonUtil.getJson("0", feedList.size(), JSONArray.fromObject(feedList), filterList);
+
+    }catch(Exception ex){
+			logger.error(ex.getMessage());
+			jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1500")));
+    }
+
+    return jsonObject;
+  }
+
+  //===========================================================
+  // 피드 좋아요
+  //===========================================================
+  @PostMapping(TodayCodyConstUrl.feedLike)
+  public JSONObject doUpdateFeedLike(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
+    JSONObject jsonObject = new JSONObject();
+    try{
+      int count = feedService.doUpdateFeedLike(params);
+
+      if(count > 0) {
+				// 처리 성공
+				jsonObject.put("result", JSONObject.fromObject(new ResultInfo("0")));
+			}else {
+	        	// "1402" 처리 된 데이터 없슴
+	        	jsonObject.put("result", JSONObject.fromObject(new ResultInfo("1402")));
+	    }
 
     }catch(Exception ex){
 			logger.error(ex.getMessage());

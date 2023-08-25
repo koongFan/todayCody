@@ -10,7 +10,7 @@ public interface BoardDAO {
 
   public int insertBoard(BoardDTO boardDTO) throws Exception;
   public void insertFileInfo(HashMap<String, Object> jsonMap);
-  public List<?> getBoardList(BoardDTO boardDTO) throws Exception;
-  public Map<String,Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception;
-  public Map<String,Object> boardDelete(BoardDTO boardDTO) throws Exception;
+  public List<BoardDTO> getBoardList(BoardDTO boardDTO) throws Exception;
+  // public Map<String,Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception;
+  // public Map<String,Object> boardDelete(BoardDTO boardDTO) throws Exception;
 }
