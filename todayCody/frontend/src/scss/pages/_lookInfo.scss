@@ -1,6 +1,6 @@
 .lookInfoContainer {
   width: 1020px;
-  height: 1748px;
+  height: 2000px;
   padding-top: 60px;
   margin: 0 auto;
   display: flex;
@@ -105,5 +105,14 @@
       flex: 1 0 0;
       border: none;
     }
+  }
+  // <div className="loading">
+  //   <img src="/img/three-dots.svg" alt="점" className="dots" />
+  // </div>
+  .loading {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    bottom: 0;
   }
 }
