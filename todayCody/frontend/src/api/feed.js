@@ -21,18 +21,26 @@ export const feedUpload = async (formData, navigate) => {
 // 피드 불러오기
 export function useGetFeeds(page) {
   const [feeds, setFeeds] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
     try {
       setLoading(true);
+
       axios
-        .get(`${baseUrl}/feed/list.do?page=${page}&per_page=5`)
+        .get(`${baseUrl}/feed/list.do?page=${page * 10}&per_page=10`)
         .then((res) => {
-          console.log(res);
-          setFeeds((prev) => [...prev, ...res.data.list]);
-          setHasMore(res.data.docs.length > 0);
+          // console.log("page:", page, "data:", res.data.list);
+          setFeeds((prev) => {
+            if (page === 0) {
+              //0일때를 따로 안하면 반복돼서 처음부터 20개가 나온다.
+              return res.data.list;
+            } else {
+              return [...prev, ...res.data.list];
+            }
+          });
+          setHasMore(res.data.list.length > 0);
           setLoading(false);
         });
     } catch (err) {
@@ -40,7 +48,7 @@ export function useGetFeeds(page) {
     }
   }, [page]);
 
-  return { feeds, loading, hasMore };
+  return { feeds, setFeeds, loading, hasMore };
 }
 
 //쿼리 함수
@@ -49,7 +57,6 @@ export const getFeeds = async (page) => {
     const res = await axios.get(
       `${baseUrl}/feed/list.do?page=${page}&per_page=5`
     );
-    // const reverse = [...res.data.list].reverse();
     return res.data.list;
   } catch (err) {
     if (err.response.status === 404) {

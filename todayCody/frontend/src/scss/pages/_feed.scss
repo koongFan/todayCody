@@ -1,10 +1,14 @@
-.feedList {
-  width: 100%;
-  max-width: 600px;
-  margin-inline: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.feedContainer {
+  position: relative;
 
-  margin-top: 3rem;
+  .feedList {
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 3rem;
+  }
 }

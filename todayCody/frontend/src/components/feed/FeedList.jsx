@@ -3,13 +3,13 @@ import Modal from "components/feed/Modal";
 import Slider from "./Slider";
 import parse from "html-react-parser";
 
-export default function FeedList({ data }) {
+export default function FeedList({ data, feedRef }) {
   const [modalOpen, setModalOpen] = useState(false);
   const { u_nickname, likes, content, image_path } = data;
 
   return (
     <>
-      <div className="feedContainer">
+      <div className="feedContainer" ref={feedRef}>
         <div className="feedTop">
           <div className="profile">
             <div className="imgContainer">
