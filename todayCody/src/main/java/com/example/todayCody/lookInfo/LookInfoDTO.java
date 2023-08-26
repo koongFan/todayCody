@@ -15,4 +15,8 @@ public class LookInfoDTO {
     private String image_path;
     private String u_nickname;
     private String postCnt;
+
+    private String tag;
+    private String per_page;
+    private String page;
 }

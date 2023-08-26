@@ -35,6 +35,13 @@ public class LookInfoController {
         JSONObject jsonObject = new JSONObject();    
         try {
 
+          if(info.getPer_page()==null || info.getPer_page().equals("")){
+            info.setPer_page("20");
+          }
+          if(info.getPage()==null || info.getPage().equals("")){
+            info.setPage("0");
+          }
+
           List<LookInfoDTO> list = lookInfoService.doSelectLookInfoList(info);
     
           String[] filterList = new String[]{
