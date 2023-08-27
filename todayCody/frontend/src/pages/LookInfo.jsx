@@ -22,12 +22,12 @@ export default function LookInfo() {
 
     const tagButtons = document.querySelectorAll('.categories button');
     tagButtons.forEach(button => {
-      button.style.backgroundColor = '#E7E7E7'; // 기본 색으로 초기화
+      button.style.backgroundColor = '#E7E7E7';
     });
 
     const clickedButton = document.querySelector(`#${tag}`);
     if (clickedButton) {
-      clickedButton.style.backgroundColor = '#FF4C13'; // 클릭한 버튼 색으로 변경
+      clickedButton.style.backgroundColor = '#FF4C13';
     }
   };
 
@@ -105,7 +105,7 @@ export default function LookInfo() {
 
           <div className="categories">
             <button className="kitsch" id="fStyle">#키치</button>
-            <button className="minimal" id="fStyle" onClick={() => handleTagClick("#미니멀")}>#미니멀</button>
+            <button className="minimal" id="fStyle" onClick={() => handleTagClick("미니멀")}>#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
