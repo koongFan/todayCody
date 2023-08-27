@@ -39,8 +39,10 @@ export default function LookInfo() {
   };
 
   useEffect(() => {
+    console.log("feedData:", feedData);
+    
     if (feedData) {
-      const urls = feedData.flatMap(feed => feed.image_path.split(', '));
+      const urls = feedData.flatMap(feed => feed.image_path.split(','));
       const imageUrls = urls.map(urlString => {
         const imageUrl = urlString.split(',')[0];
         return imageUrl;
