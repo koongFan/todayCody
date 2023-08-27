@@ -14,6 +14,8 @@ public interface FeedDAO {
   public int insertFileInfo(HashMap<String, Object> jsonMap);
 
   public List<FeedDTO> getFeedList(FeedDTO info);
+  public List<FeedDTO> getTop3(String year);
+  public List<FeedDTO> getFeedRankList(FeedDTO info);
 
   //피드 좋아요
   public int doUpdateFeedLike(FeedDTO info);

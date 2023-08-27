@@ -61,15 +61,32 @@ public class FeedServiceImpl implements FeedService {
   public List<FeedDTO> getFeedList(FeedDTO info) throws Exception {
 
     //==================================================================
-    List<FeedDTO> getFeedList = feedDAO.getFeedList(info);
-    return getFeedList;
+    return feedDAO.getFeedList(info);
+    //==================================================================
+  }
+  public List<FeedDTO> getFeedRankList(FeedDTO info) throws Exception {
+    //==================================================================
+    return feedDAO.getFeedRankList(info);
     //==================================================================
   }
 
   @Override
+  public List<FeedDTO> getTop3(String year) throws Exception {
+
+    return feedDAO.getTop3(year);
+  }
+
+
+
+  @Override
   // 피드 좋아요
+<<<<<<< HEAD
   public int doUpdateFeedLike(FeedDTO info){
     int count = feedDAO.doUpdateFeedLike(info);
     return count;
+=======
+  public int doUpdateFeedLike(Map<String, String> params){
+    return feedDAO.doUpdateFeedLike(params);
+>>>>>>> 3f1866404d563b7dc188ae6f0ad4a7d5ba991ae8
   }
 }

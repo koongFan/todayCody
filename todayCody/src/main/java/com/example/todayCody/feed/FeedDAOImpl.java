@@ -33,9 +33,18 @@ public class FeedDAOImpl implements FeedDAO {
   @Override
   public List<FeedDTO> getFeedList(FeedDTO info){
 
-    List<FeedDTO> getFeedList = sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList",info);
-  
-    return getFeedList;
+    return sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedList",info);
+  }
+
+  @Override
+  public List<FeedDTO> getTop3(String year) {
+    return sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getTop3",year);
+  }
+
+  @Override
+  public List<FeedDTO> getFeedRankList(FeedDTO info) {
+    return sqlSession.selectList("com.example.todayCody.feed.FeedDAO.getFeedRankList",info);
+
   }
 
   // 피드 좋아요 update

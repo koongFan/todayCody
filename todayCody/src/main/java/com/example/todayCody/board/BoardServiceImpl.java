@@ -64,9 +64,18 @@ public class BoardServiceImpl implements BoardService {
     if(boardDTO.getSort_tp() == null) {
       boardDTO.setSort_tp("1");
     }
-    List<BoardDTO> boardList = boardDAO.getBoardList(boardDTO);
 
-    return boardList;
+    return boardDAO.getBoardList(boardDTO);
+  }
+
+  @Override
+  public List<Map<String,Object>> getBoardLFileist(BoardDTO boardDTO) throws Exception {
+    return boardDAO.getBoardFileList(boardDTO);
+  }
+
+  @Override
+  public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
+    return boardDAO.getBoardDetail(boardDTO);
   }
 
   @Override
