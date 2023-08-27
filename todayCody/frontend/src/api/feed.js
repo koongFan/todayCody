@@ -48,7 +48,7 @@ export function useGetFeeds(page) {
     }
   }, [page]);
 
-  return { feeds, setFeeds, loading, hasMore };
+  return { feeds, loading, hasMore };
 }
 
 //쿼리 함수

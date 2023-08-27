@@ -1,6 +1,6 @@
 import BoardList from "./BoardList";
 
-export default function BoardTable({ currentPosts }) {
+export default function BoardTable({ posts }) {
   return (
     <table className="boardTable">
       <thead>
@@ -14,7 +14,7 @@ export default function BoardTable({ currentPosts }) {
         </tr>
       </thead>
       <tbody>
-        {currentPosts.map((post) => (
+        {posts.map((post) => (
           <BoardList post={post} />
         ))}
       </tbody>

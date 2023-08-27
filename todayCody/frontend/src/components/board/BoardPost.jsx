@@ -2,8 +2,12 @@ import Footer from "components/layout/Footer";
 import React from "react";
 import { useState } from "react";
 import Pagination from "components/common/Pagination";
+import { useLocation } from "react-router-dom";
+import parse from "html-react-parser";
 
 export default function BoardPost() {
+  const post = useLocation().state;
+  const { user_seq, title, content, reg_date } = post;
   const comments = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
@@ -20,11 +24,11 @@ export default function BoardPost() {
     <div className="wrapper">
       <div className="detailContainer">
         <div className="top">
-          <h1 className="title">제목입니다 </h1>
+          <h1 className="title">{title} </h1>
           <div className="desc">
             <div className="author">
               <img src="/img/avatar.png" alt="avatar" />
-              꿀먹은 샐러리
+              {user_seq}
             </div>
             <div className="detail">
               <div>
@@ -45,19 +49,7 @@ export default function BoardPost() {
               </div>
             </div>
           </div>
-          <div className="content">
-            <div className="text">
-              <p>이 가방 정보 좀 주세요.</p>
-              <img
-                src="https://images.pexels.com/photos/1374910/pexels-photo-1374910.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="img"
-              />
-            </div>
-            <div className="recommendBtn">
-              <img src="/icon/thumb.svg" alt="icon" />
-              추천
-            </div>
-          </div>
+          <div className="content">{parse(content)}</div>
           <button className="report">
             <img src="/icon/report.svg" alt="icon" />
             신고하기

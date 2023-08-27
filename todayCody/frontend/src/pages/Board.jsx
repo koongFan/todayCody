@@ -1,30 +1,31 @@
-import React, { useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "components/layout/Footer";
 import Pagination from "components/common/Pagination";
 import BoardTable from "components/board/BoardTable";
 import Category from "components/board/Category";
 import BoardGrid from "components/board/BoardGrid";
-import { getBoard } from "api/board";
+import { useGetPosts } from "api/board";
 
 export default function Board() {
   const [selected, setSelected] = useState("free");
+  const [page, setPage] = useState(1);
+
   const handleClick = (value) => {
     setSelected(value);
   };
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = selected === "free" ? 10 : 12;
-  getBoard({ page_num: "1", max_ret_cnt: "5", type: 1 });
+  const params = useMemo(
+    () => ({
+      page_num: page,
+      max_ret_cnt: selected === "free" ? 10 : 12,
+      type: selected === "free" ? 1 : 2,
+    }),
+    [page, selected]
+  );
 
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
+  const { posts, loading } = useGetPosts(params);
 
   const navigate = useNavigate();
-  const posts = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
-  ];
-  const currentPosts = posts.slice(firstPostIndex, lastPostIndex);
   const options = [
     { id: 1, name: "정렬", value: "" },
     { id: 2, name: "추천순", value: "recommend" },
@@ -52,17 +53,17 @@ export default function Board() {
             ))}
           </select>
           {selected === "free" ? (
-            <BoardTable currentPosts={currentPosts} />
+            <BoardTable posts={posts} />
           ) : (
-            <BoardGrid currentPosts={currentPosts} />
+            <BoardGrid posts={posts} />
           )}
           <div className="util">
-            <Pagination
+            {/* <Pagination
               totalPosts={posts.length}
               postsPerPage={postsPerPage}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-            />
+              setPage={setPage}
+              page={page}
+            /> */}
             <button
               onClick={() => navigate(`/newboard/${selected}`)}
               className="write"
