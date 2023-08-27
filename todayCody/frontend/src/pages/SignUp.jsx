@@ -16,7 +16,7 @@ export default function SignUp() {
   });
 
   const navigate = useNavigate();
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = "http://52.79.65.236:8081";
   const signup = async () => {
     try {
       const res = await axios.post(`${baseUrl}/member/signUp.do`, user);

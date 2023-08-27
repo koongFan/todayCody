@@ -39,21 +39,24 @@ export default function LookInfo() {
   };
 
   useEffect(() => {
-    const urls = feedData.flatMap(feed => feed.image_path.split(', '));
-    const imageUrls = urls.map(urlString => {
-      const imageUrl = urlString.split(',')[0];
-      return imageUrl;
-    });
-
-    Promise.all(imageUrls.map(getImageSize))
-      .then((sizes) => {
-        setImageSizes(sizes);
-        setImageUrls(imageUrls);
-      })
-      .catch((error) => {
-        console.error("이미지 크기 가져오기 오류:", error);
+    if (feedData) {
+      const urls = feedData.flatMap(feed => feed.image_path.split(', '));
+      const imageUrls = urls.map(urlString => {
+        const imageUrl = urlString.split(',')[0];
+        return imageUrl;
       });
+  
+      Promise.all(imageUrls.map(getImageSize))
+        .then((sizes) => {
+          setImageSizes(sizes);
+          setImageUrls(imageUrls);
+        })
+        .catch((error) => {
+          console.error("이미지 크기 가져오기 오류:", error);
+        });
+    }
   }, [feedData]);
+  
 
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
