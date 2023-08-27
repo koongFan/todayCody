@@ -33,6 +33,16 @@ public class BoardDAOImpl implements BoardDAO{
     return sqlSessionTemplate.selectList("com.example.todayCody.board.BoardDAO.getBoardList",boardDTO);
   }
 
+  @Override
+  public List<Map<String,Object>> getBoardFileList(BoardDTO boardDTO) {
+    return sqlSessionTemplate.selectList("com.example.todayCody.board.BoardDAO.getBoardFileList",boardDTO);
+  }
+
+  @Override
+  public BoardDTO getBoardDetail(BoardDTO boardDTO) throws Exception {
+    return sqlSessionTemplate.selectOne("com.example.todayCody.board.BoardDAO.getBoardDetail",boardDTO);
+  }
+
   // @Override
   // public Map<String, Object> boardEdit(BoardDTO boardDTO, List<MultipartFile> aMultipartFile) throws Exception {
   //   return null;

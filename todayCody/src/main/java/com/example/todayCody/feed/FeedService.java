@@ -12,9 +12,12 @@ public interface FeedService {
    
   // public List<Object> getFeedList() throws Exception;
 
-  
+
   public List<FeedDTO> getFeedList(FeedDTO info) throws Exception;
+  public List<FeedDTO> getFeedRankList(FeedDTO info) throws Exception;
+  public List<FeedDTO> getTop3(String year) throws Exception;
 
   // 피드 좋아요
   public int doUpdateFeedLike(Map<String, String> params);
+
 }

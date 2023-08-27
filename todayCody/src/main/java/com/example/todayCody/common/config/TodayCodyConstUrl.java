@@ -19,9 +19,11 @@ public class TodayCodyConstUrl {
 
     // 피드 상세보기
     public static final String feedDetail = "/feed/detail.do";
+    public static final String getTop3 = "/feed/getTop3.do";
 
     // 피드 리스트 불러오기
     public static final String feedList = "/feed/list.do";
+    public static final String feedRankList = "/feed/rankList.do";
 
     // 마이페이지
     public static final String myPage = "/myPage/list.do";
@@ -34,7 +36,9 @@ public class TodayCodyConstUrl {
 
     // 게시판 업로드
     public static final String boardWrite = "/board/write.do";
-  
+    public static final String boardEdit = "/board/edit.do";
+    public static final String boardDetail = "/board/detail.do";
+
     public static final String boardList = "/board/list.do";
   
     public static final String axiosBoardController = "/AxiosBoardController.do";
