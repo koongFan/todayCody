@@ -92,10 +92,10 @@ public class FeedController {
   // 피드 좋아요
   //===========================================================
   @PostMapping(TodayCodyConstUrl.feedLike)
-  public JSONObject doUpdateFeedLike(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, String> params) throws Exception{
+  public JSONObject doUpdateFeedLike(HttpServletRequest request, HttpServletResponse response, FeedDTO info) throws Exception{
     JSONObject jsonObject = new JSONObject();
     try{
-      int count = feedService.doUpdateFeedLike(params);
+      int count = feedService.doUpdateFeedLike(info);
 
       if(count > 0) {
 				// 처리 성공

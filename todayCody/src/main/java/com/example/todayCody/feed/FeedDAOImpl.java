@@ -40,7 +40,7 @@ public class FeedDAOImpl implements FeedDAO {
 
   // 피드 좋아요 update
   @Override
-  public int doUpdateFeedLike(Map<String, String> params){
-    return sqlSession.update("com.example.todayCody.feed.FeedDAO.doUpdateFeedLike", params);
+  public int doUpdateFeedLike(FeedDTO info){
+    return sqlSession.update("com.example.todayCody.feed.FeedDAO.doUpdateFeedLike", info);
   }
 }

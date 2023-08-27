@@ -68,8 +68,8 @@ public class FeedServiceImpl implements FeedService {
 
   @Override
   // 피드 좋아요
-  public int doUpdateFeedLike(Map<String, String> params){
-    int count = feedDAO.doUpdateFeedLike(params);
+  public int doUpdateFeedLike(FeedDTO info){
+    int count = feedDAO.doUpdateFeedLike(info);
     return count;
   }
 }
