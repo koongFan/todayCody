@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import Modal from "components/feed/Modal";
 import Slider from "./Slider";
 import parse from "html-react-parser";
+import { feedLike } from "api/feed";
 
-export default function FeedList({ data }) {
+export default function FeedList({ data, feedRef }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const { u_nickname, likes, content, image_path } = data;
+  const { feed_seq, u_nickname, likes, content, image_path } = data;
+  const [likeCount, setLikeCount] = useState(parseInt(likes));
+  const [clicked, setClicked] = useState(false);
 
+  const handleLike = () => {
+    if (clicked) {
+      setLikeCount((prev) => prev - 1);
+    } else {
+      setLikeCount((prev) => prev + 1);
+    }
+    setClicked((prev) => !prev);
+    feedLike(JSON.stringify({ feed_seq: feed_seq }));
+  };
   return (
     <>
-      <div className="feedContainer">
+      <div className="feedListContainer" ref={feedRef}>
         <div className="feedTop">
           <div className="profile">
             <div className="imgContainer">
@@ -23,19 +35,22 @@ export default function FeedList({ data }) {
         <Slider imgs={image_path.split(",")} />
         <div className="feedContent">
           <div className="icons">
-            <img src="/icon/heart.svg" alt="heart-icon" />
+            <img
+              src={clicked ? "/icon/orangeHeart.svg" : "/icon/heart.svg"}
+              alt="heart-icon"
+              onClick={handleLike}
+            />
             <img src="/icon/balloon.svg" alt="balloon-icon" />
           </div>
-          <p className="likes">좋아요 {likes}개</p>
+          <p className="likes">
+            좋아요 <span>{likeCount}</span> 개
+          </p>
           {/* <ul className="tags">
             {tags.map((item) => (
               <li>#{item}</li>
             ))}
           </ul> */}
-          <p className="feedText">
-            <span>{u_nickname}</span> &nbsp;
-            {parse(content)}
-          </p>
+          <p className="feedText">{parse(content)}</p>
           {/* <div className="comments">
             <p className="more" onClick={() => setModalOpen(true)}>
               View all 33 comments

@@ -14,7 +14,7 @@ export default function Login() {
   const [formIsValid, setFormIsValid] = useState(false);
   const navigate = useNavigate();
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const baseUrl = "http://52.79.65.236:8081";
   const { dispatch } = useContext(AuthContext);
 
   const signin = async () => {
