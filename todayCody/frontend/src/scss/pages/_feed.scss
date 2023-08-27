@@ -1,14 +1,14 @@
 .feedContainer {
+  width: 550px;
+  margin-inline: auto;
   position: relative;
 
   .feedList {
     width: 100%;
-    max-width: 600px;
-    margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    margin-top: 3rem;
+    margin-block: 3rem;
   }
 }

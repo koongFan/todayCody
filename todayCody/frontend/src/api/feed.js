@@ -51,18 +51,11 @@ export function useGetFeeds(page) {
   return { feeds, loading, hasMore };
 }
 
-//쿼리 함수
-export const getFeeds = async (page) => {
+export const feedLike = async (params) => {
   try {
-    const res = await axios.get(
-      `${baseUrl}/feed/list.do?page=${page}&per_page=5`
-    );
-    return res.data.list;
+    const res = await axios.post(`${baseUrl}/feed/like.do`, params);
+    console.log(res);
   } catch (err) {
-    if (err.response.status === 404) {
-      alert("잘못된 요청입니다.");
-    } else if (err.response.status === 500) {
-      alert("서버에 문제가 있습니다.");
-    }
+    console.log(err);
   }
 };

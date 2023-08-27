@@ -19,30 +19,6 @@ export const uploadBoard = async (formData, navigate) => {
   }
 };
 
-// export const getBoard = async (params) => {
-//   try {
-//     const res = await axios.post(`${baseUrl}/board/list.do`, params);
-//     return res;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-export const getBoard = async (params) => {
-  try {
-    const res = await axios({
-      url: `${baseUrl}/board/list.do`,
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      // data: { jsonData: JSON.stringify(params) },
-    });
-    console.log(res);
-    return res.data.list;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 // 피드 불러오기
 export function useGetPosts(params) {
   const [posts, setPosts] = useState([]);
