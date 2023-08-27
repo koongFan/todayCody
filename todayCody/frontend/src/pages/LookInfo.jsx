@@ -11,7 +11,7 @@ export default function LookInfo() {
 
   const handleTagClick = (tag) => {
     const encodedTag = encodeURIComponent(tag);
-    const apiUrl = `/lookinfo/list.do?tag=${encodedTag}`;
+    const apiUrl = `/lookInfo/list.do?tag=${encodedTag}`;
     axios.get(apiUrl)
       .then(response => {
         setFeedData(response.data);
