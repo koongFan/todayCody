@@ -37,7 +37,7 @@ public class TodayCodyConstUrl {
     // 게시판 업로드
     public static final String boardWrite = "/board/write.do";
     public static final String boardEdit = "/board/edit.do";
-    public static final String boardDetail = "/board/edit.do";
+    public static final String boardDetail = "/board/detail.do";
 
     public static final String boardList = "/board/list.do";
   

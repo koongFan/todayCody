@@ -76,4 +76,33 @@ public class BoardController {
     return jsonObject;
   }
 
+  @PostMapping(TodayCodyConstUrl.boardDetail)
+  public Object getBoardDetail(HttpServletRequest request, @RequestParam Map<String, String> params) throws JsonProcessingException {
+    JSONObject jsonObject = new JSONObject();
+
+    String jsonData = params.get("jsonData");
+
+    ObjectMapper mapper = new ObjectMapper();
+
+    BoardDTO boardDTO = mapper.readValue(jsonData, BoardDTO.class);
+
+    try {
+      BoardDTO dto = boardService.getBoardDetail(boardDTO);
+      List<Map<String,Object>>  fileInfoList =  boardService.getBoardLFileist(boardDTO);
+      dto.setFile_info(fileInfoList);
+
+      String[] filterList = new String[]{
+              "board_seq", "user_seq", "title", "content", "reg_date", "udt_date", "del_yn", "read_cnt", "type", "file_info"
+      };
+
+      jsonObject = ReturnJsonUtil.getJson("0", JSONObject.fromObject(dto), filterList);
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      jsonObject.put("result", net.sf.json.JSONObject.fromObject(new ResultInfo("1500")));
+    }
+
+    return jsonObject;
+  }
+
 }
