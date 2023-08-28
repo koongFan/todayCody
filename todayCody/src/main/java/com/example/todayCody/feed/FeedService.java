@@ -18,10 +18,5 @@ public interface FeedService {
   public List<FeedDTO> getTop3(String year) throws Exception;
 
   // 피드 좋아요
-<<<<<<< HEAD
   public int doUpdateFeedLike(FeedDTO info);
-=======
-  public int doUpdateFeedLike(Map<String, String> params);
-
->>>>>>> 3f1866404d563b7dc188ae6f0ad4a7d5ba991ae8
 }
