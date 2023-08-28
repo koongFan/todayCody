@@ -14,7 +14,7 @@ export default function LookInfo() {
     const apiUrl = `/lookInfo/list.do?tag=${encodedTag}`;
     axios.get(apiUrl)
       .then(response => {
-        setFeedData(response.data);
+        setFeedData(response.data.list);
       })
       .catch(error => {
         console.error(error);
