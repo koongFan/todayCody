@@ -19,16 +19,6 @@ export default function LookInfo() {
       .catch(error => {
         console.error(error);
       });
-
-    const tagButtons = document.querySelectorAll('.categories button');
-    tagButtons.forEach(button => {
-      button.style.backgroundColor = '#E7E7E7';
-    });
-
-    const clickedButton = document.querySelector(`#${tag}`);
-    if (clickedButton) {
-      clickedButton.style.backgroundColor = '#FF4C13';
-    }
   };
 
   const getImageSize = async (src) => {
@@ -58,7 +48,6 @@ export default function LookInfo() {
         });
     }
   }, [feedData]);
-  
 
   const handleScroll = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -109,7 +98,7 @@ export default function LookInfo() {
           </div>
 
           <div className="categories">
-            <button className="kitsch" id="fStyle">#키치</button>
+            <button className="kitsch" id="fStyle" onClick={() => handleTagClick("키치")}>#키치</button>
             <button className="minimal" id="fStyle" onClick={() => handleTagClick("미니멀")}>#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
@@ -135,7 +124,7 @@ export default function LookInfo() {
 
           <div className="lookImages-container">
             <div className="column">
-              {imageSizes.map((size, index) => (
+              {imageSizes.slice(0, 5).map((size, index) => (
                 <div
                   key={index}
                   id="lImage"
@@ -143,15 +132,60 @@ export default function LookInfo() {
                     width: size?.width,
                     height: size?.height
                   }}
-                  >
+                >
                   <img src={imageUrls[index]} alt={`Img ${index + 1}`} />
-                  {index === imageSizes.length - 1 && loading && (
-                    <img src="/img/three-dots.svg" alt="로딩중.," />
-                  )}
                 </div>
               ))}
             </div>
+            <div className="column">
+              {imageSizes.slice(6, 10).map((size, index) => (
+                <div
+                  key={index}
+                  id="lImage"
+                  style={{
+                    width: size?.width,
+                    height: size?.height
+                  }}
+                >
+                  <img src={imageUrls[index + 5]} alt={`Img ${index + 6}`} />
+                </div>
+              ))}
+            </div>
+            <div className="column">
+              {imageSizes.slice(11, 15).map((size, index) => (
+                <div
+                  key={index}
+                  id="lImage"
+                  style={{
+                    width: size?.width,
+                    height: size?.height
+                  }}
+                >
+                  <img src={imageUrls[index + 10]} alt={`Img ${index + 11}`} />
+                </div>
+              ))}
+            </div>
+            <div className="column">
+              {imageSizes.slice(16, 20).map((size, index) => (
+                <div
+                  key={index}
+                  id="lImage"
+                  style={{
+                    width: size?.width,
+                    height: size?.height
+                  }}
+                >
+                  <img src={imageUrls[index + 15]} alt={`Img ${index + 16}`} />
+                </div>
+              ))}
+            </div>
+            {loading && (
+              <div className="loading">
+                <img src="/img/three-dots.svg" alt="로딩중..." />
+              </div>
+            )}
           </div>
+
         </div>
       </div>
       <Footer />
