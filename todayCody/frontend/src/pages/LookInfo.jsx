@@ -8,6 +8,7 @@ export default function LookInfo() {
   const [imageUrls, setImageUrls] = useState([]);
   const [loadedImageCount, setLoadedImageCount] = useState(20);
   const [loading, setLoading] = useState(false);
+  const [selectedTag, setSelectedTag] = useState(null);
 
   const handleTagClick = (tag) => {
     const encodedTag = encodeURIComponent(tag);
@@ -15,6 +16,7 @@ export default function LookInfo() {
     axios.get(apiUrl)
       .then(response => {
         setFeedData(response.data.list);
+        setSelectedTag(tag);
       })
       .catch(error => {
         console.error(error);
@@ -99,7 +101,9 @@ export default function LookInfo() {
 
           <div className="categories">
             <button className="kitsch" id="fStyle" onClick={() => handleTagClick("키치")}>#키치</button>
-            <button className="minimal" id="fStyle" onClick={() => handleTagClick("미니멀")}>#미니멀</button>
+            <button className="minimal" id="fStyle"
+              onClick={() => handleTagClick("미니멀")}
+              style={{ background: selectedTag === "키치" ? "#ff3c13" : "" }}>#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
