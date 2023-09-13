@@ -100,7 +100,8 @@ export default function LookInfo() {
           </div>
 
           <div className="categories">
-            <button className="kitsch" id="fStyle" onClick={() => handleTagClick("키치")}>#키치</button>
+            <button className="kitsch" id="fStyle"
+              onClick={() => handleTagClick("키치")}>#키치</button>
             <button className="minimal" id="fStyle"
               onClick={() => handleTagClick("미니멀")}
               style={{ background: selectedTag === "키치" ? "#ff3c13" : "" }}>#미니멀</button>
