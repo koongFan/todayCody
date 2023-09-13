@@ -129,8 +129,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index]} alt={`Img ${index + 1}`} />
@@ -143,8 +143,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 5]} alt={`Img ${index + 6}`} />
@@ -157,8 +157,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 10]} alt={`Img ${index + 11}`} />
@@ -171,8 +171,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 15]} alt={`Img ${index + 16}`} />
