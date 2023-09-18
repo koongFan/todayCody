@@ -106,6 +106,10 @@
       align-items: flex-start;
       flex: 1 0 0;
       border: none;
+
+      #lImage {
+        background-size: cover;
+      }
     }
   }
   
