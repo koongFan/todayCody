@@ -8,6 +8,7 @@ export default function LookInfo() {
   const [imageUrls, setImageUrls] = useState([]);
   const [loadedImageCount, setLoadedImageCount] = useState(20);
   const [loading, setLoading] = useState(false);
+  const [selectedTag, setSelectedTag] = useState(null);
 
   const handleTagClick = (tag) => {
     const encodedTag = encodeURIComponent(tag);
@@ -15,6 +16,7 @@ export default function LookInfo() {
     axios.get(apiUrl)
       .then(response => {
         setFeedData(response.data.list);
+        setSelectedTag(tag);
       })
       .catch(error => {
         console.error(error);
@@ -98,8 +100,11 @@ export default function LookInfo() {
           </div>
 
           <div className="categories">
-            <button className="kitsch" id="fStyle" onClick={() => handleTagClick("키치")}>#키치</button>
-            <button className="minimal" id="fStyle" onClick={() => handleTagClick("미니멀")}>#미니멀</button>
+            <button className="kitsch" id="fStyle"
+              onClick={() => handleTagClick("키치")}>#키치</button>
+            <button className="minimal" id="fStyle"
+              onClick={() => handleTagClick("미니멀")}
+              style={{ background: selectedTag === "키치" ? "#ff3c13" : "" }}>#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
             <button className="minimal" id="fStyle">#미니멀</button>
@@ -129,8 +134,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index]} alt={`Img ${index + 1}`} />
@@ -143,8 +148,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 5]} alt={`Img ${index + 6}`} />
@@ -157,8 +162,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 10]} alt={`Img ${index + 11}`} />
@@ -171,8 +176,8 @@ export default function LookInfo() {
                   key={index}
                   id="lImage"
                   style={{
-                    width: size?.width,
-                    height: size?.height
+                    width: '255px',
+                    height: 'auto'
                   }}
                 >
                   <img src={imageUrls[index + 15]} alt={`Img ${index + 16}`} />

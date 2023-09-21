@@ -99,17 +99,20 @@
     align-items: flex-start;
 
     .column {
+      width: 255px;
+      height: 1589px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       flex: 1 0 0;
       border: none;
+
+      #lImage {
+        background-size: cover;
+      }
     }
   }
   
-  // <div className="loading">
-  //   <img src="/img/three-dots.svg" alt="점" className="dots" />
-  // </div>
   .loading {
     width: 60px;
     height: 60px;
